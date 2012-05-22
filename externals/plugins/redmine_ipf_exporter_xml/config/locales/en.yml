@@ -1,0 +1,27 @@
+en:
+  label_ipf_exp_xml_relations: "Export relations"
+  label_ipf_exp_xml_watchers: "Export watchers"
+  label_ipf_exp_xml_description: "Export description"
+  label_ipf_exp_xml_time: "Export spent time"
+  label_ipf_exp_xml_attachments: "List attachments"
+  label_ipf_exp_xml_query_columns_only: "Export selected columns only"
+  label_ipf_exp_xml_group: "Split by grouping criteria"
+  label_ipf_exp_xml_generate_name: "Suggest export name"
+  label_ipf_exp_xml_issues_limit: "Override export limit"
+  label_ipf_exp_xml_issues_limit_help: "0 - use default"
+  label_ipf_exp_xml_name: "Export name suffix"
+  
+  label_ipf_exp_xml_settings_title: "Export details"
+  label_ipf_exp_xml_button_export: "Export"
+  label_ipf_exp_xml_button_back: "Back to issues"
+  
+  label_ipf_exp_xml_field_attachment: "Attachments"
+
+  label_ipf_exp_xml_format: "XLS export:"
+  label_ipf_exp_xml_format_quick: "Quick"
+  label_ipf_exp_xml_format_quick_tooltip: "Export using default settings"
+  label_ipf_exp_xml_format_detailed: "Detailed"
+  label_ipf_exp_xml_format_detailed_tooltip: "Choose options before export"
+
+  key_ipf_metrics_name_wbs: "WBS"
+  key_ipf_custom_field_name: "WBS Number"

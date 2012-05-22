@@ -1,0 +1,34 @@
+en:
+  label_ipf_wt_exp_csv_relations: "Export relations"
+  label_ipf_wt_exp_csv_watchers: "Export watchers"
+  label_ipf_wt_exp_csv_description: "Export description"
+  label_ipf_wt_exp_csv_time: "Export spent time"
+  label_ipf_wt_exp_csv_attachments: "List attachments"
+  label_ipf_wt_exp_csv_query_columns_only: "Export selected columns only"
+  label_ipf_wt_exp_csv_group: "Split by grouping criteria"
+  label_ipf_wt_exp_csv_generate_name: "Suggest export name"
+  label_ipf_wt_exp_csv_issues_limit: "Override export limit"
+  label_ipf_wt_exp_csv_issues_limit_help: "0 - use default"
+  label_ipf_wt_exp_csv_name: "Export name suffix"
+  
+  label_ipf_wt_exp_csv_settings_title: "Export details"
+  label_ipf_wt_exp_csv_button_export: "Export"
+  label_ipf_wt_exp_csv_button_back: "Back to issues"
+  
+  label_ipf_wt_exp_csv_field_attachment: "Attachments"
+
+  label_ipf_wt_exp_csv_format: "Time Entry CSV export:"
+  label_ipf_wt_exp_csv_format_quick: "Quick"
+  label_ipf_wt_exp_csv_format_quick_tooltip: "Export using default settings"
+  label_ipf_wt_exp_csv_format_detailed: "Detailed"
+  label_ipf_wt_exp_csv_format_detailed_tooltip: "Choose options before export"
+
+  field_time_entry_id: "id"
+  field_time_entry_project: "project"
+  field_time_entry_user: "user"
+  field_time_entry_issue_id: "issue_id"
+  field_time_entry_hours: "hours"
+  field_time_entry_comments: "comments"
+  field_time_entry_activity: "activity"
+  field_time_entry_spent_on: "spent_on"
+

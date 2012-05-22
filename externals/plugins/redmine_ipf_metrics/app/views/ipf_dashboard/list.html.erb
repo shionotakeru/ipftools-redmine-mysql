@@ -1,0 +1,27 @@
+        <h2><%=l(:title_ipf_dashbord_list, :project => @project.name)%></h2>
+
+        <% form_tag({:controller => 'IpfDashboard', :action => 'setup',:project_id => @project_id}) do %>
+		    <table  class="list" border="0">
+		        <thead>
+		            <tr>
+		                <th></th>
+                        <th></th>
+		                <th><%= l(:label_ipf_dashboard_name) %></th>
+		                <th><%= l(:label_ipf_dashboard_explanation) %></th>
+	                    <th><%= l(:label_ipf_dashboard_jsp) %></th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            <% @pattern_list.each do |pattern_row| %>
+		                <tr class="<%= cycle("odd", "even") %>">
+	                        <td><%= radio_button_tag( "dashboard", pattern_row["id"], pattern_row["checked"] ) %></td>
+	                        <td><%= h(pattern_row["project_name"]) %></td>
+                            <td><%= h(pattern_row["name"]) %></td>
+	                        <td><%= h(pattern_row["explanation"]) %></td>
+	                        <td><%= h(pattern_row["jsp"]) %></td>
+		                </tr>
+		            <% end %>
+		        </tbody>
+		    </table>
+            <%= submit_tag l(:button_ipf_dashboard_setup) %>
+        <% end %>

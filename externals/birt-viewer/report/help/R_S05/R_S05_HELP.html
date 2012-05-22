@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html lang="ja"><head><title>IPF_ヘルプ</title>
+<meta content="text/html; charset=Shift_JIS" http-equiv="Content-Type">
+<meta content="text/css" http-equiv="Content-Style-Type">
+<meta name="" content="mode/flm; pagewidth=750; pageheight=900" 750;" pageheight='900"' 940;? pageheight='1200"'>
+
+</head>
+<body>
+<div style="Z-INDEX: 9; POSITION: absolute; WIDTH: 643px; HEIGHT: 40px; VISIBILITY: visible; TOP: 176px; LEFT: 48px;" id="Layer25">
+<div>
+<table border="1" width="642" height="32">
+  <tbody>
+  <tr>
+    <td width="105"><font size="2">グラフの目的</font></td>
+    <td width="741"><font size="2">ソース規模実績値の推移、及び計画値との対比を行い、製造工程での進捗確認、及び試験工程での<br>
+品質低下の予兆がないか確認します。</font></td></tr></tbody></table></div></div>
+<div style="Z-INDEX: -1; POSITION: absolute; VISIBILITY: visible; TOP: 422px; LEFT: 47px;" id="Layer9">
+  <div>
+    <table border="1" width="642" height="206">
+      <tbody>
+        <tr>
+          <td rowspan="4" width="82"><font size="2">説明</font></td>
+          <td><font size="2">最上位のWBSタスクをパラメータのWBSタスクに初期表示します。</font></td>
+        </tr>
+        <tr>
+          <td><font size="2">実績変化分は、週ごとの増加行数を表示します。</font></td>
+        </tr>
+        <tr>
+          <td height="99"><font size="2">予実割合は週ごとの（実績値/計画値）で算出します。<br>
+          管理図のように、中心線と上限規定値、下限規定値の補助線を表示します。<br>
+          　　中心線は予実割合を”1”として補助線を表示します。<br>
+          　　上限／下限規定値は、中心線から何％離れた所に補助線を表示するか、プロパティファイルに<br>
+          　　定義します。&nbsp;<br>
+          　　例）上下とも20％とした場合、1.2と0.8に補助線を表示します。</font></td>
+        </tr>
+        <tr>
+          <td height="43"><font size="2">ソース規模の週ごとの計画値は、WBSタスクの期間内で線形に配分します。<br>
+          ソース規模の週ごとの計画値がない場合（製造工程が完了した場合、また、
+          予定より製造工程の着手が早まった場合等）は予実割合は表示しません。<br>
+          </font></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div style="Z-INDEX: 25; POSITION: absolute; TOP: 980px; LEFT: 210px;" id="Layer14"><img border="0" alt="毎週の予実" src="text_6.gif" width="67" height="17"></div>
+<div style="Z-INDEX: 19; POSITION: absolute; TOP: 996px; LEFT: 222px;" id="Layer16"><font size="2"><img border="0" src="point_2.gif" width="33" height="22"></font></div>
+<div style="Z-INDEX: 4; POSITION: absolute; VISIBILITY: visible; TOP: 1378px; LEFT: 48px;" id="Layer5">
+<div>
+<table border="1" width="642">
+  <tbody>
+  <tr>
+    <td width="162"><font size="2">項目名</font></td>
+    <td width="122"><font size="2">表示の種類</font></td>
+    <td width="37"><font size="2">必須</font></td>
+    <td width="62"><font size="2">複数選択</font></td>
+    <td width="80"><font size="2">デフォルト</font></td>
+    <td width="240"><font size="2">説明</font></td>
+  </tr>
+  <tr>
+    <td width="162"><font size="2">WBSタスク</font></td>
+    <td width="122"><font size="2">リストボックス</font></td>
+    <td width="37">
+      <center><font size="2">○</font></center></td>
+    <td width="62">
+      <center><font size="2">－</font></center></td>
+    <td width="80"><font size="2">未指定</font></td>
+    <td width="240"><font size="2">WBSのタスク（機能及びモジュール）</font></td>
+  </tr>
+  <tr>
+    <td width="162"><font size="2">グラフ表示期間<br>
+（開始日）</font></td>
+    <td width="122"><font size="2">テキストボックス</font></td>
+    <td width="37">
+      <center><font size="2">○</font></center></td>
+    <td width="62">
+      <center><font size="2">－</font></center></td>
+    <td width="80"><font size="2">現在の日付<br>
+－１ヶ月</font></td>
+    <td width="240"><font size="2">年月日<br>
+（例：2011/4/1 または 2011-4-1)</font></td>
+  </tr>
+  <tr>
+    <td width="162"><font size="2">グラフ表示期間<br>
+（終了日）</font></td>
+    <td width="122"><font size="2">テキストボックス</font></td>
+    <td width="37">
+      <center><font size="2">○</font></center></td>
+    <td width="62">
+      <center><font size="2">－</font></center></td>
+    <td width="80"><font size="2">現在の日付</font></td>
+    <td width="240"><font size="2">年月日<br>
+（例：2011/4/1 または 
+  2011-4-1)</font></td></tr></tbody></table></div></div>
+<div style="Z-INDEX: 2; POSITION: absolute; TOP: 1321px; LEFT: 18px;" id="Layer4"><font size="2"><img border="0" alt="（２）　グラフパラメータ" src="index_2.gif" width="204" height="38"></font></div>
+<div style="Z-INDEX: 3; POSITION: absolute; TOP: 19px; LEFT: 6px;" id="Layer3"><font size="2"><img border="0" alt="R_S05：ソフトウェア規模推移" src="title.gif" width="366" height="45"></font></div>
+<div style="Z-INDEX: 7; POSITION: absolute; TOP: 50px; LEFT: 50px;" id="Layer19"><font size="2"></font></div>
+<div style="Z-INDEX: 6; POSITION: absolute; TOP: 1520px; LEFT: 69px;" id="Layer18"><font size="2"><img border="0" alt="画面イメージ" src="text_1.gif" width="117" height="36"></font></div>
+<div style="Z-INDEX: -3; POSITION: absolute; TOP: 1571px; LEFT: 76px;" id="Layer30"><img border="0" src="r_s05_param.gif" width="523" height="422"></div>
+<div style="Z-INDEX: 1; POSITION: absolute; TOP: 92px; LEFT: 19px;" id="Layer2"><font size="2"><img border="0" alt="（１）　グラフ概要" src="index_1.gif" width="165" height="38"></font></div>
+<div style="Z-INDEX: 5; POSITION: absolute; top : 703px; left : 86px;" id="Layer13"><font size="2"><img border="0" alt="画面イメージ" src="text_1.gif" width="117" height="36"></font></div>
+<div style="Z-INDEX: 13; POSITION: absolute; width : 643px; height : 15px; VISIBILITY: visible; top : 633px; left : 47px;" id="Layer8">
+  <div>
+    <table border="1" width="643" height="15">
+      <tbody>
+        <tr>
+          <td width="83" height="55"><font size="2">ドリルダウン&nbsp;</font></td>
+          <td height="55"><font size="2">折れ線グラフのプロットされた点をダブルクリックすることによりドリルダウンし、現在のタスクを直近の<br>
+          親に持つタスクが、グラフパラメータのWBSタスクのリストボックスに設定されたパラメータ入力画面を<br>
+          表示します。&nbsp;</font></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div style="Z-INDEX: -2; POSITION: absolute; WIDTH: 629px; HEIGHT: 539px; VISIBILITY: visible; TOP: 741px; left : 88px;" id="Layer11"><font size="2"><img border="0" src="r_s05_overview.gif" width="617" height="520"></font></div>
+<div style="Z-INDEX: 22; POSITION: absolute; TOP: 860px; LEFT: 69px;" id="Layer29"><img border="0" alt="スケールは自動調整" src="text_2.gif" width="20" height="143"></div>
+<div style="Z-INDEX: 18; POSITION: absolute; TOP: 919px; LEFT: 93px;" id="Layer15"><font size="2"><img border="0" src="point_1.gif" width="36" height="24"></font></div>
+<div style="z-index : 27; POSITION: absolute; top : 1183px; left : 275px;" id="Layer28"><img border="0" alt="グラフ作成日時を表示" src="text_4.gif" width="119" height="17"></div>
+<div style="Z-INDEX: 15; POSITION: absolute; top : 1182px; left : 233px;" id="Layer32"><font size="2"><img border="0" src="point_2.gif" width="34" height="22"></font></div>
+<div style="Z-INDEX: 10; POSITION: absolute; WIDTH: 643px; HEIGHT: 29px; VISIBILITY: visible; TOP: 223px; LEFT: 48px;" id="Layer26">
+<div>
+<table border="1" width="642" height="27">
+  <tbody>
+  <tr>
+    <td width="105"><font size="2">グラフの種類</font></td>
+    <td width="741"><font size="2">折れ線グラフ</font></td></tr></tbody></table></div></div>
+<div style="Z-INDEX: 23; POSITION: absolute; top : 888px; left : 136px;" id="Layer22"><img border="0" alt="グラフをダブルクリックすると ドリルダウン" src="text_3.gif" width="163" height="36"></div>
+<div style="Z-INDEX: 12; POSITION: absolute; WIDTH: 643px; HEIGHT: 62px; VISIBILITY: visible; TOP: 352px; LEFT: 47px;" id="Layer27">
+<div>
+<table border="1" width="642" height="50">
+  <tbody>
+  <tr>
+    <td rowspan="2" width="106"><font size="2">概要&nbsp;&nbsp;&nbsp;</font></td>
+    <td width="742"><font size="2">パラメータ指定の期間内で、現在までのソース規模の実績推移、実績変化分、予実割合を<br>
+週ごとに表示します。</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">表示対象のWBSタスクと、グラフ表示期間（開始日、終了日）をグラフパラメータで指定します。</font></td></tr></tbody></table></div></div>
+<div style="Z-INDEX: 8; POSITION: absolute; WIDTH: 643px; HEIGHT: 34px; VISIBILITY: visible; TOP: 137px; LEFT: 48px;" id="Layer1">
+<div>
+<table border="1" width="642" height="31">
+  <tbody>
+  <tr>
+    <td width="105"><font size="2">使用する工程</font></td>
+    <td width="742"><font size="2">製造工程、試験工程</font></td></tr></tbody></table></div></div>
+<div style="z-index : 28; POSITION: absolute; TOP: 1631px; LEFT: 221px;" id="Layer6"><img border="0" alt="項目にカーソルを当てると説明を表示" src="text_8.gif" width="221" height="19"></div>
+<div style="Z-INDEX: 16; POSITION: absolute; TOP: 1630px; LEFT: 182px;" id="Layer33"><font size="2"><img border="0" src="point_2.gif" width="34" height="22"></font></div>
+<div style="Z-INDEX: 11; POSITION: absolute; WIDTH: 643px; HEIGHT: 86px; VISIBILITY: visible; TOP: 258px; LEFT: 48px;" id="Layer7">
+<div>
+<table border="1" width="642" height="73">
+  <tbody>
+  <tr>
+    <td rowspan="4" width="106"><font size="2">グラフ軸</font></td>
+    <td width="125"><font size="2">軸</font></td>
+    <td width="117"><font size="2">項目</font></td>
+    <td width="487"><font size="2">説明</font></td>
+  </tr>
+  <tr>
+    <td rowspan="2" width="125"><font size="2">Y軸（垂直）&nbsp;&nbsp;</font></td>
+    <td width="117"><font size="2">SLOC</font></td>
+    <td width="487"><font size="2">ソース規模の実績値</font></td>
+  </tr>
+  <tr>
+    <td><font size="2">予実割合</font></td>
+    <td><font size="2">週ごとのソース規模の（実績値/計画値）</font></td>
+  </tr>
+  <tr>
+    <td width="125"><font size="2">X軸（水平）</font></td>
+    <td width="117"><font size="2">期間</font></td>
+    <td width="487"><font size="2">週</font></td></tr></tbody></table></div></div>
+<div style="Z-INDEX: 24; POSITION: absolute; top : 905px; left : 322px;" id="Layer10"><img border="0" alt="累計" src="text_5.gif" width="29" height="17"></div>
+<div style="Z-INDEX: 20; POSITION: absolute; top : 907px; left : 360px;" id="Layer20"><font size="2"><img border="0" src="point_1.gif" width="36" height="24"></font></div>
+<div style="Z-INDEX: 17; POSITION: absolute; top : 917px; left : 203px;" id="Layer31"><font size="2"><img border="0" src="click.gif" width="56" height="52"></font></div>
+<div style="Z-INDEX: 26; POSITION: absolute; TOP: 1058px; LEFT: 334px;" id="Layer17"><img border="0" alt="週毎の変化分" src="text_7.gif" width="80" height="17"></div>
+<div style="Z-INDEX: 21; POSITION: absolute; TOP: 1075px; LEFT: 352px;" id="Layer23"><font size="2"><img border="0" src="point_2.gif" width="33" height="22"></font></div>
+</body></html>

@@ -1,0 +1,74 @@
+1,ProjectCustomField,開始日,date,,,0,0,FALSE,FALSE,FALSE,1,FALSE,,TRUE,TRUE
+2,ProjectCustomField,終了日,date,,,0,0,FALSE,FALSE,FALSE,2,FALSE,,TRUE,TRUE
+3,ProjectCustomField,開発開始日,date,,,0,0,FALSE,FALSE,FALSE,3,FALSE,,TRUE,TRUE
+4,ProjectCustomField,開発終了日,date,,,0,0,FALSE,FALSE,FALSE,4,FALSE,,TRUE,TRUE
+5,ProjectCustomField,障害起算日,list,"--- 
+- 開始予定日
+- 終了予定日",,0,0,TRUE,FALSE,FALSE,5,FALSE,開始予定日,TRUE,TRUE
+6,ProjectCustomField,課題起算日,list,"---
+- 開始予定日
+- 終了予定日",,0,0,TRUE,FALSE,FALSE,6,FALSE,開始予定日,TRUE,TRUE
+7,IssueCustomField,重要度,list,"--- 
+- 軽微
+- 普通
+- 重要",,0,0,TRUE,FALSE,FALSE,7,FALSE,普通,TRUE,TRUE
+8,IssueCustomField,試験数計画,int,,,0,0,FALSE,FALSE,FALSE,8,FALSE,,TRUE,TRUE
+9,IssueCustomField,試験数実績,int,,,0,0,FALSE,FALSE,FALSE,9,FALSE,,TRUE,TRUE
+10,IssueCustomField,SLOC計画値,int,,,0,0,FALSE,FALSE,FALSE,10,FALSE,,TRUE,TRUE
+11,IssueCustomField,想定バグ密度,float,,,0,0,FALSE,FALSE,FALSE,11,FALSE,,TRUE,TRUE
+12,IssueCustomField,開始日（実績）,date,,,0,0,FALSE,FALSE,FALSE,12,FALSE,,TRUE,TRUE
+13,IssueCustomField,終了日（実績）,date,,,0,0,FALSE,FALSE,FALSE,12,FALSE,,TRUE,TRUE
+14,IssueCustomField,試験項目密度指標値_上限値,float,,,0,0,FALSE,FALSE,FALSE,13,FALSE,,TRUE,TRUE
+15,IssueCustomField,試験項目密度指標値_下限値,float,,,0,0,FALSE,FALSE,FALSE,14,FALSE,,TRUE,TRUE
+16,IssueCustomField,グループ,list,"--- 
+- 未設定
+- A:グループA
+- B:グループB
+- C:グループC",,0,0,TRUE,FALSE,FALSE,15,FALSE,未設定,TRUE,TRUE
+17,IssueCustomField,コンポーネント,string,,,0,0,FALSE,FALSE,FALSE,16,FALSE,,TRUE,TRUE
+18,IssueCustomField,報告者,string,,,0,0,FALSE,FALSE,FALSE,17,FALSE,,TRUE,TRUE
+19,IssueCustomField,関係者,string,,,0,0,FALSE,FALSE,FALSE,18,FALSE,,TRUE,TRUE
+20,IssueCustomField,マイルストーン,string,,,0,0,FALSE,FALSE,FALSE,19,FALSE,,TRUE,TRUE
+21,IssueCustomField,状況,string,,,0,0,FALSE,FALSE,FALSE,20,FALSE,,TRUE,TRUE
+22,IssueCustomField,キーワード,string,,,0,0,FALSE,FALSE,FALSE,21,FALSE,,TRUE,TRUE
+23,IssueCustomField,原因分類,list,"--- 
+- 11:仕様確認漏れ
+- 12:仕様確認ミス
+- 21:設計漏れ
+- 22:設計誤り（論理的な不整合）
+- 23:設計改善（標準化対応）
+- 24:設計改善（記載・表現配慮）
+- 31:製造（設計と不一致）
+- 32:製造（コーディングミス）
+- 33:製造（標準化対応）
+- 34:製造（改善）
+- 41:環境設定ミス
+- 42:データ不備
+- 51:リリースミス
+- 52:オペレーションミス
+- 53:運用ミス
+- 54:HW障害
+- 55:PP障害（OS含む）
+- 61:仕様変更要求
+- 62:仕様どおり
+- 71:記載ミス（誤字・脱字・修正漏れ）
+- 81:その他（記載ミス以外）",,0,0,TRUE,FALSE,FALSE,22,FALSE,,TRUE,TRUE
+24,IssueCustomField,WBS番号,string,,"^[0-9\.]+$",0,0,TRUE,FALSE,FALSE,23,FALSE,,TRUE,TRUE
+25,IssueCustomField,関連チケット,string,,"^[0-9,]+$",0,0,FALSE,FALSE,FALSE,24,FALSE,,TRUE,TRUE
+26,IssueCustomField,WBSチケット,int,,,0,0,FALSE,FALSE,FALSE,25,FALSE,,TRUE,TRUE
+27,ProjectCustomField,TPERIOD_1_L：三日以上,int,,,0,0,FALSE,FALSE,FALSE,26,FALSE,3,TRUE,TRUE
+28,ProjectCustomField,TPERIOD_1_U：三日以上,int,,,0,0,FALSE,FALSE,FALSE,27,FALSE,6,TRUE,TRUE
+29,ProjectCustomField,TPERIOD_2_L：１週間以上,int,,,0,0,FALSE,FALSE,FALSE,28,FALSE,7,TRUE,TRUE
+30,ProjectCustomField,TPERIOD_2_U：１週間以上,int,,,0,0,FALSE,FALSE,FALSE,29,FALSE,13,TRUE,TRUE
+31,ProjectCustomField,TPERIOD_3_L：２週間以上,int,,,0,0,FALSE,FALSE,FALSE,30,FALSE,14,TRUE,TRUE
+32,ProjectCustomField,TPERIOD_3_U：２週間以上,int,,,0,0,FALSE,FALSE,FALSE,31,FALSE,20,TRUE,TRUE
+33,ProjectCustomField,TPERIOD_4_L：３週間以上,int,,,0,0,FALSE,FALSE,FALSE,32,FALSE,21,TRUE,TRUE
+34,ProjectCustomField,TPERIOD_4_U：３週間以上,int,,,0,0,FALSE,FALSE,FALSE,33,FALSE,9999,TRUE,TRUE
+35,ProjectCustomField,PPERIOD_1_L：三日以上,int,,,0,0,FALSE,FALSE,FALSE,34,FALSE,3,TRUE,TRUE
+36,ProjectCustomField,PPERIOD_1_U：三日以上,int,,,0,0,FALSE,FALSE,FALSE,35,FALSE,6,TRUE,TRUE
+37,ProjectCustomField,PPERIOD_2_L：１週間以上,int,,,0,0,FALSE,FALSE,FALSE,36,FALSE,7,TRUE,TRUE
+38,ProjectCustomField,PPERIOD_2_U：１週間以上,int,,,0,0,FALSE,FALSE,FALSE,37,FALSE,13,TRUE,TRUE
+39,ProjectCustomField,PPERIOD_3_L：２週間以上,int,,,0,0,FALSE,FALSE,FALSE,38,FALSE,14,TRUE,TRUE
+40,ProjectCustomField,PPERIOD_3_U：２週間以上,int,,,0,0,FALSE,FALSE,FALSE,39,FALSE,20,TRUE,TRUE
+41,ProjectCustomField,PPERIOD_4_L：３週間以上,int,,,0,0,FALSE,FALSE,FALSE,40,FALSE,21,TRUE,TRUE
+42,ProjectCustomField,PPERIOD_4_U：３週間以上,int,,,0,0,FALSE,FALSE,FALSE,41,FALSE,9999,TRUE,TRUE

@@ -1,0 +1,16 @@
+<p>
+<table>
+    <tr>
+        <td><%= l(:ipf_log_label_file) %></td>
+        <td><%= text_field_tag('settings[ipf_log_file]', @settings['ipf_log_file']) %></td>
+    </tr>
+    <tr>
+        <td><%= l(:ipf_log_label_interval) %></td>
+        <td><%= select_tag('settings[ipf_log_interval]', options_for_select(['daily', 'weekly', 'monthly'], @settings['ipf_log_interval'])) %></td>
+    </tr>
+    <tr>
+        <td><%= l(:ipf_log_label_locale) %></td>
+        <td><%= select_tag('settings[ipf_log_locale]', options_for_select(lang_options_for_select(false), @settings['ipf_log_locale'])) %></td>
+    </tr>
+</table>
+</p>

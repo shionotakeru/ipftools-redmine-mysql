@@ -1,0 +1,1395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transformation>
+  <info>
+    <name>project_info_output</name>
+    <description>プロジェクト基本情報（Redmine）</description>
+    <extended_description/>
+    <trans_version/>
+    <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
+    <directory>&#47;rm</directory>
+    <parameters>
+    </parameters>
+    <log>
+<trans-log-table><connection/>
+<schema/>
+<table/>
+<size_limit_lines/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject/></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject/></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject/></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name><subject/></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field></trans-log-table>
+<perf-log-table><connection/>
+<schema/>
+<table/>
+<interval/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>SEQ_NR</id><enabled>Y</enabled><name>SEQ_NR</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>INPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>INPUT_BUFFER_ROWS</name></field><field><id>OUTPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>OUTPUT_BUFFER_ROWS</name></field></perf-log-table>
+<channel-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>LOGGING_OBJECT_TYPE</id><enabled>Y</enabled><name>LOGGING_OBJECT_TYPE</name></field><field><id>OBJECT_NAME</id><enabled>Y</enabled><name>OBJECT_NAME</name></field><field><id>OBJECT_COPY</id><enabled>Y</enabled><name>OBJECT_COPY</name></field><field><id>REPOSITORY_DIRECTORY</id><enabled>Y</enabled><name>REPOSITORY_DIRECTORY</name></field><field><id>FILENAME</id><enabled>Y</enabled><name>FILENAME</name></field><field><id>OBJECT_ID</id><enabled>Y</enabled><name>OBJECT_ID</name></field><field><id>OBJECT_REVISION</id><enabled>Y</enabled><name>OBJECT_REVISION</name></field><field><id>PARENT_CHANNEL_ID</id><enabled>Y</enabled><name>PARENT_CHANNEL_ID</name></field><field><id>ROOT_CHANNEL_ID</id><enabled>Y</enabled><name>ROOT_CHANNEL_ID</name></field></channel-log-table>
+<step-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field></step-log-table>
+    </log>
+    <maxdate>
+      <connection/>
+      <table/>
+      <field/>
+      <offset>0.0</offset>
+      <maxdiff>0.0</maxdiff>
+    </maxdate>
+    <size_rowset>10000</size_rowset>
+    <sleep_time_empty>50</sleep_time_empty>
+    <sleep_time_full>50</sleep_time_full>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <using_thread_priorities>Y</using_thread_priorities>
+    <shared_objects_file/>
+    <capture_step_performance>N</capture_step_performance>
+    <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <step_performance_capturing_size_limit>100</step_performance_capturing_size_limit>
+    <dependencies>
+    </dependencies>
+    <partitionschemas>
+    </partitionschemas>
+    <slaveservers>
+    </slaveservers>
+    <clusterschemas>
+    </clusterschemas>
+  <created_user>-</created_user>
+  <created_date>2011&#47;10&#47;04 09:13:05.788</created_date>
+  <modified_user>admin</modified_user>
+  <modified_date>2012&#47;01&#47;11 15:28:51.730</modified_date>
+  </info>
+  <notepads>
+  </notepads>
+  <connection>
+    <name>ETL_test</name>
+    <server>${HOST_NAME}</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>${IPF_DB_NAME}</database>
+    <port>${PORT_NO}</port>
+    <username>${IPF_DB_USER}</username>
+    <password>${IPF_DB_PASS}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${PORT_NO}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>IPF_DB</name>
+    <server>${IPF_DB_HOST}</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>${IPF_DB_NAME}</database>
+    <port>${IPF_DB_PORT}</port>
+    <username>${IPF_DB_USER}</username>
+    <password>${IPF_DB_PASS}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${IPF_DB_PORT}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>SET search_path TO ${IPF_DB_SCHEMA};
+</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>rm</name>
+    <server>192.168.1.209</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>rm</database>
+    <port>5432</port>
+    <username>rm</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce10bef2bdd7</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>5432</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>RM_DB</name>
+    <server>${RM_DB_HOST}</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>${RM_DB_NAME}</database>
+    <port>${RM_DB_PORT}</port>
+    <username>${RM_DB_USER}</username>
+    <password>${RM_DB_PASS}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${RM_DB_PORT}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>TRAC_DB</name>
+    <server>${TRAC_DB_HOST}</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>${TRAC_DB_NAME}</database>
+    <port>${TRAC_DB_PORT}</port>
+    <username>${TRAC_DB_USER}</username>
+    <password>${TRAC_DB_PASS}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${TRAC_DB_PORT}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>SET search_path TO ${TRAC_DB_SCHEMA};
+</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>tracdb</name>
+    <server>${HOST_NAME}</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>${TRAC_DB_NAME}</database>
+    <port>${PORT_NO}</port>
+    <username>${TRAC_DB_USER}</username>
+    <password>${TRAC_DB_PASS}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${PORT_NO}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <order>
+  <hop> <from>ソート</from><to>縦横変換</to><enabled>Y</enabled> </hop>  <hop> <from>型チェック</from><to>error分岐</to><enabled>Y</enabled> </hop>  <hop> <from>error分岐</from><to>起算日変換</to><enabled>Y</enabled> </hop>  <hop> <from>起算日変換</from><to>型変換</to><enabled>Y</enabled> </hop>  <hop> <from>custom_values_input</from><to>ソート</to><enabled>Y</enabled> </hop>  <hop> <from>縦横変換</from><to>カスタムフィールド値結合</to><enabled>Y</enabled> </hop>  <hop> <from>カスタムフィールド値結合</from><to>型チェック</to><enabled>Y</enabled> </hop>  <hop> <from>型変換</from><to>不要列削除</to><enabled>Y</enabled> </hop>  <hop> <from>project_input</from><to>NULL置換</to><enabled>Y</enabled> </hop>  <hop> <from>NULL置換</from><to>カスタムフィールド値結合</to><enabled>Y</enabled> </hop>  <hop> <from>エラー行のみ</from><to>出力対象外</to><enabled>Y</enabled> </hop>  <hop> <from>フィールド→行変換</from><to>エラー行のみ</to><enabled>Y</enabled> </hop>  <hop> <from>出力対象</from><to>フィールド→行変換</to><enabled>Y</enabled> </hop>  <hop> <from>error分岐</from><to>出力対象</to><enabled>Y</enabled> </hop>  <hop> <from>エラー行のみ</from><to>error_log</to><enabled>Y</enabled> </hop>  <hop> <from>error_log</from><to>error file output</to><enabled>Y</enabled> </hop>  <hop> <from>不要列削除</from><to>Delete</to><enabled>Y</enabled> </hop>  <hop> <from>Delete</from><to>project_info_output</to><enabled>Y</enabled> </hop>  <hop> <from>処理件数チェック</from><to>件数チェックNG</to><enabled>Y</enabled> </hop>  <hop> <from>処理件数チェック</from><to>件数チェックOK</to><enabled>Y</enabled> </hop>  <hop> <from>処理件数取得</from><to>処理件数チェック</to><enabled>Y</enabled> </hop>  <hop> <from>project_info_output</from><to>処理件数取得</to><enabled>Y</enabled> </hop>  <hop> <from>エラーリスト件数取得</from><to>エラーリストメッセージ設定</to><enabled>Y</enabled> </hop>  <hop> <from>error_log</from><to>エラーリスト件数取得</to><enabled>Y</enabled> </hop>  </order>
+  <step>
+    <name>Delete</name>
+    <type>Delete</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>IPF_DB</connection>
+    <commit>100</commit>
+    <lookup>
+      <schema>${IPF_DB_SCHEMA}</schema>
+      <table>project_info</table>
+      <key>
+        <name>project_id</name>
+        <field>project_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>933</xloc>
+      <yloc>39</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>NULL置換</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var outline1 = null;
+if (outline == null || isEmpty(outline)) {
+  outline1 = project_name;
+} else {
+  outline1 = outline; 
+}</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>outline1</name>
+        <rename>outline1</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>161</xloc>
+      <yloc>39</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>custom_values_input</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>RM_DB</connection>
+    <sql>SELECT
+  t1.id as project_id
+ ,t3.name
+ ,t2.value
+FROM
+  projects t1
+  INNER JOIN custom_values t2
+    ON t1.id = t2.customized_id
+  INNER JOIN custom_fields t3
+    ON t2.custom_field_id = t3.id AND
+       t3.name IN (&apos;開始日&apos;,&apos;終了日&apos;,&apos;開発開始日&apos;,&apos;開発終了日&apos;,&apos;障害起算日&apos;,&apos;課題起算日&apos;)
+WHERE
+  t2.customized_type = &apos;Project&apos; AND
+  t1.id = ${PROJECT_ID}
+ORDER BY
+  t1.id,t3.name</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>56</xloc>
+      <yloc>166</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>error file output</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator>,</separator>
+    <enclosure>&quot;</enclosure>
+    <enclosure_forced>Y</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <file>
+      <name>${ERR_FILE_PATH}\project_info_err</name>
+      <is_command>N</is_command>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
+      <extention>csv</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>Y</add_date>
+      <add_time>Y</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>N</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>project_id</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>error_fields</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>error_field_value</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>933</xloc>
+      <yloc>166</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>error_log</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>N</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+    <fields>
+      <field>
+        <name>project_id</name>
+        </field>
+      <field>
+        <name>error_fields</name>
+        </field>
+      <field>
+        <name>error_field_value</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>814</xloc>
+      <yloc>166</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>error分岐</name>
+    <type>SwitchCase</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<fieldname>error_flg</fieldname>
+<use_contains>N</use_contains>
+<case_value_type>String</case_value_type>
+<case_value_format/>
+<case_value_decimal/>
+<case_value_group/>
+<default_target_step>起算日変換</default_target_step>
+<cases><case><value>1</value>
+<target_step>出力対象</target_step>
+</case></cases>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>490</xloc>
+      <yloc>39</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>project_info_output</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>IPF_DB</connection>
+    <schema>${IPF_DB_SCHEMA}</schema>
+    <table>project_info</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>project_id</column_name>
+          <stream_name>project_id</stream_name>
+        </field>
+        <field>
+          <column_name>project_name</column_name>
+          <stream_name>project_name</stream_name>
+        </field>
+        <field>
+          <column_name>outline</column_name>
+          <stream_name>outline</stream_name>
+        </field>
+        <field>
+          <column_name>parent_id</column_name>
+          <stream_name>parent_id</stream_name>
+        </field>
+        <field>
+          <column_name>start_date</column_name>
+          <stream_name>start_date</stream_name>
+        </field>
+        <field>
+          <column_name>end_date</column_name>
+          <stream_name>end_date</stream_name>
+        </field>
+        <field>
+          <column_name>pg_start_date</column_name>
+          <stream_name>pg_start_date</stream_name>
+        </field>
+        <field>
+          <column_name>pg_end_date</column_name>
+          <stream_name>pg_end_date</stream_name>
+        </field>
+        <field>
+          <column_name>trouble_initial_date</column_name>
+          <stream_name>trouble_initial_date</stream_name>
+        </field>
+        <field>
+          <column_name>problem_initial_date</column_name>
+          <stream_name>problem_initial_date</stream_name>
+        </field>
+        <field>
+          <column_name>project_path</column_name>
+          <stream_name>identifier</stream_name>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1034</xloc>
+      <yloc>39</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>project_input</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>RM_DB</connection>
+    <sql>SELECT
+  id as project_id
+ ,name as project_name
+ ,description as outline
+ ,parent_id
+ ,identifier
+FROM
+  projects t1
+WHERE
+  id = ${PROJECT_ID}
+ORDER BY
+  id</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>56</xloc>
+      <yloc>39</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>エラーリストメッセージ設定</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var errFileName = &quot;project_info_err.csv&quot;;
+
+var errListMsg = getEnvironmentVar(&quot;ERR_LIST_MSG&quot;);
+
+var outErrListMsg = &quot;&quot;;
+if(errListMsg != &quot;&quot;) {
+	outErrListMsg = errListMsg + &quot;,&quot;
+}
+outErrListMsg = outErrListMsg + errFileName + &quot;(&quot; + count + &quot;件)&quot;;
+
+setEnvironmentVar(&quot;ERR_LIST_MSG&quot;,outErrListMsg);
+</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>outErrListMsg</name>
+        <rename>outErrListMsg</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>814</xloc>
+      <yloc>370</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>エラーリスト件数取得</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <all_rows>N</all_rows>
+      <ignore_aggregate>N</ignore_aggregate>
+      <field_ignore/>
+      <directory>%%java.io.tmpdir%%</directory>
+      <prefix>grp</prefix>
+      <add_linenr>N</add_linenr>
+      <linenr_fieldname/>
+      <give_back_row>N</give_back_row>
+      <group>
+      </group>
+      <fields>
+        <field>
+          <aggregate>count</aggregate>
+          <subject>error_fields</subject>
+          <type>COUNT_ALL</type>
+          <valuefield/>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>814</xloc>
+      <yloc>270</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>エラー行のみ</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>error_log</send_true_to>
+<send_false_to>出力対象外</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>error_fields_name</leftvalue>
+ <function>CONTAINS</function>
+ <rightvalue>error_fields</rightvalue>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>705</xloc>
+      <yloc>166</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>カスタムフィールド値結合</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<join_type>LEFT OUTER</join_type>
+<step1>NULL置換</step1>
+<step2>縦横変換</step2>
+    <keys_1>
+      <key>project_id</key>
+    </keys_1>
+    <keys_2>
+      <key>project_id</key>
+    </keys_2>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>284</xloc>
+      <yloc>39</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>ソート</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>%%java.io.tmpdir%%</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>project_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+      <field>
+        <name>name</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>161</xloc>
+      <yloc>166</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>フィールド→行変換</name>
+    <type>Normaliser</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+   <typefield>error_fields</typefield>
+    <fields>      <field>        <name>parent_id</name>
+        <value>parent_id</value>
+        <norm>error_field_value</norm>
+        </field>      <field>        <name>start_date</name>
+        <value>start_date</value>
+        <norm>error_field_value</norm>
+        </field>      <field>        <name>end_date</name>
+        <value>end_date</value>
+        <norm>error_field_value</norm>
+        </field>      <field>        <name>pg_start_date</name>
+        <value>pg_start_date</value>
+        <norm>error_field_value</norm>
+        </field>      <field>        <name>pg_end_date</name>
+        <value>pg_end_date</value>
+        <norm>error_field_value</norm>
+        </field>      </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>598</xloc>
+      <yloc>166</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>不要列削除</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>project_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>project_name</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>outline1</name>
+        <rename>outline</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>parent_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>start_date1</name>
+        <rename>start_date</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>end_date1</name>
+        <rename>end_date</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>pg_start_date1</name>
+        <rename>pg_start_date</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>pg_end_date1</name>
+        <rename>pg_end_date</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>trouble_initial_date1</name>
+        <rename>trouble_initial_date</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>problem_initial_date1</name>
+        <rename>problem_initial_date</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>identifier</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>814</xloc>
+      <yloc>39</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>件数チェックNG</name>
+    <type>Abort</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <row_threshold>0</row_threshold>
+      <message/>
+      <always_log_rows>Y</always_log_rows>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1034</xloc>
+      <yloc>370</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>件数チェックOK</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1150</xloc>
+      <yloc>270</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>処理件数チェック</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>件数チェックNG</send_true_to>
+<send_false_to>件数チェックOK</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>Step name</leftvalue>
+   <function>=</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>project_info_output</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>Lines red</leftvalue>
+   <function>=</function>
+   <rightvalue/>
+   <value><name>constant</name><type>Integer</type><text>0</text><length>-1</length><precision>0</precision><isnull>N</isnull><mask>#</mask></value>   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1034</xloc>
+      <yloc>270</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>処理件数取得</name>
+    <type>StepsMetrics</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <steps>
+      <step>
+        <name>project_info_output</name>
+        <copyNr>0</copyNr>
+        <stepRequired>N</stepRequired>
+        </step>
+      </steps>
+        <stepnamefield>Step name</stepnamefield>
+        <stepidfield>Step id</stepidfield>
+        <steplinesinputfield>Lines input</steplinesinputfield>
+        <steplinesoutputfield>Lines output</steplinesoutputfield>
+        <steplinesreadfield>Lines red</steplinesreadfield>
+        <steplinesupdatedfield>Lines updated</steplinesupdatedfield>
+        <steplineswrittentfield>Lines written</steplineswrittentfield>
+        <steplineserrorsfield>Lines rejected</steplineserrorsfield>
+        <stepsecondsfield>Duration</stepsecondsfield>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1034</xloc>
+      <yloc>166</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>出力対象</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>project_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>parent_id_new</name>
+        <rename>parent_id</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>start_date</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>end_date</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>pg_start_date</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>pg_end_date</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>error_fields</name>
+        <rename>error_fields_name</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>490</xloc>
+      <yloc>166</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>出力対象外</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>705</xloc>
+      <yloc>270</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>型チェック</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var error_flg=&quot;0&quot;;
+var start_date_new=replace(start_date,&quot;&#47;&quot;,&quot;-&quot;)
+var end_date_new=replace(end_date,&quot;&#47;&quot;,&quot;-&quot;)
+var pg_start_date_new=replace(pg_start_date,&quot;&#47;&quot;,&quot;-&quot;)
+var pg_end_date_new=replace(pg_end_date,&quot;&#47;&quot;,&quot;-&quot;)
+var parent_id_new=num2str(parent_id)
+
+
+if(chkNum(parent_id)){
+	var error_flg=&quot;1&quot;;
+	var error_fields=&quot;parent_id&quot;;
+}else{
+	var error_flg=&quot;0&quot;;
+	var error_fields=&quot;&quot;;
+}
+if(chkDate(start_date_new)){
+	var error_flg=&quot;1&quot;;
+	if(error_fields==&quot;&quot;){
+		var error_fields=&quot;start_date&quot;;
+	}else{
+		var error_fields=error_fields+&quot;,start_date&quot;;
+	}
+}
+if(chkDate(end_date_new)){
+	var error_flg=&quot;1&quot;;
+	if(error_fields==&quot;&quot;){
+		var error_fields=&quot;end_date&quot;;
+	}else{
+		var error_fields=error_fields+&quot;,end_date&quot;;
+	}
+}
+if(chkDate(pg_start_date_new)){
+	var error_flg=&quot;1&quot;;
+	if(error_fields==&quot;&quot;){
+		var error_fields=&quot;pg_start_date&quot;;
+	}else{
+		var error_fields=error_fields+&quot;,pg_start_date&quot;;
+	}
+}
+if(chkDate(pg_end_date_new)){
+	var error_flg=&quot;1&quot;;
+	if(error_fields==&quot;&quot;){
+		var error_fields=&quot;pg_end_date&quot;;
+	}else{
+		var error_fields=error_fields+&quot;,pg_end_date&quot;;
+	}
+}
+function chkNum(obj){
+	var num=&quot;0123456789.&quot;;
+	var tmp=new Array();
+	if(obj==null){
+		}else{
+		for(var i=0; i&lt;obj.length; i++){
+    		        tmp[i]=obj.substring(i,i+1);
+        		    var flag=num.indexOf(tmp[i]);
+            		if(flag==-1){
+						return true;
+					}else{
+						return false;
+					}
+				}
+			}
+		}
+function chkDate(obj){
+	var num=&quot;0123456789-&quot;;
+	var tmp=new Array();
+	if(obj==null){
+		}else{
+		for(var i=0; i&lt;obj.length; i++){
+    		        tmp[i]=obj.substring(i,i+1);
+        		    var flag=num.indexOf(tmp[i]);
+            		if(flag==-1){
+						return true;
+					}else{
+						return false;
+					}
+				}
+			}
+		}</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>error_flg</name>
+        <rename>error_flg</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>start_date_new</name>
+        <rename>start_date_new</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>end_date_new</name>
+        <rename>end_date_new</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>pg_start_date_new</name>
+        <rename>pg_start_date_new</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>pg_end_date_new</name>
+        <rename>pg_end_date_new</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>error_fields</name>
+        <rename>error_fields</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>parent_id_new</name>
+        <rename>parent_id_new</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>399</xloc>
+      <yloc>39</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>型変換</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>start_date1</field_name>
+<calc_type>COPY_FIELD</calc_type>
+<field_a>start_date_new</field_a>
+<field_b/>
+<field_c/>
+<value_type>Date</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask>yyyy-MM-dd</conversion_mask>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>end_date1</field_name>
+<calc_type>COPY_FIELD</calc_type>
+<field_a>end_date_new</field_a>
+<field_b/>
+<field_c/>
+<value_type>Date</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask>yyyy-MM-dd</conversion_mask>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>pg_start_date1</field_name>
+<calc_type>COPY_FIELD</calc_type>
+<field_a>pg_start_date_new</field_a>
+<field_b/>
+<field_c/>
+<value_type>Date</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask>yyyy-MM-dd</conversion_mask>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>pg_end_date1</field_name>
+<calc_type>COPY_FIELD</calc_type>
+<field_a>pg_end_date_new</field_a>
+<field_b/>
+<field_c/>
+<value_type>Date</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask>yyyy-MM-dd</conversion_mask>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>705</xloc>
+      <yloc>39</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>縦横変換</name>
+    <type>Denormaliser</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <key_field>name</key_field>
+      <group>
+        <field>
+          <name>project_id</name>
+          </field>
+        </group>
+      <fields>
+        <field>
+          <field_name>value</field_name>
+          <key_value>開始日</key_value>
+          <target_name>start_date</target_name>
+          <target_type>String</target_type>
+          <target_format/>
+          <target_length>255</target_length>
+          <target_precision>-1</target_precision>
+          <target_decimal_symbol/>
+          <target_grouping_symbol/>
+          <target_currency_symbol/>
+          <target_null_string/>
+          <target_aggregation_type>-</target_aggregation_type>
+          </field>
+        <field>
+          <field_name>value</field_name>
+          <key_value>終了日</key_value>
+          <target_name>end_date</target_name>
+          <target_type>String</target_type>
+          <target_format/>
+          <target_length>255</target_length>
+          <target_precision>-1</target_precision>
+          <target_decimal_symbol/>
+          <target_grouping_symbol/>
+          <target_currency_symbol/>
+          <target_null_string/>
+          <target_aggregation_type>-</target_aggregation_type>
+          </field>
+        <field>
+          <field_name>value</field_name>
+          <key_value>開発開始日</key_value>
+          <target_name>pg_start_date</target_name>
+          <target_type>String</target_type>
+          <target_format/>
+          <target_length>255</target_length>
+          <target_precision>-1</target_precision>
+          <target_decimal_symbol/>
+          <target_grouping_symbol/>
+          <target_currency_symbol/>
+          <target_null_string/>
+          <target_aggregation_type>-</target_aggregation_type>
+          </field>
+        <field>
+          <field_name>value</field_name>
+          <key_value>開発終了日</key_value>
+          <target_name>pg_end_date</target_name>
+          <target_type>String</target_type>
+          <target_format/>
+          <target_length>255</target_length>
+          <target_precision>-1</target_precision>
+          <target_decimal_symbol/>
+          <target_grouping_symbol/>
+          <target_currency_symbol/>
+          <target_null_string/>
+          <target_aggregation_type>-</target_aggregation_type>
+          </field>
+        <field>
+          <field_name>value</field_name>
+          <key_value>障害起算日</key_value>
+          <target_name>trouble_initial_date</target_name>
+          <target_type>String</target_type>
+          <target_format/>
+          <target_length>255</target_length>
+          <target_precision>-1</target_precision>
+          <target_decimal_symbol/>
+          <target_grouping_symbol/>
+          <target_currency_symbol/>
+          <target_null_string/>
+          <target_aggregation_type>-</target_aggregation_type>
+          </field>
+        <field>
+          <field_name>value</field_name>
+          <key_value>課題起算日</key_value>
+          <target_name>problem_initial_date</target_name>
+          <target_type>String</target_type>
+          <target_format/>
+          <target_length>255</target_length>
+          <target_precision>-1</target_precision>
+          <target_decimal_symbol/>
+          <target_grouping_symbol/>
+          <target_currency_symbol/>
+          <target_null_string/>
+          <target_aggregation_type>-</target_aggregation_type>
+          </field>
+        </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>250</xloc>
+      <yloc>166</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>起算日変換</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var trouble_initial_date1 = null
+var problem_initial_date1  = null
+
+if(trouble_initial_date==&quot;開始予定日&quot;){
+	trouble_initial_date1=1
+}else{
+	if(trouble_initial_date==&quot;終了予定日&quot;){
+		trouble_initial_date1=2
+	}
+}
+if(problem_initial_date==&quot;開始予定日&quot;){
+	problem_initial_date1=1
+}else{
+	if(problem_initial_date==&quot;終了予定日&quot;){
+		problem_initial_date1=2
+	}
+}</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>trouble_initial_date1</name>
+        <rename>trouble_initial_date1</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>problem_initial_date1</name>
+        <rename>problem_initial_date1</rename>
+        <type>Integer</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>598</xloc>
+      <yloc>39</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step_error_handling>
+  </step_error_handling>
+   <slave-step-copy-partition-distribution>
+</slave-step-copy-partition-distribution>
+   <slave_transformation>N</slave_transformation>
+</transformation>

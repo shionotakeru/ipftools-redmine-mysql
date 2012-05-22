@@ -1,0 +1,3751 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;2.5.1.v20090917-1447></property>
+    <text-property name="title">R_S14　長期未解決課題抽出</text-property>
+    <simple-property-list name="includeResource">
+        <value>resource/R_S14</value>
+    </simple-property-list>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[importPackage(Packages.java.util);
+importPackage(Packages.java.io);
+
+var prop = null;
+var inputStream = null;
+var path = reportContext.getResource("resource/R_S14.properties").getPath();
+// プロパティファイル読込
+try {
+    inputStream = new BufferedInputStream(new FileInputStream(path));
+    prop = new Properties();
+    prop.load(inputStream);
+} finally {
+    if (inputStream != null) {
+        inputStream.close();
+    }
+}
+
+//X軸ラベル設定値取得
+vars["char_count"] = prop.getProperty("main.xaxis.label.char.by.line");
+if (vars["char_count"] == null || vars["char_count"] == "") {
+	vars["char_count"] = 10;
+}]]></method>
+    <method name="beforeFactory"><![CDATA[// コンテキストパスを取得しBIRT内部変数へ格納
+var contextPath = reportContext.getHttpServletRequest().getContextPath();
+vars["Context"] = contextPath;
+
+var createFlag = params["NAVI_CREATE_FLAG"].value;
+
+// 生成判定
+if (createFlag) {
+	
+	// 処理なし
+	
+} else {
+    // サイズ変更呼び出し
+	bodySize();
+}
+
+
+
+// レポートの表示サイズを縮尺率分の１に変更
+function bodySize() {
+	importPackage(Packages.java.util);
+	importPackage(Packages.java.lang);
+	// 縮尺率の取得
+	var Reduction = vars["Reduction"] - 0;
+
+	for (idx = 0; idx < 1000; idx++) {
+	    // チャートサイズを変更
+	    var item = this.getReportElementByID(Integer.parseInt(idx + ""));
+		if (item != null) {
+			var b = this.getReportElementByID(Integer.parseInt(idx + "")).getQualifiedName();
+			if (b == null) {
+				// width縮小処理
+			    var wid = item.getWidth();
+				// 取得出来ない場合は何もしない
+				if (wid != null) {
+					// 値と単位を分離
+					var SizeN = getSizeN(wid);
+					var SizeS = getSizeS(wid);
+					// 値を縮小値で割ったものと単位を結合
+					var strSize = (SizeN / Reduction) + SizeS
+					// 縮小結果を設定
+					item.setWidth(strSize);
+				}
+				// height縮小処理
+				var hei = item.getHeight();
+				// 取得出来ない場合は何もしない
+				if (hei != null) {
+					// 値と単位を分離
+					var SizeN = getSizeN(hei);
+					var SizeS = getSizeS(hei);
+					// 値を縮小値で割ったものと単位を結合
+					var strSize = (SizeN / Reduction) + SizeS
+					// 縮小結果を設定
+					item.setHeight(strSize);
+				}
+
+				if (item.getStyle != null) {
+					var style = item.getStyle();
+					if (style != null) {
+						var fnt = style.fontSize;
+					    if (fnt != null) {
+							var SizeN = getSizeN(fnt);
+							var SizeS = getSizeS(fnt);
+							var intSize = parseInt((SizeN / Reduction) + 0.9);
+//							if (SizeN > 10) {
+//								var intSize = parseInt((SizeN / Reduction));
+//							} else {
+//								var intSize = parseInt((SizeN * 0.75));
+//							}
+							if (intSize == 0) {
+								intSize = 1;
+							}
+							var strSize = intSize + SizeS
+							style.fontSize = strSize;
+						}
+					} else {
+						dummy = 0;
+					}
+				}
+			}
+		}
+	}
+    masterSize();
+}
+// サイズ分解(値取得)
+function getSizeN(strSize) {
+
+	var res = "";
+	var chr = "";
+	// 文字列の先頭から数字及び"."を抽出
+	for (idxN = 0; idxN < strSize.length(); idxN++) {
+		chr = strSize.substring(idxN, idxN + 1);
+		if (isNaN(num = parseInt(chr)) == false || chr == ".") {
+			res += chr;
+		}
+	}
+	return res;
+}
+// サイズ分解(単位取得)
+function getSizeS(strSize) {
+
+	var res = "";
+	var chr = "";
+	// 文字列の先頭から数字及び"."以外を抽出
+	for (idxS = 0; idxS < strSize.length(); idxS++) {
+		chr = strSize.substring(idxS, idxS + 1);
+		if (isNaN(num = parseInt(chr)) == true &amp;&amp; chr != ".") {
+			res += chr;
+		}
+	}
+	return res;
+}
+
+// マスターページのレイアウト変更
+function masterSize() {
+
+	// 縮尺率の取得
+	var Reduction = vars["Reduction"] - 0;
+
+    var master = reportContext.getReportRunnable().designHandle.getDesignHandle().findMasterPage("Simple MasterPage");
+    // マスターページ　レイアウト
+    master.setPageType("custom");
+    // レイアウトタイプ（自動）
+    master.setProperty("orientation", "auto");
+    // 幅
+	var mp_wid = master.getProperty("width");
+	if (mp_wid != null) {
+		var SizeN = mp_wid.measure + 1;
+		var SizeS = mp_wid.units;
+//		var SizeN = getSizeN(mp_wid);
+//		var SizeS = getSizeS(mp_wid);
+		var strSize = (SizeN / Reduction) + SizeS
+	    master.setProperty("width", strSize);
+	}
+	// 高さ
+	var mp_hei = master.getProperty("height");
+	if (mp_hei != null) {
+		var SizeN = mp_hei.measure;
+		var SizeS = mp_hei.units;
+//		var SizeN = getSizeN(mp_hei);
+//		var SizeS = getSizeS(mp_hei);
+		var strSize = (SizeN / Reduction) + SizeS
+	    master.setProperty("height", strSize);
+	}
+}]]></method>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">liblary/IPFCommon.rptlibrary</property>
+            <property name="namespace">IPFCommon</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="PERIOD" id="173">
+            <text-property name="helpText" key="help.period"></text-property>
+            <text-property name="promptText" key="param.period"></text-property>
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">true</property>
+            <property name="dataSetName">DS_R_S14_PERIOD_ZONE</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["period_zone"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["period_zone_name"]</expression>
+            <expression name="sortByColumn">dataSetRow["period_zone"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="PROJECT_ID" id="169" extends="IPFCommon.PROJECT_ID"/>
+        <scalar-parameter name="USER_ID" id="112">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">11111111</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="HELP_FLAG" id="128">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">boolean</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">True</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">check-box</property>
+            <structure name="format"/>
+        </scalar-parameter>
+        <parameter-group name="paging" id="123">
+            <parameters>
+                <scalar-parameter name="LIMMIT" id="126">
+                    <property name="hidden">true</property>
+                    <property name="valueType">static</property>
+                    <property name="isRequired">true</property>
+                    <property name="dataType">integer</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">10</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="concealValue">false</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="BIND_OFFSET" id="130">
+                    <property name="hidden">true</property>
+                    <property name="valueType">static</property>
+                    <property name="isRequired">true</property>
+                    <property name="dataType">integer</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">0</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="concealValue">false</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+            </parameters>
+        </parameter-group>
+        <parameter-group name="drilling" id="124">
+            <parameters>
+                <scalar-parameter name="NAVI_CREATE_FLAG" id="119">
+                    <property name="hidden">true</property>
+                    <property name="valueType">static</property>
+                    <property name="dataType">boolean</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">true</value>
+                    </simple-property-list>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">check-box</property>
+                    <structure name="format"/>
+                </scalar-parameter>
+            </parameters>
+        </parameter-group>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="IPAPostgres" id="167"
+ extends="IPFCommon.IPAPostgres"/>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DS_PROJECT" id="168"
+ extends="IPFCommon.DS_PROJECT"/>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DS_R_S14_PERIOD_ZONE" id="172">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">period_zone</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">period_zone</text-property>
+                    <text-property name="heading">period_zone</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">period_zone_name</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">period_zone_name</text-property>
+                    <text-property name="heading">period_zone_name</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">PROJECT_ID</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue" type="javascript">importPackage(Packages.java.util);&#13;
+importPackage(Packages.java.io);&#13;
+importPackage(Packages.java.lang);&#13;
+&#13;
+var prop = null;&#13;
+var inputStream = null;&#13;
+var path = reportContext.getResource("resource/R_S14.properties").getPath();&#13;
+// プロパティファイル読込&#13;
+try {   &#13;
+    inputStream = new BufferedInputStream(new FileInputStream(path));&#13;
+    prop = new Properties();&#13;
+    prop.load(inputStream);&#13;
+} finally {&#13;
+    if (inputStream != null) {&#13;
+        inputStream.close();&#13;
+    }&#13;
+}&#13;
+&#13;
+prop.getProperty("param.no.data.message");</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_3</property>
+                    <property name="paramName">PROJECT_ID</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">period_zone</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">period_zone_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">IPAPostgres</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">period_zone</property>
+                    <property name="nativeName">period_zone</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">period_zone_name</property>
+                    <property name="nativeName">period_zone_name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT
+	UNION_TABLE.PERIOD_ZONE AS PERIOD_ZONE
+	,UNION_TABLE.PERIOD_ZONE_NAME AS PERIOD_ZONE_NAME
+FROM
+
+(
+	SELECT
+		'0' AS NO_DATA_FLG
+		,MART.PERIOD_ZONE AS PERIOD_ZONE
+		,MART.PERIOD_ZONE_NAME AS PERIOD_ZONE_NAME
+	FROM
+		R_S14_MART MART
+	WHERE
+		MART.PROJECT_ID = ?
+	GROUP BY 
+		MART.PERIOD_ZONE
+		,MART.PERIOD_ZONE_NAME
+	UNION
+	SELECT
+		'1' AS NO_DATA_FLG
+		,0 AS PERIOD_ZONE
+		,? AS PERIOD_ZONE_NAME
+) UNION_TABLE
+
+WHERE 
+CASE WHEN 
+(
+	SELECT
+		COUNT(TABLE1.PERIOD_ZONE) AS MART_COUNT
+	FROM
+		(
+			SELECT
+				MART.PERIOD_ZONE AS PERIOD_ZONE
+				,MART.PERIOD_ZONE_NAME AS PERIOD_ZONE_NAME
+			FROM
+				R_S14_MART MART
+			WHERE
+				MART.PROJECT_ID = ?
+			GROUP BY 
+				MART.PERIOD_ZONE
+				,MART.PERIOD_ZONE_NAME
+		) TABLE1
+) > 0 
+	THEN UNION_TABLE.NO_DATA_FLG = '0'
+	ELSE UNION_TABLE.NO_DATA_FLG = '1'
+	END
+ORDER BY
+	UNION_TABLE.PERIOD_ZONE]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>period_zone</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>period_zone</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>period_zone</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>period_zone_name</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>60</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>period_zone_name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>period_zone_name</design:label>
+            <design:formattingHints>
+              <design:displaySize>60</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DS_R_S14_PERIOD" id="174">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">period_zone_name</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">period_zone_name</text-property>
+                    <text-property name="heading">period_zone_name</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">PROJECT_ID</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">PERIOD</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">period_zone_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">IPAPostgres</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">period_zone_name</property>
+                    <property name="nativeName">period_zone_name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT
+	MART.PERIOD_ZONE_NAME AS PERIOD_ZONE_NAME
+FROM
+	R_S14_MART MART
+WHERE
+	MART.PROJECT_ID = ?
+	AND MART.PERIOD_ZONE = ?
+GROUP BY 
+	MART.PERIOD_ZONE
+	,MART.PERIOD_ZONE_NAME
+ORDER BY
+	MART.PERIOD_ZONE
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>period_zone</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>period_zone</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>period_zone</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>period_zone_name</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>60</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>period_zone_name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>period_zone_name</design:label>
+            <design:formattingHints>
+              <design:displaySize>60</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DS_R_S14" id="177">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">period_zone</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">period_zone</text-property>
+                    <text-property name="heading">period_zone</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">period_zone_name</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">period_zone_name</text-property>
+                    <text-property name="heading">period_zone_name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">unsolved_subject_count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">unsolved_subject_count</text-property>
+                    <text-property name="heading">unsolved_subject_count</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">severity_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">severity_id</text-property>
+                    <text-property name="heading">severity_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">severity_name</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">severity_name</text-property>
+                    <text-property name="heading">severity_name</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">PROJECT_ID</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">PERIOD</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_3</property>
+                    <property name="paramName">BIND_OFFSET</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-5</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_4</property>
+                    <property name="paramName">LIMMIT</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-5</property>
+                    <property name="position">4</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_5</property>
+                    <property name="paramName">PROJECT_ID</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">5</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_6</property>
+                    <property name="paramName">PERIOD</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">6</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">period_zone</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">period_zone_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">unsolved_subject_count</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">severity_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">severity_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">IPAPostgres</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">period_zone</property>
+                    <property name="nativeName">period_zone</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">period_zone_name</property>
+                    <property name="nativeName">period_zone_name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">unsolved_subject_count</property>
+                    <property name="nativeName">unsolved_subject_count</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">severity_id</property>
+                    <property name="nativeName">severity_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">severity_name</property>
+                    <property name="nativeName">severity_name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT 
+	CHILD.PERIOD_ZONE AS PERIOD_ZONE
+	,CHILD.PERIOD_ZONE_NAME AS PERIOD_ZONE_NAME
+	,CHILD.UNSOLVED_SUBJECT_COUNT AS UNSOLVED_SUBJECT_COUNT
+	,CHILD.SEVERITY_ID AS SEVERITY_ID
+	,CHILD.SEVERITY_NAME AS SEVERITY_NAME
+FROM
+(
+	SELECT
+		MART.PERIOD_ZONE AS PERIOD_ZONE
+	FROM
+		R_S14_MART MART
+	WHERE
+		MART.PROJECT_ID = ?
+		AND MART.PERIOD_ZONE >= ?
+	GROUP BY
+		MART.PERIOD_ZONE
+	ORDER BY 
+		MART.PERIOD_ZONE
+	OFFSET ? LIMIT ?
+) PARENT
+INNER JOIN
+	(
+		SELECT
+			MART.PERIOD_ZONE AS PERIOD_ZONE
+			,MART.PERIOD_ZONE_NAME AS PERIOD_ZONE_NAME
+			,MART.SEVERITY_ID AS SEVERITY_ID
+			,MART.SEVERITY_NAME AS SEVERITY_NAME
+			,SUM(MART.UNSOLVED_SUBJECT_COUNT) AS UNSOLVED_SUBJECT_COUNT
+		FROM
+			R_S14_MART MART
+		WHERE
+			MART.PROJECT_ID = ?
+			AND MART.PERIOD_ZONE >= ?
+		GROUP BY 
+			MART.PERIOD_ZONE
+			,MART.PERIOD_ZONE_NAME
+			,MART.SEVERITY_ID
+			,MART.SEVERITY_NAME
+	) CHILD
+ON
+	PARENT.PERIOD_ZONE = CHILD.PERIOD_ZONE
+ORDER BY
+	CHILD.PERIOD_ZONE
+	,CHILD.SEVERITY_ID
+	]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>4</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>5</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>6</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>period_zone</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>period_zone</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>period_zone</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>period_zone_name</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>60</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>period_zone_name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>period_zone_name</design:label>
+            <design:formattingHints>
+              <design:displaySize>60</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>unsolved_subject_count</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>unsolved_subject_count</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>unsolved_subject_count</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>severity_id</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>severity_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>severity_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>severity_name</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>60</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>severity_name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>severity_name</design:label>
+            <design:formattingHints>
+              <design:displaySize>60</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DS_R_S14_LIST" id="178">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">severity_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">severity_id</text-property>
+                    <text-property name="heading">severity_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">severity_name</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">severity_name</text-property>
+                    <text-property name="heading">severity_name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">subject_count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">subject_count</text-property>
+                    <text-property name="heading">subject_count</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">solved_count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">solved_count</text-property>
+                    <text-property name="heading">solved_count</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">unsolved_subject_count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">unsolved_subject_count</text-property>
+                    <text-property name="heading">unsolved_subject_count</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">late_start_count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">late_start_count</text-property>
+                    <text-property name="heading">late_start_count</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">late_end_count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">late_end_count</text-property>
+                    <text-property name="heading">late_end_count</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">PROJECT_ID</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">1</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">severity_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">severity_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">subject_count</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">solved_count</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">unsolved_subject_count</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">late_start_count</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">late_end_count</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">IPAPostgres</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">severity_id</property>
+                    <property name="nativeName">severity_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">severity_name</property>
+                    <property name="nativeName">severity_name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">subject_count</property>
+                    <property name="nativeName">subject_count</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">solved_count</property>
+                    <property name="nativeName">solved_count</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">unsolved_subject_count</property>
+                    <property name="nativeName">unsolved_subject_count</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">late_start_count</property>
+                    <property name="nativeName">late_start_count</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">late_end_count</property>
+                    <property name="nativeName">late_end_count</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT
+	MART.SEVERITY_ID AS SEVERITY_ID
+	,MART.SEVERITY_NAME AS SEVERITY_NAME
+	,MART.SUBJECT_COUNT AS SUBJECT_COUNT
+	,(MART.SUBJECT_COUNT - MART.UNSOLVED_SUBJECT_COUNT) AS SOLVED_COUNT
+	,MART.UNSOLVED_SUBJECT_COUNT AS UNSOLVED_SUBJECT_COUNT
+	,MART.LATE_START_COUNT AS LATE_START_COUNT
+	,MART.LATE_END_COUNT AS LATE_END_COUNT
+FROM
+	R_S14_LIST_MART MART
+WHERE
+	MART.PROJECT_ID = ?
+ORDER BY 
+	MART.SEVERITY_ID
+
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>severity_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>severity_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>severity_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>severity_name</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>60</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>severity_name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>severity_name</design:label>
+            <design:formattingHints>
+              <design:displaySize>60</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>subject_count</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>subject_count</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>subject_count</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>solved_count</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>solved_count</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>solved_count</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>unsolved_count</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>unsolved_count</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>unsolved_count</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>late_start_count</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>late_start_count</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>late_start_count</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>late_end_count</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>late_end_count</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>late_end_count</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DS_R_S14_PAGING" id="283">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">out_offset</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">out_offset</text-property>
+                    <text-property name="heading">out_offset</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">PROJECT_ID</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">PERIOD</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_3</property>
+                    <property name="paramName">LIMMIT</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">out_offset</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">IPAPostgres</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">out_offset</property>
+                    <property name="nativeName">out_offset</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+	OUT_OFFSET
+from 
+	FUNC_R_S14_PAGING(?,?,?) as (OUT_OFFSET INTEGER)]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>out_offset</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>out_offset</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>out_offset</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="DS_R_S14_PERIOD_LABEL" id="287">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">period_zone</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">period_zone</text-property>
+                    <text-property name="heading">period_zone</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">period_zone_name</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">period_zone_name</text-property>
+                    <text-property name="heading">period_zone_name</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">PROJECT_ID</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">PERIOD</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">period_zone</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">period_zone_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[importPackage(Packages.java.util);
+vars["Xaxis_Label"] = new HashMap();
+]]></method>
+            <method name="onFetch"><![CDATA[vars["Xaxis_Label"].put(row["period_zone"],row["period_zone_name"])]]></method>
+            <property name="dataSource">IPAPostgres</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">period_zone</property>
+                    <property name="nativeName">period_zone</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">period_zone_name</property>
+                    <property name="nativeName">period_zone_name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT
+	MART.PERIOD_ZONE
+	,MART.PERIOD_ZONE_NAME
+FROM
+	R_S14_MART MART
+WHERE
+	MART.PROJECT_ID = ?
+	AND MART.PERIOD_ZONE >= ?
+GROUP BY
+	MART.PERIOD_ZONE
+	,MART.PERIOD_ZONE_NAME
+ORDER BY
+	MART.PERIOD_ZONE
+	,MART.PERIOD_ZONE_NAME
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>period_zone</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>period_zone</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>period_zone</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>period_zone_name</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>60</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>period_zone_name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>period_zone_name</design:label>
+            <design:formattingHints>
+              <design:displaySize>60</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">custom</property>
+            <property name="height">11in</property>
+            <property name="width">8.5in</property>
+            <property name="headerHeight">0.1in</property>
+            <property name="footerHeight">0.1in</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="288">
+            <property name="height">0.20833333333333334in</property>
+            <property name="dataSet">DS_R_S14_PERIOD_LABEL</property>
+            <list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr" type="javascript">true</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">period_zone</property>
+                    <text-property name="displayName">period_zone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["period_zone"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">period_zone_name</property>
+                    <text-property name="displayName">period_zone_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["period_zone_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="289"/>
+            <row id="290">
+                <property name="height">0.20833333333333334in</property>
+                <cell id="291"/>
+            </row>
+        </grid>
+        <list id="284">
+            <property name="pageBreakAfter">avoid</property>
+            <property name="pageBreakBefore">always</property>
+            <property name="pageBreakInside">avoid</property>
+            <property name="dataSet">DS_R_S14_PAGING</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">out_offset</property>
+                    <text-property name="displayName">out_offset</text-property>
+                    <expression name="expression" type="javascript">params["BIND_OFFSET"].value=dataSetRow["out_offset"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <detail>
+                <data id="285">
+                    <property name="display">none</property>
+                    <property name="resultSetColumn">out_offset</property>
+                </data>
+                <grid id="22">
+                    <property name="pageBreakAfter">avoid</property>
+                    <property name="pageBreakBefore">avoid</property>
+                    <property name="pageBreakInside">avoid</property>
+                    <property name="height">8.395833333333334in</property>
+                    <property name="width">7.947916666666667in</property>
+                    <column id="23">
+                        <property name="width">4.453950679%</property>
+                    </column>
+                    <column id="24">
+                        <property name="width">95.54604932%</property>
+                    </column>
+                    <row id="25">
+                        <property name="height">5.335874226%</property>
+                        <cell id="26">
+                            <property name="fontFamily">"IPAexゴシック"</property>
+                        </cell>
+                        <cell id="27">
+                            <property name="fontFamily">"IPAexゴシック"</property>
+                            <grid id="43">
+                                <property name="height">0.3333333333333333in</property>
+                                <property name="width">7.53125in</property>
+                                <property name="dataSet">DS_PROJECT</property>
+                                <list-property name="boundDataColumns">
+                                    <structure>
+                                        <property name="name">subject</property>
+                                        <text-property name="displayName">subject</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["subject"]</expression>
+                                        <property name="dataType">string</property>
+                                    </structure>
+                                </list-property>
+                                <column id="44">
+                                    <property name="width">35.54640818%</property>
+                                </column>
+                                <column id="45">
+                                    <property name="width">64.45359182%</property>
+                                </column>
+                                <row id="46">
+                                    <property name="height">100%</property>
+                                    <cell id="47">
+                                        <property name="fontSize">15pt</property>
+                                        <property name="fontWeight">bold</property>
+                                        <data id="171">
+                                            <property name="resultSetColumn">subject</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="48">
+                                        <label id="50">
+                                            <property name="fontSize">15pt</property>
+                                            <property name="fontWeight">bold</property>
+                                            <text-property name="text" key="header.graph.title">title</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                    <row id="28">
+                        <property name="height">6.205335874%</property>
+                        <cell id="29">
+                            <property name="fontFamily">"IPAexゴシック"</property>
+                        </cell>
+                        <cell id="30">
+                            <property name="fontFamily">"IPAexゴシック"</property>
+                            <grid id="56">
+                                <property name="height">0.3541666666666667in</property>
+                                <property name="width">7.53125in</property>
+                                <property name="dataSet">DS_R_S14_PERIOD</property>
+                                <list-property name="boundDataColumns">
+                                    <structure>
+                                        <property name="name">period_zone_name</property>
+                                        <text-property name="displayName">period_zone_name</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["period_zone_name"]</expression>
+                                        <property name="dataType">string</property>
+                                    </structure>
+                                </list-property>
+                                <column id="57">
+                                    <property name="width">23%</property>
+                                </column>
+                                <column id="58">
+                                    <property name="width">86.17713451%</property>
+                                </column>
+                                <row id="70">
+                                    <property name="height">100%</property>
+                                    <cell id="71">
+                                        <label id="170">
+                                            <text-property name="text" key="header.priod.title"></text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="72">
+                                        <property name="colSpan">1</property>
+                                        <property name="rowSpan">1</property>
+                                        <data id="176">
+                                            <property name="resultSetColumn">period_zone_name</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                    <row id="34">
+                        <property name="height">54.09718914%</property>
+                        <cell id="35">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontFamily">"IPAexゴシック"</property>
+                            <extended-item extensionName="Chart" id="286">
+                                <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
+  <Version>2.5.1</Version>
+  <Type>Bar Chart</Type>
+  <SubType>Side-by-side</SubType>
+  <Description>
+    <Value></Value>
+    <Font>
+      <Alignment/>
+    </Font>
+  </Description>
+  <Block>
+    <Children xsi:type="layout:TitleBlock">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>false</Visible>
+      <Label>
+        <Caption>
+          <Value>棒グラフのタイトル</Value>
+          <Font>
+            <Name>IPAexゴシック</Name>
+            <Size>16.0</Size>
+            <Bold>true</Bold>
+            <Alignment>
+              <horizontalAlignment>Center</horizontalAlignment>
+              <verticalAlignment>Center</verticalAlignment>
+            </Alignment>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>true</Visible>
+      </Label>
+    </Children>
+    <Children xsi:type="layout:Plot">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>true</Visible>
+      <HorizontalSpacing>5</HorizontalSpacing>
+      <VerticalSpacing>5</VerticalSpacing>
+      <ClientArea>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>0.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>0.0</Right>
+        </Insets>
+      </ClientArea>
+    </Children>
+    <Children xsi:type="layout:Legend">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>true</Visible>
+      <ClientArea>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>2.0</Top>
+          <Left>2.0</Left>
+          <Bottom>2.0</Bottom>
+          <Right>2.0</Right>
+        </Insets>
+      </ClientArea>
+      <Text>
+        <Value></Value>
+        <Font>
+          <Name>IPAexゴシック</Name>
+          <Alignment/>
+        </Font>
+      </Text>
+      <Orientation>Vertical</Orientation>
+      <Direction>Top_Bottom</Direction>
+      <Separator>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Separator>
+      <Position>Right</Position>
+      <ItemType>Series</ItemType>
+      <Title>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Title>
+      <TitlePosition>Above</TitlePosition>
+    </Children>
+    <Bounds>
+      <Left>0.0</Left>
+      <Top>0.0</Top>
+      <Width>212.0</Width>
+      <Height>130.0</Height>
+    </Bounds>
+    <Insets>
+      <Top>3.0</Top>
+      <Left>3.0</Left>
+      <Bottom>3.0</Bottom>
+      <Right>3.0</Right>
+    </Insets>
+    <Row>-1</Row>
+    <Column>-1</Column>
+    <Rowspan>-1</Rowspan>
+    <Columnspan>-1</Columnspan>
+    <Outline>
+      <Style>Solid</Style>
+      <Thickness>1</Thickness>
+      <Color>
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>0</Green>
+        <Blue>0</Blue>
+      </Color>
+      <Visible>false</Visible>
+    </Outline>
+    <Visible>true</Visible>
+  </Block>
+  <Dimension>Two_Dimensional</Dimension>
+  <Script>/**&#xD;
+ * Called before rendering the Title of an Axis.&#xD;
+ * &#xD;
+ * @param axis&#xD;
+ *            Axis&#xD;
+ * @param label&#xD;
+ *            Title&#xD;
+ * @param icsc&#xD;
+ *            IChartScriptContext&#xD;
+ */&#xD;
+&#xD;
+function beforeDrawAxisTitle( axis, label, icsc )&#xD;
+{&#xD;
+	// 軸タイトルのフォントサイズ変更&#xD;
+	// フラグ取得&#xD;
+	var navi_flg = icsc.getExternalContext().getScriptable().getParameterValue(&quot;NAVI_CREATE_FLAG&quot;);&#xD;
+	// 縮小率取得&#xD;
+	var Reduction = (icsc.getExternalContext().getScriptable().getPageVariable('Reduction') - 0);&#xD;
+	// フラグがfalseになっている場合にフォントサイズを縮小する&#xD;
+	if (navi_flg == false) {&#xD;
+		var size = label.getCaption().getFont().getSize();&#xD;
+		size = size / Reduction;&#xD;
+		label.getCaption().getFont().setSize(size);&#xD;
+	} &#xD;
+}&#xD;
+&#xD;
+&#xD;
+/**&#xD;
+ * Called before rendering each label on a given Axis.&#xD;
+ * &#xD;
+ * @param axis&#xD;
+ *            Axis&#xD;
+ * @param label&#xD;
+ *            Label&#xD;
+ * @param icsc&#xD;
+ *            IChartScriptContext&#xD;
+ */&#xD;
+&#xD;
+function beforeDrawAxisLabel( axis, label, icsc )&#xD;
+{&#xD;
+	//X軸ラベル整形＆設定&#xD;
+	setLabelFormat( axis, label, icsc );&#xD;
+	&#xD;
+}&#xD;
+&#xD;
+/**&#xD;
+ * Called before generation of chart model to GeneratedChartState.&#xD;
+ * &#xD;
+ * @param chart+&#xD;
+ *            Chart&#xD;
+ * @param icsc&#xD;
+ *            IChartScriptContext&#xD;
+ */&#xD;
+&#xD;
+function beforeGeneration( chart, icsc )&#xD;
+{&#xD;
+	// X軸ラベル領域の高さを設定&#xD;
+	setLabelSpan(icsc, chart);&#xD;
+	&#xD;
+}&#xD;
+&#xD;
+&#xD;
+/**&#xD;
+ * Called before rendering Series.&#xD;
+ * &#xD;
+ * @param series&#xD;
+ *            Series&#xD;
+ * @param isr&#xD;
+ *            ISeriesRenderer&#xD;
+ * @param icsc&#xD;
+ *            IChartScriptContext&#xD;
+ */&#xD;
+&#xD;
+function beforeDrawSeries( series, isr, icsc )&#xD;
+{&#xD;
+	// フラグ取得&#xD;
+	var navi_flg = icsc.getExternalContext().getScriptable().getParameterValue(&quot;NAVI_CREATE_FLAG&quot;);&#xD;
+	&#xD;
+	if(navi_flg == false){&#xD;
+		// 縮小時はドリル不可&#xD;
+		icsc.getChartInstance().getInteractivity().setEnable(false);&#xD;
+	}&#xD;
+}&#xD;
+&#xD;
+&#xD;
+/**&#xD;
+ * original function : adjustment Xaxis label span.&#xD;
+ * &#xD;
+ * @param chart&#xD;
+ *            Chart&#xD;
+ * @param icsc&#xD;
+ *            IChartScriptContext&#xD;
+ */&#xD;
+&#xD;
+function setLabelSpan(icsc, chart){&#xD;
+	importPackage( Packages.org.eclipse.birt.chart.model.component.impl );&#xD;
+	importPackage( Packages.org.eclipse.birt.chart.model.data.impl );&#xD;
+	importPackage( Packages.org.eclipse.birt.chart.util );&#xD;
+	    &#xD;
+    // 最大の名称文字数&#xD;
+    var max = Number(icsc.getExternalContext().getScriptable().getPageVariable('char_count'));&#xD;
+	&#xD;
+	// 設定するlabel span値&#xD;
+	var span = 11 * max; &#xD;
+&#xD;
+	// フラグ取得&#xD;
+	var navi_flg = icsc.getExternalContext().getScriptable().getParameterValue(&quot;NAVI_CREATE_FLAG&quot;);&#xD;
+	// 縮小率取得&#xD;
+	var Reduction = (icsc.getExternalContext().getScriptable().getPageVariable('Reduction') - 0);&#xD;
+	// フラグがfalseになっている場合に設定するlabel spanを縮小する&#xD;
+	if (navi_flg == false) {&#xD;
+		span = span / Reduction;&#xD;
+	}&#xD;
+&#xD;
+	// x軸のlabel spanを設定&#xD;
+	if (max > 0) {&#xD;
+		&#xD;
+		// x軸取得&#xD;
+		var xAxis = chart.getPrimaryBaseAxes()[0];&#xD;
+		// label span設定&#xD;
+		xAxis.setLabelSpan(span);&#xD;
+&#xD;
+	}&#xD;
+}&#xD;
+&#xD;
+&#xD;
+/**&#xD;
+ * original function : adjustment Xaxis label format.&#xD;
+ * &#xD;
+ * @param axis&#xD;
+ *            Axis&#xD;
+ * @param label&#xD;
+ *            Label&#xD;
+ * @param icsc&#xD;
+ *            IChartScriptContext&#xD;
+ */&#xD;
+function setLabelFormat( axis, label, icsc ){&#xD;
+	&#xD;
+	/* x軸のラベル改行処理 */&#xD;
+	&#xD;
+	// x軸名称HashMap&#xD;
+	var xaxisMap = (icsc.getExternalContext().getScriptable().getPageVariable('Xaxis_Label'));&#xD;
+	// 一行の文字数&#xD;
+	var charCount = Number(icsc.getExternalContext().getScriptable().getPageVariable('char_count'));&#xD;
+&#xD;
+	// Mapから取得した名称に置き換える処理&#xD;
+	importPackage(Packages.org.eclipse.birt.chart.model.attribute);&#xD;
+	if (axis.getOrientation() == Orientation.HORIZONTAL_LITERAL){&#xD;
+		var labelValue = Number(label.getCaption().getValue());&#xD;
+		var subject = xaxisMap.get(labelValue);&#xD;
+		var newStr = &quot;&quot;;&#xD;
+		if(subject != null){&#xD;
+			newStr = getDisplayStr(subject,charCount);&#xD;
+		}&#xD;
+		label.getCaption().setValue(newStr);&#xD;
+	}&#xD;
+}&#xD;
+&#xD;
+/**&#xD;
+ * original function : get string that does the new line processing and the omission processing. &#xD;
+ * &#xD;
+ * @param str&#xD;
+ *            base string&#xD;
+ * @param limit&#xD;
+ *            Length limit&#xD;
+ *&#xD;
+ */&#xD;
+function getDisplayStr(str, limit){&#xD;
+	&#xD;
+	importPackage( Packages.java.lang );&#xD;
+	var sb = new StringBuilder(str);&#xD;
+	var escapeStr = escape(str);&#xD;
+	var normalLen = 0;&#xD;
+	var charcLen = 0;&#xD;
+	var breakLength = 0;&#xD;
+	var omitLength = 0;&#xD;
+	&#xD;
+	for(var cnt = 0; cnt &lt; escapeStr.length; cnt++){&#xD;
+		if(escapeStr.charAt(cnt) == &quot;%&quot;){&#xD;
+			if(escapeStr.charAt(++cnt) == &quot;u&quot;){&#xD;
+				cnt += 3;&#xD;
+				normalLen++;&#xD;
+			}&#xD;
+			cnt++;&#xD;
+		}&#xD;
+		normalLen++;&#xD;
+&#xD;
+		// 改行位置判定&#xD;
+		if (breakLength == 0) {&#xD;
+			if (normalLen > limit * 2) {&#xD;
+				breakLength = charcLen;&#xD;
+			}&#xD;
+		}&#xD;
+		// 最大文字数判定&#xD;
+		if (normalLen > limit * 4) {&#xD;
+			omitLength = charcLen;&#xD;
+			break;&#xD;
+		}&#xD;
+		charcLen++;&#xD;
+	}&#xD;
+&#xD;
+	// 最大文字数を超える分は省略&#xD;
+	if (omitLength != 0) {&#xD;
+		sb = new StringBuilder(str.substring(0,omitLength) + &quot;..&quot;);&#xD;
+	}&#xD;
+	// 改行を設定&#xD;
+	if (breakLength != 0) {&#xD;
+		sb = sb.insert(breakLength,&quot;\n&quot;);&#xD;
+	}&#xD;
+&#xD;
+	return sb.toString();&#xD;
+}&#xD;
+</Script>
+  <Units>Points</Units>
+  <SeriesThickness>10.0</SeriesThickness>
+  <ExtendedProperties>
+    <Name>enable.area.alt</Name>
+    <Value>false</Value>
+  </ExtendedProperties>
+  <SampleData>
+    <BaseSampleData>
+      <DataSetRepresentation>'A','B','C','D','E'</DataSetRepresentation>
+    </BaseSampleData>
+    <OrthogonalSampleData>
+      <DataSetRepresentation>5,4,12</DataSetRepresentation>
+      <SeriesDefinitionIndex>0</SeriesDefinitionIndex>
+    </OrthogonalSampleData>
+  </SampleData>
+  <Interactivity/>
+  <EmptyMessage>
+    <Caption>
+      <Value>main.no.data.message=This chart contains no data.</Value>
+      <Font>
+        <Name>IPAexゴシック</Name>
+        <Alignment>
+          <horizontalAlignment>Center</horizontalAlignment>
+          <verticalAlignment>Center</verticalAlignment>
+        </Alignment>
+      </Font>
+    </Caption>
+    <Background xsi:type="attribute:ColorDefinition">
+      <Transparency>64</Transparency>
+      <Red>127</Red>
+      <Green>127</Green>
+      <Blue>127</Blue>
+    </Background>
+    <Outline>
+      <Color>
+        <Transparency>128</Transparency>
+        <Red>127</Red>
+        <Green>127</Green>
+        <Blue>127</Blue>
+      </Color>
+      <Visible>true</Visible>
+    </Outline>
+    <Insets>
+      <Top>10.0</Top>
+      <Left>10.0</Left>
+      <Bottom>10.0</Bottom>
+      <Right>10.0</Right>
+    </Insets>
+    <Visible>true</Visible>
+  </EmptyMessage>
+  <Axes>
+    <Type>Text</Type>
+    <Title>
+      <Caption>
+        <Value>X 軸のタイトル</Value>
+        <Font>
+          <Size>14.0</Size>
+          <Bold>true</Bold>
+          <Alignment>
+            <horizontalAlignment>Center</horizontalAlignment>
+            <verticalAlignment>Center</verticalAlignment>
+          </Alignment>
+        </Font>
+      </Caption>
+      <Background xsi:type="attribute:ColorDefinition">
+        <Transparency>0</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Background>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+      </Outline>
+      <Insets>
+        <Top>0.0</Top>
+        <Left>2.0</Left>
+        <Bottom>0.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Visible>false</Visible>
+    </Title>
+    <TitlePosition>Below</TitlePosition>
+    <AssociatedAxes>
+      <Type>Linear</Type>
+      <Title>
+        <Caption>
+          <Value>main.yaxis.title=Y 軸のタイトル</Value>
+          <Font>
+            <Name>IPAexゴシック</Name>
+            <Size>14.0</Size>
+            <Bold>true</Bold>
+            <Alignment>
+              <horizontalAlignment>Center</horizontalAlignment>
+              <verticalAlignment>Center</verticalAlignment>
+            </Alignment>
+            <Rotation>-90.0</Rotation>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>true</Visible>
+      </Title>
+      <TitlePosition>Left</TitlePosition>
+      <SeriesDefinitions>
+        <Query>
+          <Definition>row[&quot;severity_name&quot;]</Definition>
+          <Grouping>
+            <GroupType>Text</GroupType>
+          </Grouping>
+        </Query>
+        <SeriesPalette>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>153</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>255</Red>
+            <Green>204</Green>
+            <Blue>153</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>154</Red>
+            <Green>204</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>128</Green>
+            <Blue>0</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>51</Red>
+            <Green>102</Green>
+            <Blue>255</Blue>
+          </Entries>
+          <Entries xsi:type="attribute:ColorDefinition">
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>255</Blue>
+          </Entries>
+        </SeriesPalette>
+        <Series xsi:type="type:BarSeries">
+          <Visible>true</Visible>
+          <Label>
+            <Caption>
+              <Value></Value>
+              <Font>
+                <Name>IPAexゴシック</Name>
+                <Alignment/>
+              </Font>
+            </Caption>
+            <Background xsi:type="attribute:ColorDefinition">
+              <Transparency>0</Transparency>
+              <Red>255</Red>
+              <Green>255</Green>
+              <Blue>255</Blue>
+            </Background>
+            <Outline>
+              <Style>Solid</Style>
+              <Thickness>1</Thickness>
+              <Color>
+                <Transparency>255</Transparency>
+                <Red>0</Red>
+                <Green>0</Green>
+                <Blue>0</Blue>
+              </Color>
+              <Visible>false</Visible>
+            </Outline>
+            <Insets>
+              <Top>0.0</Top>
+              <Left>2.0</Left>
+              <Bottom>0.0</Bottom>
+              <Right>3.0</Right>
+            </Insets>
+            <Visible>true</Visible>
+          </Label>
+          <DataDefinition>
+            <Definition>row[&quot;unsolved_subject_count&quot;]</Definition>
+            <Grouping>
+              <GroupType>Text</GroupType>
+              <AggregateExpression>Sum</AggregateExpression>
+            </Grouping>
+          </DataDefinition>
+          <SeriesIdentifier>Series 1</SeriesIdentifier>
+          <DataPoint>
+            <Components>
+              <Type>Orthogonal_Value</Type>
+            </Components>
+            <Separator>, </Separator>
+          </DataPoint>
+          <LabelPosition>Outside</LabelPosition>
+          <Stacked>false</Stacked>
+          <Triggers>
+            <Condition>ondblclick</Condition>
+            <Action>
+              <Type>URL_Redirect</Type>
+              <Value xsi:type="attribute:MultiURLValues">
+                <URLValues>
+                  <Label>
+                    <Caption>
+                      <Value>link</Value>
+                    </Caption>
+                  </Label>
+                  <BaseUrl>&lt;structure>
+    &lt;property name=&quot;linkType&quot;>drill-through&lt;/property>
+    &lt;property name=&quot;reportName&quot;>R_S14_detail.rptdesign&lt;/property>
+    &lt;property name=&quot;targetBookmarkType&quot;>bookmark&lt;/property>
+    &lt;property name=&quot;targetWindow&quot;>_blank&lt;/property>
+    &lt;property name=&quot;targetFileType&quot;>report-design&lt;/property>
+    &lt;list-property name=&quot;paramBindings&quot;>
+        &lt;structure>
+            &lt;property name=&quot;paramName&quot;>PROJECT_ID&lt;/property>
+            &lt;simple-property-list name=&quot;expression&quot;>
+                &lt;value type=&quot;javascript&quot;>params[&quot;PROJECT_ID&quot;].value&lt;/value>
+            &lt;/simple-property-list>
+        &lt;/structure>
+        &lt;structure>
+            &lt;property name=&quot;paramName&quot;>USER_ID&lt;/property>
+            &lt;simple-property-list name=&quot;expression&quot;>
+                &lt;value type=&quot;javascript&quot;>params[&quot;USER_ID&quot;].value&lt;/value>
+            &lt;/simple-property-list>
+        &lt;/structure>
+        &lt;structure>
+            &lt;property name=&quot;paramName&quot;>PERIOD&lt;/property>
+            &lt;simple-property-list name=&quot;expression&quot;>
+                &lt;value type=&quot;javascript&quot;>row[&quot;period_zone&quot;]&lt;/value>
+            &lt;/simple-property-list>
+        &lt;/structure>
+    &lt;/list-property>
+&lt;/structure>
+</BaseUrl>
+                  <BaseParameterName></BaseParameterName>
+                  <ValueParameterName></ValueParameterName>
+                  <SeriesParameterName></SeriesParameterName>
+                </URLValues>
+                <PropertiesMap>
+                  <Key>MenuItem</Key>
+                  <Value>color:Black;fontSize:10pt;paddingLeft:10px;paddingRight:10px;paddingTop:2px;paddingBottom:2px</Value>
+                </PropertiesMap>
+                <PropertiesMap>
+                  <Key>Menu</Key>
+                  <Value>zIndex:99999;backgroundColor:#FAFFF8;width:auto;height:auto;border:1px solid #333333;filter:progid:DXImageTransform.Microsoft.Shadow(Color:#333333,Direction=120,strength=5)</Value>
+                </PropertiesMap>
+                <PropertiesMap>
+                  <Key>OnMouseOut</Key>
+                  <Value>backgroundColor:#FAFFF8;color:#000000</Value>
+                </PropertiesMap>
+                <PropertiesMap>
+                  <Key>OnMouseOver</Key>
+                  <Value>backgroundColor:#245DDB;color:#FFFFFF</Value>
+                </PropertiesMap>
+              </Value>
+            </Action>
+          </Triggers>
+          <Translucent>true</Translucent>
+          <Riser>Rectangle</Riser>
+        </Series>
+        <Grouping>
+          <GroupType>Text</GroupType>
+          <AggregateExpression>Sum</AggregateExpression>
+        </Grouping>
+        <Sorting>Ascending</Sorting>
+        <SortKey>
+          <Definition>row[&quot;severity_id&quot;]</Definition>
+        </SortKey>
+      </SeriesDefinitions>
+      <Orientation>Vertical</Orientation>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Visible>true</Visible>
+      </LineAttributes>
+      <Label>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Name>IPAexゴシック</Name>
+            <Alignment/>
+            <Rotation>0.0</Rotation>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>true</Visible>
+      </Label>
+      <FormatSpecifier xsi:type="attribute:JavaNumberFormatSpecifier">
+        <Pattern>###,###</Pattern>
+      </FormatSpecifier>
+      <LabelPosition>Left</LabelPosition>
+      <MajorGrid>
+        <LineAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>196</Red>
+            <Green>196</Green>
+            <Blue>196</Blue>
+          </Color>
+          <Visible>true</Visible>
+        </LineAttributes>
+        <TickStyle>Across</TickStyle>
+        <TickAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>196</Red>
+            <Green>196</Green>
+            <Blue>196</Blue>
+          </Color>
+          <Visible>true</Visible>
+        </TickAttributes>
+      </MajorGrid>
+      <MinorGrid>
+        <LineAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>225</Red>
+            <Green>225</Green>
+            <Blue>225</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </LineAttributes>
+        <TickStyle>Across</TickStyle>
+        <TickAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>225</Red>
+            <Green>225</Green>
+            <Blue>225</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </TickAttributes>
+      </MinorGrid>
+      <Scale>
+        <MinorGridsPerUnit>5</MinorGridsPerUnit>
+        <AutoExpand>true</AutoExpand>
+        <MajorGridsStepNumber>5</MajorGridsStepNumber>
+      </Scale>
+      <Origin>
+        <Type>Min</Type>
+        <Value xsi:type="data:NumberDataElement">
+          <Value>0.0</Value>
+        </Value>
+      </Origin>
+      <PrimaryAxis>true</PrimaryAxis>
+      <Percent>false</Percent>
+    </AssociatedAxes>
+    <SeriesDefinitions>
+      <Query>
+        <Definition></Definition>
+      </Query>
+      <SeriesPalette>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>80</Red>
+          <Green>166</Green>
+          <Blue>218</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>242</Red>
+          <Green>88</Green>
+          <Blue>106</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>232</Red>
+          <Green>172</Green>
+          <Blue>57</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>255</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>64</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>170</Red>
+          <Green>85</Green>
+          <Blue>85</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>192</Red>
+          <Green>192</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>192</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>7</Red>
+          <Green>146</Green>
+          <Blue>94</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>128</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>0</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>64</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>80</Red>
+          <Green>240</Green>
+          <Blue>120</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>64</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>0</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>0</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>64</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>0</Blue>
+        </Entries>
+      </SeriesPalette>
+      <Series>
+        <Visible>true</Visible>
+        <Label>
+          <Caption>
+            <Value></Value>
+            <Font>
+              <Alignment/>
+            </Font>
+          </Caption>
+          <Background xsi:type="attribute:ColorDefinition">
+            <Transparency>0</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Background>
+          <Outline>
+            <Style>Solid</Style>
+            <Thickness>1</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+            <Visible>false</Visible>
+          </Outline>
+          <Insets>
+            <Top>0.0</Top>
+            <Left>2.0</Left>
+            <Bottom>0.0</Bottom>
+            <Right>3.0</Right>
+          </Insets>
+          <Visible>false</Visible>
+        </Label>
+        <DataDefinition>
+          <Definition>row[&quot;period_zone&quot;]</Definition>
+        </DataDefinition>
+        <SeriesIdentifier></SeriesIdentifier>
+        <DataPoint>
+          <Components>
+            <Type>Orthogonal_Value</Type>
+          </Components>
+          <Separator>, </Separator>
+        </DataPoint>
+        <LabelPosition>Outside</LabelPosition>
+        <Stacked>false</Stacked>
+      </Series>
+      <Grouping>
+        <Enabled>false</Enabled>
+        <GroupType>Numeric</GroupType>
+        <AggregateExpression>Sum</AggregateExpression>
+      </Grouping>
+      <SortKey/>
+    </SeriesDefinitions>
+    <Orientation>Horizontal</Orientation>
+    <LineAttributes>
+      <Style>Solid</Style>
+      <Thickness>1</Thickness>
+      <Visible>true</Visible>
+    </LineAttributes>
+    <Label>
+      <Caption>
+        <Value></Value>
+        <Font>
+          <Name>IPAexゴシック</Name>
+          <Alignment/>
+          <Rotation>-90.0</Rotation>
+        </Font>
+      </Caption>
+      <Background xsi:type="attribute:ColorDefinition">
+        <Transparency>0</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Background>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+      </Outline>
+      <Insets>
+        <Top>0.0</Top>
+        <Left>2.0</Left>
+        <Bottom>0.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Visible>true</Visible>
+    </Label>
+    <LabelPosition>Below</LabelPosition>
+    <MajorGrid>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>196</Red>
+          <Green>196</Green>
+          <Blue>196</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </LineAttributes>
+      <TickStyle>Across</TickStyle>
+      <TickAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>196</Red>
+          <Green>196</Green>
+          <Blue>196</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </TickAttributes>
+    </MajorGrid>
+    <MinorGrid>
+      <LineAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>225</Red>
+          <Green>225</Green>
+          <Blue>225</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </LineAttributes>
+      <TickStyle>Across</TickStyle>
+      <TickAttributes>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>225</Red>
+          <Green>225</Green>
+          <Blue>225</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </TickAttributes>
+    </MinorGrid>
+    <Scale>
+      <MinorGridsPerUnit>5</MinorGridsPerUnit>
+      <ShowOutside>false</ShowOutside>
+    </Scale>
+    <Origin>
+      <Type>Value</Type>
+      <Value xsi:type="data:NumberDataElement">
+        <Value>0.0</Value>
+      </Value>
+    </Origin>
+    <PrimaryAxis>true</PrimaryAxis>
+    <CategoryAxis>true</CategoryAxis>
+    <Percent>false</Percent>
+  </Axes>
+  <Orientation>Vertical</Orientation>
+  <UnitSpacing>50.0</UnitSpacing>
+  <Rotation/>
+</model:ChartWithAxes>
+]]></xml-property>
+                                <property name="outputFormat">SVG</property>
+                                <list-property name="action">
+                                    <structure>
+                                        <property name="targetWindow">_blank</property>
+                                        <property name="linkType">drill-through</property>
+                                        <property name="targetFileType">report-design</property>
+                                        <property name="targetBookmarkType">bookmark</property>
+                                        <property name="reportName">R_S14_detail.rptdesign</property>
+                                        <list-property name="paramBindings">
+                                            <structure>
+                                                <property name="paramName">PROJECT_ID</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">params["PROJECT_ID"].value</value>
+                                                </simple-property-list>
+                                            </structure>
+                                            <structure>
+                                                <property name="paramName">USER_ID</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">params["USER_ID"].value</value>
+                                                </simple-property-list>
+                                            </structure>
+                                            <structure>
+                                                <property name="paramName">PERIOD</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">row["period_zone"]</value>
+                                                </simple-property-list>
+                                            </structure>
+                                        </list-property>
+                                    </structure>
+                                </list-property>
+                                <property name="inheritColumns">false</property>
+                                <property name="dataSet">DS_R_S14</property>
+                                <property name="height">4.489583333333333in</property>
+                                <property name="width">7.854166666666667in</property>
+                                <list-property name="boundDataColumns">
+                                    <structure>
+                                        <property name="name">period_zone</property>
+                                        <expression name="expression" type="javascript">dataSetRow["period_zone"]</expression>
+                                        <property name="dataType">integer</property>
+                                    </structure>
+                                    <structure>
+                                        <property name="name">period_zone_name</property>
+                                        <expression name="expression" type="javascript">dataSetRow["period_zone_name"]</expression>
+                                        <property name="dataType">string</property>
+                                    </structure>
+                                    <structure>
+                                        <property name="name">unsolved_subject_count</property>
+                                        <expression name="expression" type="javascript">dataSetRow["unsolved_subject_count"]</expression>
+                                        <property name="dataType">decimal</property>
+                                    </structure>
+                                    <structure>
+                                        <property name="name">severity_id</property>
+                                        <expression name="expression" type="javascript">dataSetRow["severity_id"]</expression>
+                                        <property name="dataType">integer</property>
+                                    </structure>
+                                    <structure>
+                                        <property name="name">severity_name</property>
+                                        <expression name="expression" type="javascript">dataSetRow["severity_name"]</expression>
+                                        <property name="dataType">string</property>
+                                    </structure>
+                                </list-property>
+                            </extended-item>
+                        </cell>
+                    </row>
+                    <row id="37">
+                        <property name="height">7.694140067%</property>
+                        <cell id="38">
+                            <property name="fontFamily">"IPAexゴシック"</property>
+                            <label id="335">
+                                <property name="height">0.5in</property>
+                            </label>
+                        </cell>
+                        <cell id="39">
+                            <property name="fontFamily">"IPAexゴシック"</property>
+                            <grid id="95">
+                                <property name="width">7.53125in</property>
+                                <column id="96">
+                                    <property name="width">10.23768424%</property>
+                                </column>
+                                <column id="97">
+                                    <property name="width">89.76231576%</property>
+                                </column>
+                                <row id="98">
+                                    <property name="height">33.333333%</property>
+                                    <cell id="99">
+                                        <label id="107">
+                                            <text-property name="text" key="sub.xaxis.name">xaxis</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="100">
+                                        <label id="109">
+                                            <text-property name="text" key="sub.xaxis.1.desc">xaxis desc</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                                <row id="101">
+                                    <property name="height">33.333333%</property>
+                                    <cell id="102">
+                                        <label id="108">
+                                            <text-property name="text" key="sub.yaxis.name">yaxis</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="103">
+                                        <label id="110">
+                                            <text-property name="text" key="sub.yaxis.desc">yaxis desc 1</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                    <row id="179">
+                        <cell id="180">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontFamily">"IPAexゴシック"</property>
+                            <label id="343"/>
+                            <label id="282">
+                                <text-property name="text" key="list.title"></text-property>
+                            </label>
+                            <table id="228">
+                                <property name="width">7.875in</property>
+                                <property name="dataSet">DS_R_S14_LIST</property>
+                                <list-property name="boundDataColumns">
+                                    <structure>
+                                        <property name="name">severity_id</property>
+                                        <text-property name="displayName">severity_id</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["severity_id"]</expression>
+                                        <property name="dataType">integer</property>
+                                    </structure>
+                                    <structure>
+                                        <property name="name">severity_name</property>
+                                        <text-property name="displayName">severity_name</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["severity_name"]</expression>
+                                        <property name="dataType">string</property>
+                                    </structure>
+                                    <structure>
+                                        <property name="name">subject_count</property>
+                                        <text-property name="displayName">subject_count</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["subject_count"]</expression>
+                                        <property name="dataType">integer</property>
+                                    </structure>
+                                    <structure>
+                                        <property name="name">solved_count</property>
+                                        <text-property name="displayName">solved_count</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["solved_count"]</expression>
+                                        <property name="dataType">integer</property>
+                                    </structure>
+                                    <structure>
+                                        <property name="name">unsolved_count</property>
+                                        <text-property name="displayName">unsolved_count</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["unsolved_subject_count"]</expression>
+                                        <property name="dataType">integer</property>
+                                    </structure>
+                                    <structure>
+                                        <property name="name">late_start_count</property>
+                                        <text-property name="displayName">late_start_count</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["late_start_count"]</expression>
+                                        <property name="dataType">integer</property>
+                                    </structure>
+                                    <structure>
+                                        <property name="name">late_end_count</property>
+                                        <text-property name="displayName">late_end_count</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["late_end_count"]</expression>
+                                        <property name="dataType">integer</property>
+                                    </structure>
+                                </list-property>
+                                <column id="268">
+                                    <property name="width">16.66666667%</property>
+                                </column>
+                                <column id="269">
+                                    <property name="width">16.66666667%</property>
+                                </column>
+                                <column id="270">
+                                    <property name="width">16.66666667%</property>
+                                </column>
+                                <column id="271">
+                                    <property name="width">16.66666667%</property>
+                                </column>
+                                <column id="272">
+                                    <property name="width">16.66666667%</property>
+                                </column>
+                                <column id="273">
+                                    <property name="width">16.66666667%</property>
+                                </column>
+                                <header>
+                                    <row id="229">
+                                        <property name="backgroundColor">#A6FFD2</property>
+                                        <cell id="232">
+                                            <property name="borderBottomColor">#C0C0C0</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftColor">#C0C0C0</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightColor">#C0C0C0</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopColor">#C0C0C0</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <label id="233">
+                                                <property name="fontWeight">bold</property>
+                                                <text-property name="text" key="list.title.severity">severity_name</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="234">
+                                            <property name="borderBottomColor">#C0C0C0</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftColor">#C0C0C0</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightColor">#C0C0C0</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopColor">#C0C0C0</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <label id="235">
+                                                <property name="fontWeight">bold</property>
+                                                <text-property name="text" key="list.title.task.count">subject_count</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="236">
+                                            <property name="borderBottomColor">#C0C0C0</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftColor">#C0C0C0</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightColor">#C0C0C0</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopColor">#C0C0C0</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <label id="237">
+                                                <property name="fontWeight">bold</property>
+                                                <text-property name="text" key="list.title.closed_count">solved_count</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="238">
+                                            <property name="borderBottomColor">#C0C0C0</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftColor">#C0C0C0</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightColor">#C0C0C0</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopColor">#C0C0C0</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <label id="239">
+                                                <property name="fontWeight">bold</property>
+                                                <text-property name="text" key="list.title.unclosed.count">unsolved_count</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="240">
+                                            <property name="borderBottomColor">#C0C0C0</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftColor">#C0C0C0</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightColor">#C0C0C0</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopColor">#C0C0C0</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <label id="241">
+                                                <property name="fontWeight">bold</property>
+                                                <text-property name="text" key="list.title.late.start.count">late_start_count</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="242">
+                                            <property name="borderBottomColor">#C0C0C0</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftColor">#C0C0C0</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightColor">#C0C0C0</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopColor">#C0C0C0</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <label id="243">
+                                                <property name="fontWeight">bold</property>
+                                                <text-property name="text" key="list.title.late.end.count">late_end_count</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                </header>
+                                <detail>
+                                    <row id="244">
+                                        <cell id="247">
+                                            <property name="borderBottomColor">#C0C0C0</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftColor">#C0C0C0</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightColor">#C0C0C0</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopColor">#C0C0C0</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <data id="248">
+                                                <structure name="numberFormat">
+                                                    <property name="category">Currency</property>
+                                                    <property name="pattern">#,##0{RoundingMode=UNNECESSARY}</property>
+                                                </structure>
+                                                <property name="textAlign">center</property>
+                                                <property name="resultSetColumn">severity_name</property>
+                                            </data>
+                                        </cell>
+                                        <cell id="249">
+                                            <property name="borderBottomColor">#C0C0C0</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftColor">#C0C0C0</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightColor">#C0C0C0</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopColor">#C0C0C0</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <data id="250">
+                                                <structure name="numberFormat">
+                                                    <property name="category">Currency</property>
+                                                    <property name="pattern">#,##0{RoundingMode=UNNECESSARY}</property>
+                                                </structure>
+                                                <property name="textAlign">right</property>
+                                                <property name="resultSetColumn">subject_count</property>
+                                            </data>
+                                        </cell>
+                                        <cell id="251">
+                                            <property name="borderBottomColor">#C0C0C0</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftColor">#C0C0C0</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightColor">#C0C0C0</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopColor">#C0C0C0</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <data id="252">
+                                                <structure name="numberFormat">
+                                                    <property name="category">Currency</property>
+                                                    <property name="pattern">#,##0{RoundingMode=UNNECESSARY}</property>
+                                                </structure>
+                                                <property name="textAlign">right</property>
+                                                <property name="resultSetColumn">solved_count</property>
+                                            </data>
+                                        </cell>
+                                        <cell id="253">
+                                            <property name="borderBottomColor">#C0C0C0</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftColor">#C0C0C0</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightColor">#C0C0C0</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopColor">#C0C0C0</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <data id="254">
+                                                <structure name="numberFormat">
+                                                    <property name="category">Currency</property>
+                                                    <property name="pattern">#,##0{RoundingMode=UNNECESSARY}</property>
+                                                </structure>
+                                                <property name="textAlign">right</property>
+                                                <property name="resultSetColumn">unsolved_count</property>
+                                            </data>
+                                        </cell>
+                                        <cell id="255">
+                                            <property name="borderBottomColor">#C0C0C0</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftColor">#C0C0C0</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightColor">#C0C0C0</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopColor">#C0C0C0</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <data id="256">
+                                                <structure name="numberFormat">
+                                                    <property name="category">Currency</property>
+                                                    <property name="pattern">#,##0{RoundingMode=UNNECESSARY}</property>
+                                                </structure>
+                                                <property name="textAlign">right</property>
+                                                <property name="resultSetColumn">late_start_count</property>
+                                            </data>
+                                        </cell>
+                                        <cell id="257">
+                                            <property name="borderBottomColor">#C0C0C0</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftColor">#C0C0C0</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightColor">#C0C0C0</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopColor">#C0C0C0</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <data id="258">
+                                                <structure name="numberFormat">
+                                                    <property name="category">Currency</property>
+                                                    <property name="pattern">#,##0{RoundingMode=UNNECESSARY}</property>
+                                                </structure>
+                                                <property name="textAlign">right</property>
+                                                <property name="resultSetColumn">late_end_count</property>
+                                            </data>
+                                        </cell>
+                                    </row>
+                                </detail>
+                            </table>
+                            <label id="344"/>
+                        </cell>
+                    </row>
+                    <row id="145">
+                        <property name="height">10.30252501%</property>
+                        <cell id="146">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontFamily">"IPAexゴシック"</property>
+                            <grid id="148">
+                                <property name="width">7.875in</property>
+                                <column id="149">
+                                    <property name="width">9.257142857%</property>
+                                </column>
+                                <column id="150">
+                                    <property name="width">90.74285714%</property>
+                                </column>
+                                <row id="151">
+                                    <cell id="152">
+                                        <label id="155">
+                                            <text-property name="text" key="sub.date"></text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="153">
+                                        <text-data id="154">
+                                            <expression name="valueExpr">BirtDateTime.now()</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="159">
+                                    <cell id="160"/>
+                                    <cell id="161">
+                                        <label id="165">
+                                            <text-property name="text" key="help.link.label">help</text-property>
+                                            <list-property name="action">
+                                                <structure>
+                                                    <property name="linkType">hyperlink</property>
+                                                    <expression name="uri" type="javascript">if (params["NAVI_CREATE_FLAG"].value) {&#13;
+	vars["Context"] + '/report/help/R_S14/IPF_R_S14_HELP.html'&#13;
+} else {&#13;
+	// ハイパーリンク無し&#13;
+}</expression>
+                                                    <property name="targetWindow">_blank</property>
+                                                </structure>
+                                            </list-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                                <row id="162">
+                                    <cell id="163"/>
+                                    <cell id="164">
+                                        <label id="166">
+                                            <list-property name="visibility">
+                                                <structure>
+                                                    <property name="format">all</property>
+                                                    <expression name="valueExpr" type="javascript">if(params["HELP_FLAG"].value == false) {&#13;
+	true&#13;
+} else {&#13;
+	false&#13;
+}</expression>
+                                                </structure>
+                                            </list-property>
+                                            <text-property name="text" key="help.link.sample.label">sample_help</text-property>
+                                            <list-property name="action">
+                                                <structure>
+                                                    <property name="linkType">hyperlink</property>
+                                                    <expression name="uri" type="javascript">if (params["NAVI_CREATE_FLAG"].value) {&#13;
+	vars["Context"] + '/report/help/sample/IPF_R_S14_SAMPLE_HELP.html'&#13;
+} else {&#13;
+	// ハイパーリンク無し&#13;
+}</expression>
+                                                    <property name="targetWindow">_blank</property>
+                                                </structure>
+                                            </list-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </detail>
+        </list>
+    </body>
+    <property name="pageVariables">
+        <variable-element name="Context">
+            <property name="type">report</property>
+        </variable-element>
+        <variable-element name="Xaxis_Label">
+            <property name="type">report</property>
+        </variable-element>
+        <variable-element name="char_count">
+            <property name="type">report</property>
+        </variable-element>
+        <variable-element name="Reduction">
+            <expression name="value" type="javascript">2</expression>
+            <property name="type">report</property>
+        </variable-element>
+    </property>
+</report>

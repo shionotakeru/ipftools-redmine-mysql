@@ -1,0 +1,34 @@
+ja:
+  label_ipf_wt_exp_csv_relations: "関連を出力"
+  label_ipf_wt_exp_csv_watchers: "ウォッチャーを出力"
+  label_ipf_wt_exp_csv_description: "説明を出力"
+  label_ipf_wt_exp_csv_time: "作業時間を出力"
+  label_ipf_wt_exp_csv_attachments: "添付ファイルのリストを出力"
+  label_ipf_wt_exp_csv_query_columns_only: "選択した列だけを出力"
+  label_ipf_wt_exp_csv_group: "グループの基準で分ける"
+  label_ipf_wt_exp_csv_generate_name: "出力ファイル名を設定する"
+  label_ipf_wt_exp_csv_issues_limit: "出力の最大数"
+  label_ipf_wt_exp_csv_issues_limit_help: "0 - デフォルトを使う"
+  label_ipf_wt_exp_csv_name: "出力ファイル名の接頭辞"
+  
+  label_ipf_wt_exp_csv_settings_title: "詳細を出力する"
+  label_ipf_wt_exp_csv_button_export: "出力"
+  label_ipf_wt_exp_csv_button_back: "チケットの一覧に戻る"
+  
+  label_ipf_wt_exp_csv_field_attachment: "添付ファイル"
+
+  label_ipf_wt_exp_csv_format: "工数CSV 出力:"
+  label_ipf_wt_exp_csv_format_quick: "標準"
+  label_ipf_wt_exp_csv_format_quick_tooltip: "標準の設定で出力する"
+  label_ipf_wt_exp_csv_format_detailed: "オプション"
+  label_ipf_wt_exp_csv_format_detailed_tooltip: "オプションを指定して出力する"
+
+  field_time_entry_id: "id"
+  field_time_entry_project: "プロジェクト"
+  field_time_entry_user: "ユーザ"
+  field_time_entry_issue_id: "チケットＩＤ"
+  field_time_entry_hours: "稼働時間"
+  field_time_entry_comments: "コメント"
+  field_time_entry_activity: "行動"
+  field_time_entry_spent_on: "日付"
+

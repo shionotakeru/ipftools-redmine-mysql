@@ -1,0 +1,1 @@
+ENV['PATH'] = "@@IPFTOOLS_ROOT@@/bin#{File::PATH_SEPARATOR}#{ENV['PATH']}"

@@ -1,0 +1,31 @@
+<p>
+<fieldset><legend><%= l(:ipf_sm_settings_backup_title) %></legend>
+	<table> 
+		<tr>
+			<td><%= l(:ipf_sm_settings_backup_script) %></td>
+			<td><%= text_field_tag('settings[ipf_backup_script]', @settings['ipf_backup_script'], :size => 70) %>	</td>
+		</tr>
+	</table>
+</fieldset>	
+</p>
+<p>
+<fieldset><legend><%= l(:ipf_sm_settings_repository_title) %></legend>
+	<table> 
+		<tr>
+			<td><%= l(:ipf_sm_settings_repository_script) %></td>
+			<td><%= text_field_tag('settings[ipf_repository_script]', @settings['ipf_repository_script'], :size => 70) %>	</td>
+		</tr>
+		<tr>
+			<td><%= l(:ipf_sm_settings_scm) %></td>
+			<td><%= select_tag('settings[ipf_scm]', options_for_select(['Subversion', 'Git'], @settings['ipf_scm'])) %></td>
+		</tr>
+		<tr>
+			<td><%= l(:ipf_sm_settings_htdigest) %></td>
+            <td><%= text_field_tag('settings[ipf_htdigest_file]', @settings['ipf_htdigest_file'], :size => 70) %></td>
+		</tr>
+	</table>
+</fieldset>	
+</p>
+
+
+

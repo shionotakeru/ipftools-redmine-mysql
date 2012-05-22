@@ -1,0 +1,81 @@
+<% content_for(:header_tags) do %>
+	<%= stylesheet_link_tag('ipf_backup.css', :plugin => 'redmine_ipf_setting_manager') %>
+	<%= stylesheet_link_tag('jquery-ui-1.8.16.custom.css', :plugin => 'redmine_ipf_setting_manager') %>
+	<%= javascript_include_tag('jquery-1.6.4.js', :plugin => 'redmine_ipf_setting_manager') %>
+	<script language="JavaScript" type="text/javascript">
+		jQuery.noConflict();
+		var download_click_global
+		var delete_click_global
+	</script>	
+	<%= javascript_include_tag('jquery-ui-1.8.16.custom.min.js', :plugin => 'redmine_ipf_setting_manager') %>
+	<%= javascript_include_tag('ipf_backup.js', :plugin => 'redmine_ipf_setting_manager') %>
+<% end %>
+
+<script language="JavaScript" type="text/javascript">
+	var label_backup_yes = '<%= l(:ipf_sm_backup_dialog_yes) %>';
+	var label_backup_no = '<%= l(:ipf_sm_backup_dialog_no) %>';
+	var label_backup_ok = '<%= l(:ipf_sm_backup_dialog_ok) %>';
+	var msg_backup_failure = '<%= l(:ipf_sm_backup_dialog_backup_failure) %>';
+	var msg_delete_failure = '<%= l(:ipf_sm_backup_dialog_delete_failure) %>';
+	var msg_download_failure = '<%= l(:ipf_sm_backup_dialog_download_failure) %>';
+	var msg_cause = '<%= l(:ipf_sm_error_msg_cause) %>';
+</script>
+
+<h2><%= l(:ipf_sm_backup_title) %></h2>
+
+<fieldset><legend><%= l(:ipf_sm_backup_legend) %></legend>
+<%=radio_button_tag :backup_target,0, :checked %><%= l(:ipf_sm_backup_all) %><BR>
+<%=radio_button_tag :backup_target,1 %><%= l(:ipf_sm_backup_redmine_and_scm) %>
+</fieldset>
+<BR>
+<%= submit_tag l(:ipf_sm_backup_button), :class => "backup-exec-button" %>
+<BR>
+<BR>
+<BR>
+<div class="autoscroll">
+<table class="list">
+	<thead>
+	<tr>
+	<th align="left" valign="center"><%= l(:ipf_sm_backup_list_date) %></th>
+	<th align="left" valign="center"><%= l(:ipf_sm_backup_list_target) %></th>
+	<th align="left" valign="center"><%= l(:ipf_sm_backup_list_action) %></th>
+	<th align="left" valign="center"></th>
+  	</tr>
+	</thead>
+	<tbody>
+	  	<% @backups.each do |bk| %>
+			<tr class="<%= cycle('odd', 'even') %>">
+				<td><%= format_datetime(bk.backup_date) %></td>
+				<td><%= get_target_name(bk.target) %></td>
+				<td><%= link_to l(:ipf_sm_backup_action_download), "", :onclick => "download_click('#{bk.id}'); return false;", :id => bk.id, :class => 'icon icon-save' %></td>
+				<td><%= link_to l(:ipf_sm_backup_action_delete), "", :onclick => "delete_click('#{bk.id}'); return false;", :id => bk.id, :class => 'icon icon-del' %></td>
+		  	</tr>
+		<% end %>
+	</tbody>
+</table>
+</div>
+
+
+<div id="backup-confirm-dialog" class="dialog">
+	<p><%= l(:ipf_sm_backup_dialog_backup_confirm) %></p>
+</div>
+<div id="backup-running-dialog" class="dialog">
+	<p>
+		<table>
+			<tr>
+				<td valign="center"><%= image_tag 'loading.gif' %></td>
+				<td valign="center"><%= l(:ipf_sm_backup_dialog_backup_running) %></td>
+			</tr>
+		</table>	
+		<br>
+	</p>
+</div>
+<div id="backup-success-dialog" class="dialog">
+	<p><%= l(:ipf_sm_backup_dialog_backup_success) %></p>
+</div>
+<div id="backup-delete-confirm-dialog" class="dialog">
+	<p><%= l(:ipf_sm_backup_dialog_delete_confirm) %></p>
+</div>
+<div id="message-dialog" class="dialog">
+	<p></p>
+</div>

@@ -1,0 +1,309 @@
+#
+#   <Quantitative project management tool.>
+#
+#   Copyright (C) 2012 IPA, Japan.
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+%define prefix @@PREFIX@@
+
+Name:           ipftools-redmine
+Summary:        Quantitative project management tool using Redmine
+Version:        @@VERSION@@
+Release:        @@RELEASE@@
+License:        GPL version 3
+Group:          Development/Tools
+URL:            http://www.ipa.go.jp/
+BuildRoot:      %{_tmppath}/ipftools-redmine-%(%{__id_u} -n)
+Conflicts:      ipftools-trac
+BuildRequires:  tar unzip
+AutoReqProv:	no
+Requires:	sudo perl
+Requires:	readline ncurses gdbm glibc openssl db4
+Requires:       postgresql84-server
+Requires:       httpd mod_dav_svn
+Requires:       subversion git
+Source1:	ipftools-redmine-files-@@VERSION@@.tgz
+Source2:	ipftools-redmine-ipfdb-@@VERSION@@.tgz
+Source3:	ipftools-redmine-ruby-@@VERSION@@.tgz
+Source4:	@@URL_REDMINE@@
+Source5:	ipftools-redmine-ipf-plugins-@@VERSION@@.zip
+Source6:	ipftools-redmine-ipf-script-@@VERSION@@.zip
+Source7:	@@URL_JRE@@
+Source8:	@@URL_IPAFONT@@
+Source9:	@@URL_TOMCAT@@
+Source10:	ipftools-tomcat-@@VERSION@@.sh
+Source11:	ipftools-birt-viewer-@@VERSION@@.zip
+Source12:	ipftools-redmine-ipf-batch-@@VERSION@@.zip
+Source13:	@@URL_PENTAHO_DI@@
+Source14:	@@URL_YAMLBEANS@@
+Source15:	ipftools-redmine-patch-@@VERSION@@.patch
+Source16:	ipftools-redmine-templates-@@VERSION@@.lst
+Source17:	ipftools-redmine-ipf-help-@@VERSION@@.zip
+
+
+%description
+Quantitative project management tool using Redmine.
+
+
+
+########################################################################
+#
+# prep
+#
+########################################################################
+%prep
+%setup -q -c -T
+%{__unzip} -q %{SOURCE8}
+
+
+########################################################################
+#
+# build
+#
+########################################################################
+%build
+
+
+########################################################################
+#
+# install
+#
+########################################################################
+%install
+%{__rm} -fr $RPM_BUILD_ROOT
+%{__mkdir_p} $RPM_BUILD_ROOT%{prefix}
+
+# files
+pushd $RPM_BUILD_ROOT%{prefix}
+	tar xfz %{SOURCE1}
+	pushd libexec
+		tar xfz %{SOURCE2}
+	popd
+popd
+
+
+# ruby
+pushd $RPM_BUILD_ROOT
+	tar xfz %{SOURCE3}
+popd
+
+# redmine
+pushd $RPM_BUILD_ROOT%{prefix}
+	%{__unzip} -q %{SOURCE4}
+	%{__mv} `basename %{SOURCE4} .zip` redmine
+	%{__rm} -fr redmine/files
+	%{__rm} -f redmine/log/delete.me
+	# ipf-plugins
+	pushd redmine/vendor
+		%{__unzip} -q %{SOURCE5}
+	popd
+popd
+
+# ipf-script
+pushd $RPM_BUILD_ROOT%{prefix}
+	%{__unzip} -q %{SOURCE6}
+	find $RPM_BUILD_ROOT%{prefix}/script -name '*.rb' | while read i; do
+	    if [ "`dd if=$i bs=2 count=1 2>/dev/null`" = '#!' \
+		 -a \
+		 "`sed -n '1 { /ruby/ { s/.*/ruby/; p }; q }' $i`" = 'ruby' ]
+	    then
+		sed -i -e 's/$//; 1s|^#!.*|#! %{prefix}/bin/ruby|' $i
+		chmod -v a+x $i
+	    fi
+	done
+popd
+
+# redmine - apache
+%{__install} -d -m 755 $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d
+%{__ln_s} %{prefix}/etc/httpd-passenger.conf $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/~ipftools-redmine-0.conf
+%{__ln_s} %{prefix}/etc/httpd-redmine.conf $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/~ipftools-redmine-1.conf
+%{__install} -d -m 755 $RPM_BUILD_ROOT%{_localstatedir}/www/html
+%{__ln_s} %{prefix}/redmine/public $RPM_BUILD_ROOT%{_localstatedir}/www/html/redmine
+
+
+# scm - apache
+%{__install} -d -m 755 $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d
+%{__ln_s} %{prefix}/etc/httpd-svn.conf $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/~ipftools-svn.conf
+%{__ln_s} %{prefix}/etc/httpd-git.conf $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/~ipftools-git.conf
+
+
+# ipf-help
+%{__ln_s} %{prefix}/etc/httpd-ipftools.conf $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/~ipftools.conf
+%{__mkdir_p} $RPM_BUILD_ROOT%{prefix}/share/htdocs
+pushd $RPM_BUILD_ROOT%{prefix}/share/htdocs
+	%{__unzip} -q %{SOURCE17}
+popd
+
+# fonts
+%{__install} -d -m 755 $RPM_BUILD_ROOT%{prefix}/fonts
+%{__cp} IPAexfont*/*.ttf $RPM_BUILD_ROOT%{prefix}/fonts
+
+
+# jre
+pushd $RPM_BUILD_ROOT%{prefix}
+	/bin/sh %{SOURCE7} >/dev/null
+	%{__mv} jre* jre
+	%{__install} -d -m 755 jre/lib/fonts/fallback
+	%{__ln_s} %{prefix}/fonts/ipaexg.ttf jre/lib/fonts/fallback/ipaexg.ttf
+popd
+
+
+# tomcat
+pushd $RPM_BUILD_ROOT%{prefix}
+	%{__install} -d -m 755 tomcat
+	%{__tar} xfz %{SOURCE9} -C tomcat --strip-components=1
+	%{__rm} -fr tomcat/bin/*-native.tar.gz
+	%{__rm} -fr tomcat/webapps/*
+popd
+%{__install} -d -m 755 $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d
+%{__install} -p -m 755 %{SOURCE10} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/ipftools-tomcat
+
+
+# birt-viewer
+%{__unzip} -q %{SOURCE11} -d $RPM_BUILD_ROOT%{prefix}/tomcat/webapps
+
+
+# birt-viewer - apache
+%{__install} -d -m 755 $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d
+%{__ln_s} %{prefix}/etc/httpd-birt-viewer.conf $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/~ipftools-birt-viewer.conf
+
+
+# pentaho
+%{__install} -d -m 755 $RPM_BUILD_ROOT%{prefix}/pentaho
+%{__unzip} -q %{SOURCE13} -d $RPM_BUILD_ROOT%{prefix}/pentaho
+%{__rm} -fr $RPM_BUILD_ROOT%{prefix}/pentaho/data-integration/docs
+%{__rm} -fr $RPM_BUILD_ROOT%{prefix}/pentaho/data-integration/samples
+
+
+# yamlbeans
+%{__unzip} -q %{SOURCE14} \
+    -d $RPM_BUILD_ROOT%{prefix}/pentaho/data-integration/libext/tmp.yamlbeans \
+    "yamlbeans-*/yamlbeans-*.jar"
+%{__mv} $RPM_BUILD_ROOT%{prefix}/pentaho/data-integration/libext/tmp.yamlbeans/yamlbeans-*/yamlbeans-*.jar \
+    $RPM_BUILD_ROOT%{prefix}/pentaho/data-integration/libext
+%{__rm} -fr $RPM_BUILD_ROOT%{prefix}/pentaho/data-integration/libext/tmp.yamlbeans
+
+
+# ipf-batch
+%{__unzip} -q %{SOURCE12} -d $RPM_BUILD_ROOT%{prefix}
+%{__chmod} -R +x $RPM_BUILD_ROOT%{prefix}/batch
+
+
+# make some directories.
+%{__install} -d -m 755 $RPM_BUILD_ROOT%{prefix}/var
+%{__install} -d -m 755 $RPM_BUILD_ROOT%{prefix}/var/redmine
+%{__install} -d -m 755 $RPM_BUILD_ROOT%{prefix}/var/files
+%{__install} -d -m 755 $RPM_BUILD_ROOT%{prefix}/var/svn
+%{__install} -d -m 755 $RPM_BUILD_ROOT%{prefix}/var/git
+%{__install} -d -m 755 $RPM_BUILD_ROOT%{prefix}/var/logs
+%{__install} -d -m 755 $RPM_BUILD_ROOT%{prefix}/var/backup
+
+
+# config
+%{__install} -m 600 /dev/null $RPM_BUILD_ROOT%{prefix}/var/config
+
+
+# patch
+%{__patch} -d $RPM_BUILD_ROOT%{prefix} -p1 < %{SOURCE15}
+
+
+# templates
+for i in `cat %{SOURCE16}`; do
+    case $i in
+    *.in)
+	echo $i
+        ;;
+    *)
+        %{__mv} $RPM_BUILD_ROOT%{prefix}/$i $RPM_BUILD_ROOT%{prefix}/$i.in
+	echo $i.in
+	;;
+    esac
+done > $RPM_BUILD_ROOT%{prefix}/libexec/templates.lst
+
+
+
+########################################################################
+#
+# files
+#
+########################################################################
+%files
+%defattr(-,root,root)
+%attr(-,apache,apache) %{prefix}
+%{_sysconfdir}
+%{_localstatedir}
+
+
+########################################################################
+#
+# clean
+#
+########################################################################
+%clean
+# %{__rm} -fr $RPM_BUILD_ROOT
+
+
+########################################################################
+#
+# post
+#
+########################################################################
+%post
+if [ ! -f %{prefix}/var/svnauthz.txt ]; then
+    %{__cp} %{prefix}/share/svnauthz.txt %{prefix}/var/svnauthz.txt
+    %{__chmod} 0600 %{prefix}/var/svnauthz.txt
+    %{__chown} apache:apache %{prefix}/var/svnauthz.txt
+fi
+if [ ! -f %{prefix}/var/htdigest.txt ]; then
+    %{__cp} %{prefix}/share/htdigest.txt %{prefix}/var/htdigest.txt
+    %{__chmod} 0600 %{prefix}/var/htdigest.txt
+    %{__chown} apache:apache %{prefix}/var/htdigest.txt
+fi
+
+/sbin/service httpd condrestart >/dev/null 2>&1 || :
+/sbin/chkconfig --add ipftools-tomcat >/dev/null 2>&1 || :
+/sbin/chkconfig ipftools-tomcat on >/dev/null 2>&1 || :
+/sbin/service ipftools-tomcat start >/dev/null 2>&1 || :
+
+
+########################################################################
+#
+# preun
+#
+########################################################################
+%preun
+if [ $1 == 0 ]; then
+    /sbin/service ipftools-tomcat stop >/dev/null 2>&1 || :
+    /sbin/chkconfig --del ipftools-tomcat >/dev/null 2>&1 || :
+    %{__rm} -rf %{prefix}/redmine
+    %{__rm} -rf %{prefix}/script
+    %{__rm} -rf %{prefix}/tomcat
+    %{__rm} -rf %{prefix}/batch
+fi
+
+
+########################################################################
+#
+# postun
+#
+########################################################################
+%postun
+/sbin/service httpd condrestart >/dev/null 2>&1
+
+
+# Local Variables: ***
+# mode: rpm-spec ***
+# End: ***

@@ -1,0 +1,22 @@
+<h2><%=l(:title_ipf_graph_pattern_update)%></h2>
+
+<% form_tag({:controller => 'IpfGraphPatternGlobal', :action => 'update_entry',:project_id => @project}) do %>
+    <%= hidden_field_tag :pattern_id, @pattern_id %>
+    <%= hidden_field_tag :jsp, @jsp %>
+	<table  class="list">
+	    <tr>
+	        <td><%= l(:label_ipf_graph_pattern_name) %></td>
+	        <td><%= text_field_tag(:name, h(@name),{ :size => '80',:maxlength => '255' } )%>
+	    </tr>
+	    <tr>
+	        <td><%= l(:label_ipf_graph_pattern_explanation) %></td>
+	        <td><%= text_field_tag(:explanation, h(@explanation),{ :size => '80',:maxlength => '255' } )%>
+	    </tr>
+	    <tr>
+	        <td><%= l(:label_ipf_graph_pattern_jsp) %></td>
+	        <td><%= text_field_tag(:jsp, h(@jsp),{ :size => '80',:maxlength => '255', :disabled => true
+ } )%>
+	    </tr>
+	</table>
+    <%= submit_tag l(:button_ipf_graph_pattern_update) %>
+<% end %>

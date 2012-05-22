@@ -1,0 +1,6 @@
+[groups]
+admin = admin
+
+[/]
+* = rw
+@admin = rw

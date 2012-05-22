@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+    <head>
+        <title>定量的分析・診断機能</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS" />
+        <link rel="stylesheet" href="./base.css" type="text/css">
+        <script type="text/javascript" src="./script.js"></script>
+        <script type="text/javascript">
+        <!--
+        function send(url) {
+            var userId = document.getElementById('userId').value;
+            var urlParameter = '';
+            if (userId && userId != '') {
+                urlParameter = '?USER_ID=' + userId + '&UID=' + userId;
+                
+                document.cookie = 'USER_ID=' + userId;
+            }
+            location.href = '/birt-viewer/Direct.jsp?URL=' + encodeURI(url + urlParameter);
+        }
+        // -->
+        </script>
+    </head>
+    <body>
+        <h1 class="bigFont">定量的分析・診断機能</h1>
+        <table class="loginTable">
+            <tr>
+                <td>
+                    <h4>ユーザID</h4>
+                </td>
+                <td>
+                    <input class="loginText" type="text" id="userId" name="userId" value="" size="20" maxlength="12" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <input type="button" name="button" value="定量管理ダッシュボード表示" onclick="send('/birt-viewer/R_M01_1.html');return false;"/>
+                </td>
+            </tr>
+            <tr height="10">
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <a href="#" onclick="popup('/birt-viewer/report/help/IPF_TOP/IPF_HELP.html');return false;">ヘルプ総合メニュー</a>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

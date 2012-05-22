@@ -1,0 +1,12 @@
+<p>
+<table>
+    <tr>
+        <td><%= l(:ipf_dashboard_label_analyze_url) %></td>
+		<td><%= text_field_tag('settings[ipf_analyze_url]', @settings['ipf_analyze_url'], :size => 50) %></td>
+    </tr>
+    <tr>
+        <td><%= l(:ipf_dashboard_label_hash_key) %></td>
+        <td><%= text_field_tag('settings[ipf_dashboard_hash_key]', @settings['ipf_dashboard_hash_key']) %></td>
+    </tr>
+</table>
+</p>

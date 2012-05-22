@@ -1,0 +1,8 @@
+en:
+  project_module_ipf_dashboard: "IPF Dashboard"
+  ipf_dashboard_menu_title: "IPF Dashboard"
+
+  ipf_dashboard_label_analyze_url: "IPF Dashboard URL"
+  ipf_dashboard_label_hash_key: "Hash key"
+
+  permission_ipf_analyze: "Show IPF Dashboard"

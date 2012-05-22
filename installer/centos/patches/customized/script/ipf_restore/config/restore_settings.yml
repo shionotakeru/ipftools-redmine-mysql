@@ -1,0 +1,21 @@
+# restore settings
+IpfRestore:
+  pg_dump_path: "@@IPFTOOLS_SVN_BIN@@"
+
+  Redmine:
+    DB:
+      host: localhost
+      port: 5432
+      database: redmine
+      username: redmine
+      password: "@@IPFTOOLS_RMDB_PASSWORD@@"
+    Appended:
+      path: "@@IPFTOOLS_DATA_DIR@@/files"
+
+  IPF_DB:
+    host: localhost
+    port: 5432
+    database: ipf
+    username: ipf
+    password: "@@IPFTOOLS_IPFDB_PASSWORD@@"
+

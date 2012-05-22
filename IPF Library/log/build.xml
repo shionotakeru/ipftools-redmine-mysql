@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<project basedir="." default="jar" name="birt-userlog">
+
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <property name="source" value="1.6"/>
+
+    <path id="birt-userlog.classpath">
+        <pathelement location="classes"/>
+        <pathelement location="tomcat_lib/annotations-api.jar"/>
+        <pathelement location="tomcat_lib/catalina-ant.jar"/>
+        <pathelement location="tomcat_lib/catalina-ha.jar"/>
+        <pathelement location="tomcat_lib/catalina-tribes.jar"/>
+        <pathelement location="tomcat_lib/catalina.jar"/>
+        <pathelement location="tomcat_lib/ecj-3.3.1.jar"/>
+        <pathelement location="tomcat_lib/el-api.jar"/>
+        <pathelement location="tomcat_lib/jasper-el.jar"/>
+        <pathelement location="tomcat_lib/jasper.jar"/>
+        <pathelement location="tomcat_lib/jsp-api.jar"/>
+        <pathelement location="tomcat_lib/servlet-api.jar"/>
+        <pathelement location="tomcat_lib/tomcat-coyote.jar"/>
+        <pathelement location="tomcat_lib/tomcat-dbcp.jar"/>
+        <pathelement location="tomcat_lib/tomcat-i18n-es.jar"/>
+        <pathelement location="tomcat_lib/tomcat-i18n-fr.jar"/>
+        <pathelement location="tomcat_lib/tomcat-i18n-ja.jar"/>
+        <pathelement location="lib/commons-lang-2.6.jar"/>
+        <pathelement location="lib/commons-logging-1.1.1.jar"/>
+        <pathelement location="lib/log4j-1.2.16.jar"/>
+    </path>
+
+    <target name="build" description="javaソースをコンパイルする" >
+        <delete dir="classes"/>
+        <mkdir dir="classes"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="classes" source="${source}" target="${target}" encoding="UTF-8">
+            <src path="src" />
+            <classpath refid="birt-userlog.classpath"/>
+        </javac>
+        <copy todir="classes">
+            <fileset dir="src">
+            	<include name="**/*.properties" />
+                <include name="**/*.java" />
+                <exclude name="log4j.properties" />
+        	</fileset>
+        </copy>
+    </target>
+
+    <target name="jar" depends="build" description="jarファイルを作成する" >
+        <delete file="dist/birt-userlog.jar"/>
+        <jar basedir="classes" jarfile="dist/birt-userlog.jar" />
+    </target>
+
+</project>

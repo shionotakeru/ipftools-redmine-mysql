@@ -1,0 +1,21 @@
+# backup settings
+IpfBackup:
+  backup_out_dir: C:/ipftools/script/ipf_backup/file
+  pg_dump_path: C:/ipftools/pgsql/bin
+  
+  Redmine:
+    DB:
+      host: localhost
+      port: 5432
+      database: redmine
+      username: redmine
+      password: redmine
+    Appended:
+      path: C:/ipftools/data/files
+      
+  IPF_DB:
+    host: localhost
+    port: 5432
+    database: ipf
+    username: ipf
+    password: ipf

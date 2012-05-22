@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<project basedir="." default="jar" name="batch-source-scale">
+
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+
+    <path id="batch-source-scale.classpath">
+        <pathelement location="classes"/>
+        <pathelement location="commonJ/lib/aopalliance-1.0.jar"/>
+        <pathelement location="commonJ/lib/commons-codec-1.5.jar"/>
+        <pathelement location="commonJ/lib/commons-collections-3.2.1.jar"/>
+        <pathelement location="commonJ/lib/commons-configuration-1.7.jar"/>
+        <pathelement location="commonJ/lib/commons-dbutils-1.4.jar"/>
+        <pathelement location="commonJ/lib/commons-io-2.0.1.jar"/>
+        <pathelement location="commonJ/lib/commons-lang-2.6.jar"/>
+        <pathelement location="commonJ/lib/commons-logging-1.1.jar"/>
+        <pathelement location="commonJ/lib/geronimo-jta_1.1_spec-1.0-sources.jar"/>
+        <pathelement location="commonJ/lib/javassist-3.4.ga.jar"/>
+        <pathelement location="commonJ/lib/juniversalchardet-1.0.3.jar"/>
+        <pathelement location="commonJ/lib/log4j-1.2.16.jar"/>
+        <pathelement location="commonJ/lib/ognl-2.6.9-patch-20090427.jar"/>
+        <pathelement location="commonJ/lib/org.apache.commons.jrcs.diff.jar"/>
+        <pathelement location="commonJ/lib/postgresql-8.4-702.jdbc3.jar"/>
+        <pathelement location="commonJ/lib/s2-extension-2.4.44.jar"/>
+        <pathelement location="commonJ/lib/s2-framework-2.4.44.jar"/>
+        <pathelement location="commonJ/lib/itextpdf-5.1.2.jar"/>
+        <pathelement location="commonJ/lib/stepcounter.jar"/>
+        <pathelement location="commonJ/lib/svnkit.jar"/>
+        <pathelement location="commonJ/lib/org.eclipse.jgit-1.1.0.201109151100-r.jar"/>
+    </path>
+
+    <target name="build" description="javaソースをコンパイルする" >
+        <delete dir="classes"/>
+        <mkdir dir="classes"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="classes" source="${source}" target="${target}" encoding="UTF-8">
+            <src path="src/main/java" />
+            <src path="src/custom_counter/java" />
+            <src path="src/custom_filter/java" />
+            <classpath refid="batch-source-scale.classpath"/>
+        </javac>
+        <copy todir="classes">
+            <fileset dir="src/main/java">
+                <include name="**/*.java" />
+        	</fileset>
+            <fileset dir="src/custom_counter/java">
+                <include name="**/*.java" />
+            </fileset>
+            <fileset dir="src/custom_filter/java">
+                <include name="**/*.java" />
+            </fileset>
+            <fileset dir="src/main/resources">
+                <include name="**/*.properties" />
+                <include name="**/*.dicon" />
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="jar" depends="build" description="jarファイルを作成する" >
+        <delete file="commonJ/lib/ipf-sourcescale.jar"/>
+        <jar basedir="classes" jarfile="commonJ/lib/ipf-sourcescale.jar">
+            <exclude name="**/*.dicon" />
+            <exclude name="log4j.properties" />
+            <exclude name="jp/go/ipa/ipf/sourcescale/counter/custom/*" />
+            <exclude name="jp/go/ipa/ipf/sourcescale/sourcefilter/custom/*" />
+        </jar>
+        <delete file="commonJ/lib/ipf-sourcescale-custom-counter.jar"/>
+        <jar basedir="classes" jarfile="commonJ/lib/ipf-sourcescale-custom-counter.jar">
+            <include name="jp/go/ipa/ipf/sourcescale/counter/IpfSourceScaleCounter.*" />
+            <include name="jp/go/ipa/ipf/sourcescale/counter/custom/*" />
+        </jar>
+        <delete file="commonJ/lib/ipf-sourcescale-custom-filter.jar"/>
+        <jar basedir="classes" jarfile="commonJ/lib/ipf-sourcescale-custom-filter.jar">
+            <include name="jp/go/ipa/ipf/sourcescale/sourcefilter/IpfSourceFilter.*" />
+            <include name="jp/go/ipa/ipf/sourcescale/sourcefilter/custom/*" />
+        </jar>
+    </target>
+
+</project>

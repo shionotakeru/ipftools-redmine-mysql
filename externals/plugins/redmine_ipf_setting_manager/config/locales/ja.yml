@@ -1,0 +1,83 @@
+# Japanease strings go here for Rails 
+ja:
+
+# menu
+  ipf_sm_repository_menu: "リポジトリの作成、削除"
+  ipf_sm_backup_menu: "バックアップ"
+
+# settings
+  ipf_sm_settings_backup_title: "バックアップ"
+  ipf_sm_settings_repository_title: "リポジトリの作成、削除"
+  ipf_sm_settings_backup_script: "実行プログラムの格納ディレクトリ"
+  ipf_sm_settings_repository_script: "実行プログラムの格納ディレクトリ"
+  ipf_sm_settings_scm: "バージョン管理システム"
+  ipf_sm_settings_htdigest: "htdigest.txtへのパス"
+
+# backup
+  ipf_sm_backup_title: "バックアップ"
+  ipf_sm_backup_legend: "対象"
+  ipf_sm_backup_all: "全体プロジェクト"
+  ipf_sm_backup_redmine_and_scm: "プロジェクト管理プラットフォーム・版管理ツール"
+  ipf_sm_backup_button: "バックアップの開始"
+  ipf_sm_backup_list_date: "日時"
+  ipf_sm_backup_list_target: "対象"
+  ipf_sm_backup_list_action: "操作"
+  ipf_sm_backup_action_download: "ダウンロード"
+  ipf_sm_backup_action_delete: "削除"
+  ipf_sm_backup_dialog_backup_confirm: "バックアップを実行します"
+  ipf_sm_backup_dialog_backup_running: "バックアップを実行しています....."
+  ipf_sm_backup_dialog_backup_success: "バックアップに成功しました"
+  ipf_sm_backup_dialog_backup_failure: "バックアップに失敗しました"  
+  ipf_sm_backup_dialog_delete_confirm: "バックアップを削除します"
+  ipf_sm_backup_dialog_delete_failure: "バックアップの削除に失敗しました"
+  ipf_sm_backup_dialog_download_failure: "ダウンロードに失敗しました"
+  ipf_sm_backup_dialog_yes: "はい"
+  ipf_sm_backup_dialog_no: "いいえ"
+  ipf_sm_backup_dialog_ok: "OK"
+  
+# create and delete repository
+  ipf_sm_repository_title: "リポジトリの作成、削除"
+  ipf_sm_repository_legend: "対象"
+  ipf_sm_repository_radio_create: "作成"
+  ipf_sm_repository_radio_delete: "削除"
+  ipf_sm_repository_radio_create_default: "作成するプロジェクトを選択して下さい"
+  ipf_sm_repository_radio_delete_default: "削除するプロジェクトを選択して下さい"
+  ipf_sm_repository_button_apply: "適用"
+  ipf_sm_repository_dialog_confirm: "処理を実行します"
+  ipf_sm_repository_dialog_running: "処理を実行しています....."
+  ipf_sm_repository_dialog_success: "処理に成功しました"
+  ipf_sm_repository_dialog_failure: "処理に失敗しました"  
+  ipf_sm_repository_dialog_yes: "はい"
+  ipf_sm_repository_dialog_no: "いいえ"
+  ipf_sm_repository_dialog_ok: "OK"
+  
+# script error message
+  # common
+  ipf_sm_error_msg_cause: "原因"
+  ipf_sm_error_msg_unexpected: "予期しないエラーが発生しました"  
+  ipf_sm_error_msg_project_not_selected: "プロジェクトが選択されていません"
+  
+  # backup
+  ipf_sm_error_msg_10: "指定したバックアップファイルは存在しません"
+  ipf_sm_error_msg_11: "指定した処理は実行中です"
+  ipf_sm_error_msg_12: "添付ファイルのバックアップ取得中にエラーが発生しました"
+  ipf_sm_error_msg_13: "Redmine DBのバックアップ取得中にエラーが発生しました"
+  ipf_sm_error_msg_14: "IPF DBのバックアップ取得中にエラーが発生しました"
+  ipf_sm_error_msg_15: "リポジトリのバックアップ取得中にエラーが発生しました"
+  ipf_sm_error_msg_16: "バックアップファイルの圧縮処理中にエラーが発生しました"
+  ipf_sm_error_msg_17: "バックアップデータの登録処理中にエラーが発生しました"
+
+  # repository create
+  ipf_sm_error_msg_20: "指定した処理は実行中です"
+  ipf_sm_error_msg_21: "指定したプロジェクトは存在しません"
+  ipf_sm_error_msg_22: "指定したプロジェクトには既にリポジトリが設定されています"
+  ipf_sm_error_msg_23: "指定したプロジェクトのリポジトリが既に存在します"
+  ipf_sm_error_msg_24: "リポジトリの作成処理中にエラーが発生しました"
+  ipf_sm_error_msg_25: "リポジトリデータの登録処理中にエラーが発生しました"
+
+  # repository delete
+  ipf_sm_error_msg_30: "指定した処理は実行中です"
+  ipf_sm_error_msg_31: "指定したプロジェクトは存在しません"
+  ipf_sm_error_msg_32: "指定したプロジェクトにはリポジトリが設定されていません"
+  ipf_sm_error_msg_33: "指定したプロジェクトのリポジトリが存在しません"
+  ipf_sm_error_msg_34: "リポジトリの削除処理中にエラーが発生しました"

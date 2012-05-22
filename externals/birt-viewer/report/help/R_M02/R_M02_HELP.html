@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html lang="ja">
+<head>
+<title>IPF_ヘルプ</title>
+<meta content="text/html; charset=Shift_JIS" http-equiv="Content-Type">
+<meta content="text/css" http-equiv="Content-Style-Type">
+<meta name="" content="mode/flm; pagewidth=750; pageheight=940">
+
+</head>
+<body>
+<div style="Z-INDEX: 8; POSITION: absolute; VISIBILITY: visible; TOP: 137px; LEFT: 48px;" id="Layer1">
+  <div>
+    <table border="1" width="644" height="31">
+      <tbody>
+        <tr>
+          <td width="80"><font size="2">使用する工程</font></td>
+          <td width="548"><font size="2">製造工程</font></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div style="Z-INDEX: 9; POSITION: absolute; VISIBILITY: visible; top : 169px; left : 47px;" id="Layer25">
+  <div>
+    <table border="1" width="644" height="32">
+      <tbody>
+        <tr>
+          <td width="80"><font size="2">グラフの目的</font></td>
+          <td width="548"><font size="2">担当プロジェクトの中で、製造進捗、又は工数の乖離幅が大きいプロジェクトを検出します。</font></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div style="Z-INDEX: 10; POSITION: absolute; VISIBILITY: visible; top : 203px; LEFT: 48px;" id="Layer26">
+  <div>
+    <table border="1" width="644" height="27">
+      <tbody>
+        <tr>
+          <td width="80"><font size="2">グラフの種類</font></td>
+          <td width="548"><font size="2">棒グラフ（複数）</font></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div style="Z-INDEX: 17; POSITION: absolute; VISIBILITY: visible; top : 240px; left : 48px;" id="Layer7">
+  <div>
+    <table border="1" width="644" height="119">
+      <tbody>
+        <tr>
+          <td width="98"></td>
+          <td width="95"><font size="2">軸</font></td>
+          <td width="96"><font size="2">項目</font></td>
+          <td width="480"><font size="2">説明</font></td>
+        </tr>
+        <tr>
+          <td rowspan="2" width="98"><font size="2">グラフ軸&nbsp;<br>
+          【工数の予実】</font></td>
+          <td width="95"><font size="2">Y軸（垂直）&nbsp;</font></td>
+          <td width="96"><font size="2">工数の予実</font></td>
+          <td width="480"><font size="2">実績値（工数）÷計画値（工数）</font></td>
+        </tr>
+        <tr>
+          <td width="95"><font size="2">X軸（水平）&nbsp;</font></td>
+          <td width="96"><font size="2">プロジェクト名</font></td>
+          <td><font size="2">プロジェクト名</font></td>
+        </tr>
+        <tr>
+          <td rowspan="2" width="98"><font size="2">グラフ軸<br>
+          【製造進捗率】</font></td>
+          <td width="95"><font size="2">Y軸（垂直）&nbsp;</font></td>
+          <td width="96"><font size="2">製造進捗率</font></td>
+          <td width="480"><font size="2">実績値（SLOC）÷計画値（SLOC）</font></td>
+        </tr>
+        <tr>
+          <td width="95"><font size="2">X軸（水平）&nbsp;</font></td>
+          <td width="96"><font size="2">プロジェクト名</font></td>
+          <td><font size="2">プロジェクト名</font></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div style="Z-INDEX: 11; POSITION: absolute; VISIBILITY: visible; top : 368px; left : 48px;" id="Layer27">
+  <div>
+    <table border="1" width="644" height="67">
+      <tbody>
+        <tr>
+          <td rowspan="2" width="80"><font size="2">概要</font></td>
+          <td width="548"><font size="2">担当プロジェクトの中で、<br>
+          　　　　　製造進捗率（SLOC）により遅れ、又は超過と判断されるプロジェクトの製造進捗率グラフ<br>
+          　　　　　工数の予実により遅れ、又は超過と判断される工数の予実グラフ<br>
+          を同一画面上に表示します。</font></td>
+        </tr>
+        <tr>
+          <td width="548"><font size="2">検出条件の”製造進捗率（SLOC）”／”工数の予実”、及び”閾値”はグラフパラメータとして指定します。</font></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div style="Z-INDEX: 14; POSITION: absolute; VISIBILITY: visible; top : 476px; left : 48px;" id="Layer17">
+  <div>
+    <table border="1" width="644" height="99">
+      <tbody>
+        <tr>
+          <td width="79"><font size="2">説明&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></td>
+          <td width="549"><font size="2">検出する条件は担当プロジェクトの製造進捗率（SLOC）、又は工数の予実とし、指定された条件により製造進捗率の場合は遅れ、工数の予実の場合は超過率が高い順にグラフの表示を行います。<br>
+          　　　　　製造進捗率（SLOC）　：　計画値（SLOC） x （1 ± 閾値（％））<br>
+          　　　　　工数の予実　：　計画工数 ｘ （1 ± 閾値（％））</font><br>
+          　　　　<font size="2">例 ： 閾値 10%の場合、110%以上90%以下のプロジェクトが抽出されます。</font></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div style="Z-INDEX: 18; POSITION: absolute; VISIBILITY: visible; top : 579px; left : 49px;" id="Layer35">
+  <div>
+    <table border="1" width="644" height="27">
+      <tbody>
+        <tr>
+          <td width="79"><font size="2">その他&nbsp;</font></td>
+          <td width="549"><font size="2">棒グラフをダブルクリックすることにより、選択プロジェクトの「R_M01：定量管理ダッシュボード」を表示します。</font></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div style="Z-INDEX: 4; POSITION: absolute; VISIBILITY: visible; TOP: 2309px; LEFT: 54px;" id="Layer5">
+  <div>
+    <table border="1" width="644" height="109">
+      <colgroup>
+        <col span="3">
+        <col span="2" align="middle">
+      </colgroup>
+      <tbody>
+        <tr>
+          <td width="81"><font size="2">項目名</font></td>
+          <td width="98"><font size="2">表示の種類</font></td>
+          <td width="42">
+          <center><font size="2">必須</font></center>
+          </td>
+          <td width="57">
+          <center><font size="2">複数選択</font></center>
+          </td>
+          <td width="76"><font size="2">デフォルト</font></td>
+          <td width="222"><font size="2">説明</font></td>
+        </tr>
+        <tr>
+          <td width="81"><font size="2">検出条件</font></td>
+          <td width="98"><font size="2">ラジオボタン</font></td>
+          <td width="42">
+          <center><font size="2">○</font></center>
+          </td>
+          <td width="57">
+          <center><font size="2">－</font></center>
+          </td>
+          <td width="76"><font size="2">工数の予実</font></td>
+          <td width="222"><font size="2">製造進捗率（SLOC）/工数の予実 </font></td>
+        </tr>
+        <tr>
+          <td width="81"><font size="2">閾値&nbsp;</font></td>
+          <td width="98"><font size="2">テキストボックス&nbsp;</font></td>
+          <td width="42">
+          <center><font size="2">○</font></center>
+          </td>
+          <td width="57">
+          <center><font size="2">－</font></center>
+          </td>
+          <td width="76"><font size="2">空白&nbsp;</font></td>
+          <td width="222"><font size="2">整数値を入力。単位は％<br>
+          (例：20％を閾値とする場合は 20)。</font>&nbsp;</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div style="Z-INDEX: 2; POSITION: absolute; TOP: 2257px; LEFT: 25px;" id="Layer4"><img border="0" alt="（２）　グラフパラメータ" src="index_2.gif" width="204" height="38"></div>
+<div style="Z-INDEX: 27; POSITION: absolute; top : 1558px; left : 334px;" id="Layer34"><img border="0" alt="『製造進捗率』が閾値（パラメータ）を超えたプロジェクトを表示" src="text_7.gif" width="312" height="17"></div>
+<div style="Z-INDEX: 22; POSITION: absolute; top : 1557px; left : 91px;
+	width : 221px;
+	height : 44px;
+" id="Layer38"><img border="0" src="closingline_1.gif" width="219" height="44"></div>
+<div style="Z-INDEX: 5; POSITION: absolute; top : 1430px; left : 57px;" id="Layer13"><img border="0" alt="画面イメージ　【製造進捗率】" src="text_1.gif" width="250" height="36"></div>
+<div style="top : 1880px;left : 295px;
+	position : absolute;
+	z-index : 38;
+" id="Layer31"><img src="text_5.gif" width="238" height="16" border="0" alt="100%を基準として上下20%に補助線を表示"></div>
+<div style="top : 1909px;left : 64px;
+	position : absolute;
+	z-index : 40;
+" id="Layer29"><img border="0" src="point_1.gif" width="27" height="18"></div>
+<div style="Z-INDEX: 3; POSITION: absolute; TOP: 19px; LEFT: 6px;" id="Layer3"><img border="0" alt="R_M02：複数プロジェクトの進捗確認" src="title.gif" width="458" height="45"></div>
+<div style="top : 671px;left : 54px;
+	position : absolute;
+	z-index : -2;
+" id="Layer8"><img src="r_m02_overview.gif" width="625" height="730" border="0"></div>
+<div style="top : 1874px;left : 40px;
+	position : absolute;
+	z-index : 41;
+" id="Layer44"><img border="0" alt="スケールは自動調整" src="text_6.gif" width="20" height="143"></div>
+<div style="z-index : 33; POSITION: absolute; top : 957px; left : 261px;" id="Layer30"><img border="0" alt="工数の予実差が大きいプロジェクト順に表示" src="text_14.gif" width="226" height="17"></div>
+<div style="z-index : 32; POSITION: absolute; top : 1329px; left : 271px;" id="Layer11"><img border="0" alt="グラフ作成日時を表示" src="text_13.gif" width="118" height="17"></div>
+<div style="Z-INDEX: 13; POSITION: absolute; top : 1329px; left : 240px;" id="Layer32"><img border="0" src="point_2.gif" width="24" height="16"></div>
+<div style="z-index : 30; POSITION: absolute; top : 932px; left : 278px;" id="Layer10"><img border="0" alt="プロジェクト名" src="text_9.gif" width="71" height="17"></div>
+<div style="Z-INDEX: 16; POSITION: absolute; top : 934px; left : 249px;" id="Layer12"><img border="0" src="point_2.gif" width="24" height="16"></div>
+<div style="z-index : 34; POSITION: absolute; top : 756px; left : 294px;" id="Layer14"><img border="0" alt="『工数の予実』が閾値（パラメータ）を超えた プロジェクトを表示" src="text_15.gif" width="217" height="30"></div>
+<div style="top : 1474px;left : 75px;
+	position : absolute;
+	z-index : -3;
+" id="Layer28"><img src="r_m02_overview2.gif" width="601" height="700" border="0"></div>
+<div style="Z-INDEX: 12; POSITION: absolute; top : 833px; left : 49px;" id="Layer15"><img border="0" src="point_1.gif" width="27" height="18"></div>
+<div style="Z-INDEX: 15; POSITION: absolute; top : 830px; left : 578px;" id="Layer16"><img border="0" src="point_2.gif" width="24" height="16"></div>
+<div style="Z-INDEX: 26; POSITION: absolute; TOP: 2618px; LEFT: 170px;" id="Layer6"><img border="0" src="point_2.gif" width="24" height="16"></div>
+<div style="z-index : 37; POSITION: absolute; TOP: 2614px; LEFT: 199px;" id="Layer42"><img border="0" alt="カーソルを当てると説明を表示" src="text_10.gif" width="179" height="19"></div>
+<div style="Z-INDEX: 20; POSITION: absolute; top : 627px; left : 54px;" id="Layer24"><img border="0" alt="画面イメージ　【工数の予実】" src="text_2.gif" width="246" height="36"></div>
+<div style="Z-INDEX: 7; POSITION: absolute; TOP: 50px; LEFT: 50px;" id="Layer19"></div>
+<div style="z-index : 31; POSITION: absolute; top : 1627px; left : 278px;" id="Layer22"><img border="0" alt="『製造進捗率』で表示されたプロジェクトの工数の予実を表示" src="text_11.gif" width="310" height="17"></div>
+<div style="Z-INDEX: 1; POSITION: absolute; TOP: 92px; LEFT: 19px;" id="Layer2"><img border="0" alt="（１）　グラフ概要" src="index_1.gif" width="165" height="38"></div>
+<div style="Z-INDEX: 21; POSITION: absolute; top : 755px; left : 72px;" id="Layer37"><img border="0" src="closingline_1.gif" width="201" height="55"></div>
+<div style="z-index : 35; POSITION: absolute; top : 1099px; left : 224px;" id="Layer40"><img border="0" alt="『工数の予実』で表示されたプロジェクトの進捗率を表示" src="text_12.gif" width="284" height="17"></div>
+<div style="Z-INDEX: 6; POSITION: absolute; TOP: 2436px; LEFT: 84px;" id="Layer18"><img border="0" alt="画面イメージ" src="text_3.gif" width="117" height="36"></div>
+<div style="z-index : -1; POSITION: absolute; TOP: 2489px; LEFT: 89px;" id="Layer33"><img border="0" src="parameter.gif" width="520" height="420"></div>
+<div style="Z-INDEX: 19; POSITION: absolute; top : 856px; left : 584px;" id="Layer9"><img border="0" src="point_2.gif" width="24" height="16"></div>
+<div style="Z-INDEX: 25; POSITION: absolute; top : 2026px; left : 230px;" id="Layer39"><img border="0" src="point_2.gif" width="24" height="16"></div>
+<div style="z-index : 36; POSITION: absolute; top : 2026px; left : 260px;" id="Layer21"><img border="0" alt="プロジェクト名" src="text_9.gif" width="71" height="17"></div>
+<div style="Z-INDEX: 23; POSITION: absolute; top : 1900px; left : 257px;" id="Layer41"><img border="0" src="point_2.gif" width="24" height="16"></div>
+<div style="Z-INDEX: 24; POSITION: absolute; top : 1908px; left : 462px;" id="Layer36"><img border="0" src="point_2.gif" width="24" height="16"></div>
+<div style="top : 835px;left : 342px;
+	position : absolute;
+	z-index : 39;
+" id="Layer20"><img src="text_4.gif" width="223" height="16" border="0" alt="1.0を基準として上下0.2に補助線を表示"></div>
+<div style="Z-INDEX: 29; POSITION: absolute; top : 805px; left : 27px;" id="Layer43"><img border="0" alt="スケールは自動調整" src="text_6.gif" width="20" height="143"></div>
+<div style="Z-INDEX: 28; POSITION: absolute; top : 2075px; left : 298px;" id="Layer23"><img border="0" alt="進捗率差が大きいプロジェクト順に表示" src="text_8.gif" width="204" height="17"></div>
+</body>
+</html>

@@ -1,0 +1,203 @@
+# Japanese translations for PACKAGE package.
+# Copyright (C) 2012 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-02-21 06:27-0500\n"
+"PO-Revision-Date: 2012-01-23 11:57+0900\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: installer/bootstrap.sh:62
+#, sh-format
+msgid "Failed to setup..., see $log"
+msgstr "セットアップに失敗しました。$log を参照してください。"
+
+#: installer/bootstrap.sh:101
+msgid "$0: Ignored --repos=$i"
+msgstr "$0: --repos=$i は無視されます。"
+
+#: installer/bootstrap.sh:112
+msgid "$0: Ignored --sample=$i"
+msgstr "$0: --sample=$i は無視されます。"
+
+#: installer/bootstrap.sh:120
+msgid "$0: Unrecognized option '$i'"
+msgstr "$0: 認識できないオプション '$i'"
+
+#: installer/bootstrap.sh:124
+msgid "$0: Unrecognized argument '$i'"
+msgstr "$0: 認識できない引数 '$i'"
+
+#: installer/bootstrap.sh:137 files/bin/uninstall-ipftools-redmine:34
+msgid ""
+"Welcome to the IPF Tools (Redmine) setup\n"
+"----------------------------------------\n"
+msgstr ""
+"IPFツール (Redmine) セットアップにようこそ\n"
+"------------------------------------------\n"
+
+#: installer/bootstrap.sh:149
+msgid "You must be root to install."
+msgstr "インストールするには root でなければなりません。"
+
+#: installer/bootstrap.sh:163
+msgid ""
+"Select your repository type.\n"
+"  s) Subversion\n"
+"  g) Git\n"
+msgstr ""
+"リポジトリの種類を選択して下さい。\n"
+"  s) Subversion\n"
+"  g) Git\n"
+
+#: installer/bootstrap.sh:186
+msgid "Do you need sample project? (y/n) "
+msgstr "サンプルプロジェクトは必要ですか? (y/n) "
+
+#: installer/bootstrap.sh:212
+msgid "Yes"
+msgstr "はい"
+
+#: installer/bootstrap.sh:213
+msgid "No"
+msgstr "いいえ"
+
+#: installer/bootstrap.sh:216
+#, sh-format
+msgid ""
+"\n"
+"Are you sure you want to install IPF Tools? (y/n)\n"
+"  Repository type: $label_repos\n"
+"  Sample projects: $label_sample\n"
+msgstr ""
+"\n"
+"IPFツールをインストールしますか? (y/n)\n"
+"  リポジトリ:           $label_repos\n"
+"  サンプルプロジェクト: $label_sample\n"
+
+#: installer/bootstrap.sh:227
+msgid "This terminal is not a tty. Use --install option to install."
+msgstr ""
+"この端末は tty ではありません。インストールするには --install オプションを"
+"使ってください。"
+
+#: installer/bootstrap.sh:246
+msgid "Extracting... "
+msgstr "展開しています... "
+
+#: installer/bootstrap.sh:248 installer/install.sh:93 installer/install.sh:109
+#: files/bin/uninstall-ipftools-redmine:58 files/libexec/setup.sh:110
+#: files/libexec/setup.sh:134 files/libexec/setup.sh:151
+#: files/libexec/setup.sh:169 files/libexec/setup.sh:190
+#: files/libexec/setup.sh:208 files/libexec/setup.sh:220
+#: files/libexec/setup.sh:225 files/libexec/setup.sh:238
+#: files/libexec/setup.sh:250
+msgid "done."
+msgstr "完了"
+
+#: installer/bootstrap.sh:260
+msgid ""
+"Setup completed!\n"
+"Launch at http://localhost/redmine.\n"
+"\n"
+"View the following documents to get more information.\n"
+"\n"
+" * For administrators\n"
+"   - /opt/ipftools/share/htdocs/Implementation Tools (Management) Help.pdf\n"
+"   - http://localhost/ipftools/Implementation%20Tools%20(Management)%20Help."
+"pdf\n"
+" * For users\n"
+"   - /opt/ipftools/share/htdocs/Implementation Tools (Operation) Help.pdf\n"
+"   - http://localhost/ipftools/Implementation%20Tools%20(Operation)%20Help."
+"pdf\n"
+"\n"
+"Please register at the following URL.\n"
+"http://www.ipa.go.jp/\n"
+msgstr ""
+"セットアップが完了しました。\n"
+"http://localhost/redmine で起動しています。\n"
+"\n"
+"詳細な情報は以下のドキュメントをご覧ください。\n"
+"\n"
+" * 管理者向け\n"
+"   - /opt/ipftools/share/htdocs/Implementation Tools (Management) Help.pdf\n"
+"   - http://localhost/ipftools/Implementation%20Tools%20(Management)%20Help."
+"pdf\n"
+" * 利用者向け\n"
+"   - /opt/ipftools/share/htdocs/Implementation Tools (Operation) Help.pdf\n"
+"   - http://localhost/ipftools/Implementation%20Tools%20(Operation)%20Help."
+"pdf\n"
+"\n"
+"以下のURLでユーザ登録をお願いします。\n"
+"http://www.ipa.go.jp/\n"
+
+#: installer/install.sh:91 installer/install.sh:107
+#, sh-format
+msgid "Installing ${name}... "
+msgstr "${name}をインストールしています... "
+
+#: files/bin/uninstall-ipftools-redmine:40
+msgid "You must be root to uninstall."
+msgstr "アンインストールするには root でなければなりません。"
+
+#: files/bin/uninstall-ipftools-redmine:46
+msgid "Are you sure you want to uninstall IPF Tools? (y/n)"
+msgstr ""
+
+#: files/bin/uninstall-ipftools-redmine:56
+msgid "Uninstalling... "
+msgstr "アンインストールしています... "
+
+#: files/libexec/setup.sh:95
+msgid "Checking SELinux... "
+msgstr "SELinuxをチェックしています... "
+
+#: files/libexec/setup.sh:103 files/libexec/setup.sh:104
+msgid "Disabling SELinux... "
+msgstr "SELinuxを無効にしています... "
+
+#: files/libexec/setup.sh:132
+msgid "Initializing PostgreSQL database... "
+msgstr "PostgreSQLデータベースを初期化しています... "
+
+#: files/libexec/setup.sh:146
+msgid "Adding ipf entry to /var/lib/pgsql/data/pg_hba.conf... "
+msgstr "/var/lib/pgsql/data/pg_hba.confにipfの項目を追加しています... "
+
+#: files/libexec/setup.sh:161
+msgid "Starting PostgreSQL... "
+msgstr "PostgreSQLを開始しています... "
+
+#: files/libexec/setup.sh:181
+msgid "Creating ipf database... "
+msgstr "ipfデータベースを作成しています... "
+
+#: files/libexec/setup.sh:199
+msgid "Initializing Redmine... "
+msgstr "Redmineを初期化しています... "
+
+#: files/libexec/setup.sh:217
+msgid "Loading master data... "
+msgstr "マスタデータを読み込んでいます... "
+
+#: files/libexec/setup.sh:223
+msgid "Loading sample data... "
+msgstr "サンプルデータを読み込んでいます... "
+
+#: files/libexec/setup.sh:236
+msgid "Starting httpd... "
+msgstr "httpdを開始しています... "
+
+#: files/libexec/setup.sh:248
+#, sh-format
+msgid "Enabling ${name} to automatically start... "
+msgstr "${name}を自動的に起動するように設定しています... "

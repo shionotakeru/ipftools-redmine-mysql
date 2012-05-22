@@ -1,0 +1,31 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'ipf_worktime_xls_importer', :plugin => 'redmine_ipf_worktime_importer_xls' %>
+<% end %>
+
+<h2><%= l(:ipf_wt_imp_xls_label_import_result) %></h2>
+<p><%= l(:ipf_wt_imp_xls_label_result_notice_f, :count => @handle_count) %><%= l(:ipf_wt_imp_xls_label_result_notice_b, :count => @handle_count - @failed_count - @skip_count) %></p>
+<p><%= l(:ipf_wt_imp_xls_label_result_projects) %><br/>
+<% @affect_projects_worktime.each do |project, count|%>
+<label class="tabular2"><%= project %>:</label><label class="tabular2"><%= l(:ipf_wt_imp_xls_label_result_issues, :count => count) %></label><br/>
+<% end %></p>
+<hr/>
+
+<% if @failed_count > 0 %>
+<%= l(:ipf_wt_imp_xls_label_result_failed, :count => @failed_count) %>
+<table class="list">
+    <thead><tr>
+    	<th>#</th>
+        <% @headers.each do |column| %>
+          <th><%= h(column) %></th>
+        <% end %>
+	</tr></thead>
+	<tbody>
+	<% @failed_worktime.each do |id, issue| -%>
+	<tr class="<%= cycle("odd", "even") %>">
+		<td><%= id %></td>
+	    <% issue.each do |column| %><%= content_tag 'td', h(column[1]) %><% end %>
+	</tr>
+	<% end %>
+	</tbody>
+</table>
+<% end %>

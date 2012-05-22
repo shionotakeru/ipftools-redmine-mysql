@@ -1,0 +1,20 @@
+<p>
+<table>
+  <tr>
+    <td><%= l(:ipf_qdc_label_check_interval)%></td>
+    <td><%= text_field_tag('settings[ipf_qdc_check_interval]', @settings['ipf_qdc_check_interval']) %></td>
+  </tr>
+  <tr>
+    <td><%= l(:ipf_qdc_label_batch_path)%></td>
+    <td><%= text_field_tag('settings[ipf_qdc_batch_path]', @settings['ipf_qdc_batch_path'], :size => 40) %></td>
+  </tr>
+  <tr>
+    <td><%= l(:ipf_qdc_label_batch_log_path)%></td>
+    <td><%= text_field_tag('settings[ipf_qdc_batch_log_path]', @settings['ipf_qdc_batch_log_path'], :size => 40) %></td>
+  </tr>
+  <tr>
+    <td><%= l(:ipf_qdc_label_lock_lifetime)%></td>
+    <td><%= text_field_tag('settings[ipf_qdc_lock_lifetime]', @settings['ipf_qdc_lock_lifetime'], :size => 40) %></td>
+  </tr>
+</table>
+</p>

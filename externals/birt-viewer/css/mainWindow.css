@@ -1,0 +1,282 @@
+/* CSS layout */
+
+HTML {
+	height: 100%;
+}
+
+BODY {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+	font-family: Arial, Verdana,"ＭＳ Ｐゴシック","Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3",Osaka,sans-serif;
+    line-height: 1.4;
+    font-size: 90%;
+    color: #15428B;
+}
+
+A:link, A:visited {
+    color: #15428B;
+    text-decoration: none;
+}
+A:hover, A:active {
+    color: #c61a1a;
+    text-decoration: underline;
+}
+
+IMG {
+	border: none;
+}
+
+#top_nav {
+    min-width: 1240px;
+    width: auto !important;
+    width: 1240px;
+	height: 50px;
+    background-image: url("../images/header_bg.png");
+    background-repeat : repeat-x;
+}
+
+#logo {
+	float: left;
+}
+
+#top_nav_right {
+    float: right;
+}
+
+DIV.header_spacer {
+	float: left;
+}
+
+#project_list {
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    font-size: 110%; 
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#project_name {
+    font-size: 110%; 
+    font-weight: bold;
+}
+
+#user_name {
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    font-size: 110%; 
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#help {
+    float: left;
+    font-size: 100%; 
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right:10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-image: url("../images/help.png");
+    background-repeat: no-repeat;
+    background-position: center left;
+}
+
+A.icon_help {
+	display: block;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 40px;
+}
+
+#container {
+    min-width: 1240px;
+    width: auto !important;
+    width: 1240px;
+    position: relative;
+    height: 90%;
+    background-image: url("../images/container_bg.png");
+    background-repeat: repeat-x;
+}
+
+#left_col {
+	margin-top:5px;
+	width:310px;
+	height:100%;
+	float: left;
+}
+
+#menu_list DIV.graph_group {
+	margin: 5px;
+    width: 300px;
+    background-image: url("../images/menu_bg_300.png");
+    background-repeat: no-repeat;
+}
+
+#menu_list DIV.graph_group_name {
+    padding-left: 40px;
+	line-height: 35px;
+	height: 35px;
+	font-size: 100%;
+	font-weight: bold;
+}
+
+#menu_list DIV.graph_list {
+    background-color: #FFFFFF;
+    border-left: solid 1px #A0AFC3;
+    border-right: solid 1px #A0AFC3;
+    border-bottom: solid 1px #A0AFC3;
+}
+
+/* 定量管理ダッシュボード */
+#menu_list DIV.add_icon_01 {
+	background-image: url("../images/menu_01.png");
+    background-repeat: no-repeat;
+    background-position: 2px 2px;
+}
+
+/* 複数プロジェクト確認 */
+#menu_list DIV.add_icon_02 {
+    background-image: url("../images/menu_02.png");
+    background-repeat: no-repeat;
+    background-position: 2px 2px;
+}
+
+/* WBS管理・品質管理 */
+#menu_list DIV.add_icon_03 {
+    background-image: url("../images/menu_03.png");
+    background-repeat: no-repeat;
+    background-position: 2px 2px;
+}
+
+/* 障害管理 */
+#menu_list DIV.add_icon_04 {
+    background-image: url("../images/menu_04.png");
+    background-repeat: no-repeat;
+    background-position: 2px 2px;
+}
+
+/* 課題管理 */
+#menu_list DIV.add_icon_05 {
+    background-image: url("../images/menu_05.png");
+    background-repeat: no-repeat;
+    background-position: 2px 2px;
+}
+
+/* 要員負荷管理 */
+#menu_list DIV.add_icon_06 {
+    background-image: url("../images/menu_06.png");
+    background-repeat: no-repeat;
+    background-position: 2px 2px;
+}
+
+#menu_list DIV.graph_name {
+	margin-left: 10px;
+    line-height: 25px;
+    height: 25px;
+    background-image: url("../images/link_20_on.png");
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+
+#menu_list DIV.graph_name A {
+	padding-left: 25px;
+	padding-right: 5px;
+    background-image: url("../images/link_20_off.png");
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+
+#menu_list DIV.graph_name A:hover, A:active {
+	background-color: transparent;
+	background-image: none;
+}
+
+#page_content {
+    margin-left:310px;
+	position: relative;
+    height: 100%;
+    background-image: url("../images/container_bg.png");
+    background-repeat: repeat-x;
+    background-color: #FFFFFF;
+}
+
+#page_content_main {
+	padding-top:5px;
+	padding-left:5px;
+    position: relative;
+    height: 100%;
+    margin-left:20px;
+/*
+    background-color: #FFFFFF;
+    border-top: solid 1px #A0AFC3;
+    border-left: solid 1px #A0AFC3;
+    border-right: solid 1px #A0AFC3;
+    border-bottom: solid 1px #A0AFC3;
+*/
+}
+
+DIV.dashboard_graph {
+    float: left;
+	width:440px;
+	height:435px;
+    margin: 5px;
+}
+
+DIV.dashboard_title {
+	line-height: 35px;
+	position:relative;
+    height: 35px;
+	background-image: url("../images/menu_bg_440_on.png");
+    background-repeat: no-repeat;
+    font-size: 100%;
+    font-weight: bold;
+}
+
+DIV.dashboard_title A {
+    padding-left: 40px;
+    padding-right: 5px;
+    background-image: url("../images/link_bg_35_off.png");
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+
+DIV.dashboard_title A:hover, A:active {
+    background-color: transparent;
+    background-image: none;
+}
+
+DIV.dashboard_content {
+    position:relative;
+	height: 300px;
+    border-left: solid 1px #A0AFC3;
+    border-right: solid 1px #A0AFC3;
+    background-color: #FFFFFF;
+}
+
+DIV.dashboard_comment {
+    overflow: scroll;
+    position:relative;
+    height:90px;
+    padding:5px;
+    border: solid 1px #A0AFC3;
+    background-color: #FFFFFF;
+}
+
+#menu_show_hide {
+    padding-top:12px;
+	float:left;
+    position:relative;
+    width:20px;
+    left: -5px;
+}
+
+DIV#dashboard_title {
+    margin-left:5px;
+    position:relative;
+    font-size: 110%;
+}

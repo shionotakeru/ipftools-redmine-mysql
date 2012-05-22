@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+    <head>
+        <title>Dashboard</title>
+        <meta http-equiv="content-type" content="text/html; charset=Shift_JIS">
+        <meta http-equiv="content-style-type" content="text/css">
+        <meta http-equiv="content-script-type" content="text/javascript">
+        <link rel="stylesheet" href="./dashboard.css" type="text/css">
+        <script type="text/javascript" src="./script.js"></script>
+    </head>
+    <body>
+        <div id="main" class="main">
+            <h2 class="h2"></h2>
+            <div id="header" class="header">
+                <table class="table">
+                    <tr valign="middle">
+                        <td>
+                            <h1>定量管理ダッシュボード</h1>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <h2 class="h2"></h2>
+            <table class="table">
+                <tr>
+                    <td width="380">
+                        <h1 class="bigFontSize">IPF開発プロジェクト</h1>
+                    </td>
+                    <td width="400">
+                    </td>
+                    <td width="120">
+                        <select name="selectProject" onchange="changeLocation(this.value);">
+                            <option value="/birt-viewer/R_M01_0.html">SAMPLEプロジェクト</option>
+                            <option value="/birt-viewer/R_M01_1.html" selected="selected">IPF開発プロジェクト</option>
+                            <option value="/birt-viewer/R_M01_2.html">SAMPLE2プロジェクト</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <h2 class="h2"></h2>
+            <table class="table" >
+                <tr>
+                    <td class="frameTitleTd">
+                        <a href="#" onclick="subWindowOpen('/birt-viewer/frameset?__report=report/R_S04.rptdesign&__format=html&PROJECT_ID=1&NAVI_CREATE_FLAG=true&DRILL_FLAG=false&DRILL_FIRST_FLAG=true&INDEX=0&LIMMIT=10&BIND_OFFSET=10&HELP_FLAG=true&NEW_WINDOW_FLAG=false&TICKET_ID=1&TARGET_DATE_FROM=2011-01-01&TARGET_DATE_TO=2012-12-31&HIDDEN_PARENT_ID=0&PRODUCTIVITY=1&COST=0&SCALE=0', 'R_S04 EVM評価（進捗、工数）', 'R_S04', '1')">
+                            <h3>R_S04 EVM評価（進捗、工数）</h3>
+                        </a>
+                    </td>
+                    <td class="frameTitleTd">
+                        <a href="#" onclick="subWindowOpen('/birt-viewer/frameset?__report=report/R_S05.rptdesign&__format=html&PROJECT_ID=1&NAVI_CREATE_FLAG=true&DRILL_FLAG=false&DRILL_FIRST_FLAG=true&INDEX=0&LIMMIT=10&BIND_OFFSET=10&HELP_FLAG=true&NEW_WINDOW_FLAG=false&TICKET_ID=21&TARGET_DATE_FROM=2011-01-01&TARGET_DATE_TO=2012-4-1&HIDDEN_PARENT_ID=0', 'R_S05 ソフトウェア規模推移', 'R_S05', '1')">
+                            <h3>R_S05 ソフトウェア規模推移</h3>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="frameDescriptionTd">
+                        ■ WBSタスク：IPF開発プロジェクト
+                    </td>                
+                    <td class="frameDescriptionTd">
+                        ■ WBSタスク：IPF開発プロジェクト
+                    </td>
+                </tr>
+                <tr>
+                    <td class="frameTd">                  
+                        <iframe class="iframe" src="/birt-viewer/run?__report=report/R_S04.rptdesign&__format=html&PROJECT_ID=1&NAVI_CREATE_FLAG=false&DRILL_FLAG=false&DRILL_FIRST_FLAG=true&INDEX=0&LIMMIT=10&BIND_OFFSET=10&HELP_FLAG=true&NEW_WINDOW_FLAG=false&TICKET_ID=1&TARGET_DATE_FROM=2011-01-01&TARGET_DATE_TO=2012-12-31&HIDDEN_PARENT_ID=0&PRODUCTIVITY=1&COST=0&SCALE=0">
+                        </iframe>
+                    </td>
+                    <td class="frameTd">
+                        <iframe class="iframe" src="/birt-viewer/run?__report=report/R_S05.rptdesign&__format=html&PROJECT_ID=1&NAVI_CREATE_FLAG=false&DRILL_FLAG=false&DRILL_FIRST_FLAG=true&INDEX=0&LIMMIT=10&BIND_OFFSET=10&HELP_FLAG=true&NEW_WINDOW_FLAG=false&TICKET_ID=21&TARGET_DATE_FROM=2011-01-01&TARGET_DATE_TO=2012-4-1&HIDDEN_PARENT_ID=0">
+                        </iframe>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="frameTitleTd">
+                        <a href="#" onclick="subWindowOpen('/birt-viewer/frameset?__report=report/R_S11.rptdesign&__format=html&PROJECT_ID=1&NAVI_CREATE_FLAG=true&DRILL_FLAG=false&DRILL_FIRST_FLAG=true&INDEX=0&LIMMIT=10&BIND_OFFSET=10&HELP_FLAG=true&NEW_WINDOW_FLAG=false&TICKET_ID=1&HIDDEN_PARENT_ID=0', 'R_S11 障害滞留状況', 'R_S11','1')">
+                            <h3>R_S11 障害滞留状況</h3>
+                        </a>
+                    </td>
+                    <td class="frameTitleTd">
+                        <a href="#" onclick="subWindowOpen('/birt-viewer/frameset?__report=report/R_S14.rptdesign&__format=html&PROJECT_ID=1&NAVI_CREATE_FLAG=true&DRILL_FLAG=false&DRILL_FIRST_FLAG=true&INDEX=0&LIMMIT=10&BIND_OFFSET=10&HELP_FLAG=true&NEW_WINDOW_FLAG=false&PERIOD=1', 'R_S14 長期未解決課題抽出', 'R_S14','1')">
+                            <h3>R_S14 長期未解決課題抽出</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="frameDescriptionTd">
+                        ■ WBSタスク：IPF開発プロジェクト
+                    </td>
+                    <td class="frameDescriptionTd">
+                        ■ 未解決課題抽出条件：3日以上
+                    </td>
+                </tr>
+                <tr>
+                    <td class="frameTd">
+                        <iframe class="iframe" src="/birt-viewer/run?__report=report/R_S11.rptdesign&__format=html&PROJECT_ID=1&NAVI_CREATE_FLAG=false&DRILL_FLAG=false&DRILL_FIRST_FLAG=true&INDEX=0&LIMMIT=10&BIND_OFFSET=10&HELP_FLAG=true&NEW_WINDOW_FLAG=false&TICKET_ID=1&HIDDEN_PARENT_ID=0">
+                        </iframe>
+                    </td>
+                    <td class="frameTd">
+                        <iframe class="iframe" src="/birt-viewer/run?__report=report/R_S14.rptdesign&__format=html&PROJECT_ID=1&NAVI_CREATE_FLAG=false&DRILL_FLAG=false&DRILL_FIRST_FLAG=true&INDEX=0&LIMMIT=10&BIND_OFFSET=10&HELP_FLAG=true&NEW_WINDOW_FLAG=false&PERIOD=1">
+                        </iframe>
+                    </td>
+                </tr>
+            </table>
+            <p class="p">
+                <a href="#" onclick="popup('/birt-viewer/report/help/R_M01/IPF_R_M01_HELP.html');return false;">ヘルプ</a>
+            </p>
+            <div id="footer" class="footer">
+                <p>IPF</p>
+            </div>
+        </div>
+    </body>
+</html>

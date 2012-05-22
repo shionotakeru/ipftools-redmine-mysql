@@ -1,0 +1,60 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'ipf_worktime_csv_importer', :plugin => 'redmine_ipf_worktime_importer_csv' %>
+<% end %>
+
+<h2><%= l(:ipf_wt_imp_csv_label_match_columns) %></h2>
+<% form_tag({:action => 'result', :project_id => @project}, {:multipart => true}) do %>
+    <% if @headers %>
+	<fieldset class="box"><legend><%= l(:ipf_wt_imp_csv_label_match_select) %></legend>
+	<% @headers.each do |column| %>
+		 <label class="tabular"><%= h(column) %>:
+		 <%= select_tag "fields_map[#{column}]", "<option value=\"\">#{l(:ipf_wt_imp_csv_option_ignore)}</option>" + options_for_select( @attrs, @attrs.find(proc {[nil,nil]}){|a|column == a[0]}[1] ) %></label>
+	<% end %>
+	</fieldset>
+	<fieldset class="box"><legend><%= l(:ipf_wt_imp_csv_label_import_rule) %></legend>
+		<label><%= check_box_tag "update_worktime", true, false %> <%= l(:ipf_wt_imp_csv_label_update_issue) %>
+		</label><br/>
+		<%= observe_field("update_worktime", :function => <<END_OF_STRING
+document.getElementById("unique_field").disabled = !element.checked;
+document.getElementById("ignore_non_exist").disabled = !element.checked;
+END_OF_STRING
+)
+		%>
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;<label><%= l(:ipf_wt_imp_csv_label_unique_field) %>
+		<%= select_tag "unique_field", options_for_select(@headers), {:disabled => true} %></label><br/>
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;<label><%= check_box_tag "ignore_non_exist", true, false, {:disabled => true} %>
+		<%= l(:ipf_wt_imp_csv_label_ignore_non_exist) %></label><br/>
+				
+	</fieldset>
+    <% end %>
+
+	<%= submit_tag l(:ipf_wt_imp_csv_button_submit) %>
+<!--	<%= submit_tag l(:ipf_wt_imp_csv_button_save_rules_and_submit) %>
+	<%= text_field_tag('rule_name', l(:ipf_wt_imp_csv_label_rule_name), {:size => 32, :maxlength => 32, :onfocus => "if(this.value == '#{l(:ipf_wt_imp_csv_label_rule_name)}') {this.value = ''}"}) %>
+	--><br/>
+<% end %>
+
+<hr/>
+
+<%= l(:ipf_wt_imp_csv_label_toplines, :filename => @original_filename) %>
+<table class="list">
+    <% if @headers %>
+	    <thead><tr>
+	        <% @headers.each do |column| %>
+	          <th><%= h(column) %></th>
+	        <% end %>
+		</tr></thead>
+		<tbody>
+		<% @samples.each do |issue| -%>
+		<tr class="<%= cycle("odd", "even") %>">
+		    <% @headers.each do |column_name| %><%= content_tag 'td', h(issue[column_name]) %><% end %>
+		</tr>
+		<% end %>
+		<tr class="<%= cycle("odd", "even") %>">
+		    <% @headers.each do |column| %><td>...</td><% end %>
+		</tr>
+		</tbody>
+    <% end %>
+</table>

@@ -1,0 +1,15 @@
+<h2><%=l(:ipf_wt_imp_xls_label_issue_importer)%></h2>
+
+<% form_tag({:controller => 'IpfWorktimeXlsImporter', :action => 'match',:project_id => @project}, {:multipart => true}) do %>
+  	
+	<p><label><%=l(:ipf_wt_imp_xls_label_select_notice)%></label><br/>
+
+	<fieldset class="box"><legend><%= l(:ipf_wt_imp_xls_label_select_sheet) %></legend>
+		<p><label><%=l(:ipf_wt_imp_xls_label_select_sheet_name)%></label>
+		    <%= select_tag "sheetname", @sheet_name %>
+		</p>
+	</fieldset>	
+
+	<%= submit_tag l(:ipf_wt_imp_xls_button_submit) %>
+<% end %>
+

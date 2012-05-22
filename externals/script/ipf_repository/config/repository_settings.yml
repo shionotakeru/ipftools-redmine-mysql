@@ -1,0 +1,19 @@
+# repository settings
+IpfRepository:
+  repository_out_dir: C:/ipftools/data/svn
+  svnadmin_path: C:/ipftools/svn/bin
+  git_path: C:/ipftools/git/bin
+  
+  Redmine:
+    DB:
+      host: localhost
+      port: 5432
+      database: redmine
+      username: redmine
+      password: redmine
+
+  CommitHook:
+    Subversion:
+      batch_path: C:/ipftools/batch/B002SOJ/B002SOJ_R.bat
+    Git:
+      batch_path: C:/ipftools/batch/B002GOJ/B002GOJ_R.bat

@@ -1,0 +1,21 @@
+config:
+  master_data_path: "@@IPFTOOLS_ROOT@@/script/ipf_data_insert/data/master_data"
+  master_project_path: "@@IPFTOOLS_ROOT@@/script/ipf_data_insert/data/master_project"
+  sample_data_path: "@@IPFTOOLS_ROOT@@/script/ipf_data_insert/data/sample_data"
+  ipf_batch_path: "@@IPFTOOLS_ROOT@@/batch"
+  log_dir: "@@IPFTOOLS_DATA_DIR@@/logs"
+
+database:
+  host: localhost
+  port: 5432
+  database: redmine
+  username: redmine
+  password: "@@IPFTOOLS_RMDB_PASSWORD@@"
+
+ipf_database:
+  host: localhost
+  port: 5432
+  database: ipf
+  username: ipf
+  password: "@@IPFTOOLS_IPFDB_PASSWORD@@"
+

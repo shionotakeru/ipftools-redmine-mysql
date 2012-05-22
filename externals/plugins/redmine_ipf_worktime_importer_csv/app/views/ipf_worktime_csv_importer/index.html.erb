@@ -1,0 +1,22 @@
+<h2><%=l(:ipf_wt_imp_csv_label_issue_importer)%></h2>
+
+<% form_tag({:controller => 'IpfWorktimeCsvImporter', :action => 'match',:project_id => @project}, {:multipart => true}) do %>
+  	
+	<p><label><%=l(:ipf_wt_imp_csv_label_upload_notice)%></label><br/>
+	<%= file_field_tag 'file', :size => 60%></p>
+
+	<fieldset class="box"><legend><%= l(:ipf_wt_imp_csv_label_upload_format) %></legend>
+		 <p><label><%=l(:ipf_wt_imp_csv_label_upload_encoding)%></label>
+		<%= select_tag "encoding", "<option value=\"U\">UTF8</option><option value=\"EUC\">EUC</option><option value=\"S\">SJIS</option><option value=\"N\">None</option>" %></p>
+		
+		<p><label><%=l(:ipf_wt_imp_csv_label_upload_splitter)%></label>
+		<%= text_field_tag "splitter", ',', {:size => 3, :maxlength => 1}%></p>
+		
+		<p><label><%=l(:ipf_wt_imp_csv_label_upload_wrapper)%></label>
+		<%= text_field_tag "wrapper", '"', {:size => 3, :maxlength => 1}%></p>
+		
+	</fieldset>	
+
+	<%= submit_tag l(:ipf_wt_imp_csv_button_upload) %>
+<% end %>
+

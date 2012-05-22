@@ -1,0 +1,38 @@
+en:
+  label_import_menu: "Import"
+
+  project_module_ipf_graph: "Quantitative analysis of diagnostic"
+  permission_ipf_graph_m02: "R_M02 track the progress of multiple projects"
+  permission_ipf_graph_m03: "R_M03 Verify integrity of multiple projects"
+  permission_ipf_graph_s01: "R_S01 Field density test plan"
+  permission_ipf_graph_s02: "R_S02 Trends Progress WBS"
+  permission_ipf_graph_s03: "R_S03 Progress WBS changes"
+  permission_ipf_graph_s04: "R_S04 Evaluation EVM (progress, man-hours)"
+  permission_ipf_graph_s05: "R_S05 Scale Software Trends"
+  permission_ipf_graph_s06: "R_S06 Percentage test"
+  permission_ipf_graph_s07: "R_S07 Actual man-hours appointments"
+  permission_ipf_graph_s08: "R_S08 Load status"
+  permission_ipf_graph_s09: "R_S09 Root Cause Analysis"
+  permission_ipf_graph_s10: "R_S10 Failure density"
+  permission_ipf_graph_s11: "R_S11 Residence status failure"
+  permission_ipf_graph_s12: "R_S12 Load status"
+  permission_ipf_graph_s13: "R_S13 Prediction and fault resolution"
+  permission_ipf_graph_s14: "R_S14 Extracting long-unresolved issues"
+  permission_ipf_graph_s15: "R_S15 Extraction delay important tasks"
+
+  project_module_msproject: "Import (XML)"
+  permission_msprojects: "Import (XML) Running"
+  
+  msproject: "Import (XML)"
+
+  project_module_importer: "Import (CSV)"
+  permission_ipf_exec_csv_importer: "Import (CSV) Running"
+
+  label_import: "Import (CSV)"
+  label_issue_importer: "Import (CSV)"
+
+  project_module_ipf_metrics: "Metrics Management (Project)"
+  permission_ipf_exec_metrics_project: "Metrics Management (project) execution"
+
+  project_module_ipf_graph_pattern: "Graph pattern setting (Project)"
+  permission_ipf_exec_graph_pattern_project: "Graph pattern setting (project) execution"

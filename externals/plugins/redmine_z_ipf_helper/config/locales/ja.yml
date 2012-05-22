@@ -1,0 +1,38 @@
+ja:
+  label_import_menu: "インポート"
+
+  project_module_ipf_graph: "定量的分析・診断"
+  permission_ipf_graph_m02: "R_M02 複数プロジェクトの進捗確認"
+  permission_ipf_graph_m03: "R_M03 複数プロジェクトの健全性確認"
+  permission_ipf_graph_s01: "R_S01 試験計画項目密度"
+  permission_ipf_graph_s02: "R_S02 WBS進捗推移"
+  permission_ipf_graph_s03: "R_S03 WBS進捗変化"
+  permission_ipf_graph_s04: "R_S04 EVM評価(進捗、工数)"
+  permission_ipf_graph_s05: "R_S05 ソフトウェア規模推移"
+  permission_ipf_graph_s06: "R_S06 試験進捗率"
+  permission_ipf_graph_s07: "R_S07 工数の予実"
+  permission_ipf_graph_s08: "R_S08 負荷状況"
+  permission_ipf_graph_s09: "R_S09 障害原因分析"
+  permission_ipf_graph_s10: "R_S10 障害発生密度"
+  permission_ipf_graph_s11: "R_S11 障害滞留状況"
+  permission_ipf_graph_s12: "R_S12 負荷状況"
+  permission_ipf_graph_s13: "R_S13 障害解決予測"
+  permission_ipf_graph_s14: "R_S14 長期未解決課題抽出"
+  permission_ipf_graph_s15: "R_S15 遅延重要タスク抽出"
+
+  project_module_msproject: "インポート(XML)"
+  permission_msprojects: "インポート（XML）の実行"
+  
+  msproject: "インポート(XML)"
+
+  project_module_importer: "インポート(CSV)"
+  permission_ipf_exec_csv_importer: "インポート(CSV)の実行"
+
+  label_import: "インポート(CSV)"
+  label_issue_importer: "インポート(CSV)"
+
+  project_module_ipf_metrics: "メトリックス管理（プロジェクト）"
+  permission_ipf_exec_metrics_project: "メトリックス管理（プロジェクト）の実行"
+
+  project_module_ipf_graph_pattern: "グラフ表示パターン設定（プロジェクト）"
+  permission_ipf_exec_graph_pattern_project: "グラフ表示パターン設定（プロジェクト）の実行"

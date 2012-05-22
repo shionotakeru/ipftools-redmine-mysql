@@ -1,0 +1,90 @@
+ja:
+  project_module_ipf_quantitative_data_collector: "定量データ収集"
+  permission_ipf_exec_quantitative_data_collector: "定量データ収集の実行"
+  ipf_quantitative_data_collector_menu_title: "定量データ収集"
+  ipf_quantitative_data_collector_page_title: "データ集計処理実行画面"
+
+  ipf_qdc_label_check_interval: "収集状況確認間隔(ミリ秒)"
+  ipf_qdc_label_batch_path: "バッチプログラム格納ディレクトリ"
+  ipf_qdc_label_batch_log_path: "バッチログ格納ディレクトリ"
+  ipf_qdc_label_lock_lifetime: "ロック有効期間(分)"
+
+  ipf_quantitative_data_collector:
+    pf:
+      title: "プロジェクト管理プラットフォームデータ収集"
+      label_proc_name: "収集処理名"
+      label_exec_button: "収集実行"
+      label_collect_to: "収集先"
+      label_confirm_msg: "収集処理を実行します"
+      other_executing_msg: "グラフ表示データ集計処理が実行中です"
+
+    graph:
+      title: "グラフ表示データ集計"
+      label_proc_name: "集計処理名"
+      label_exec_button: "集計実行"
+      label_table_name: "対象テーブル"
+      label_graph_name: "対象グラフ"
+      label_confirm_msg: "集計処理を実行します"
+      other_executing_msg: "プロジェクト管理プラットフォームデータ収集処理が実行中です"
+
+    label_update_date: "データ更新日時"
+    label_processing: "処理中..."
+
+    proc_executing_msg: "指定した処理は実行中です"
+
+  ipf_qdc_pf_proc_name: "プロジェクト管理プラットフォームデータ収集"
+  ipf_qdc_pf_from_db: "Redmine DB"
+  ipf_qdc_pf_to_db: "IPF DB（定量データ）"
+
+  ipf_qdc_graph_test_plan_proc_name: "試験計画項目密度情報集計"
+  ipf_qdc_graph_test_plan_table: "試験計画項目密度情報"
+  ipf_qdc_graph_test_plan_graph: "試験計画項目密度"
+
+  ipf_qdc_graph_wbs_progress_proc_name: "WBS進捗情報集計"
+  ipf_qdc_graph_important_task_proc_name: "遅延重要タスク抽出情報集計"
+  ipf_qdc_graph_wbs_progress_week_table: "WBS進捗推移週毎情報"
+  ipf_qdc_graph_wbs_progress_month_table: "WBS進捗推移月毎情報"
+  ipf_qdc_graph_wbs_progress_task_table: "遅延重要タスク抽出情報"
+  ipf_qdc_graph_wbs_progress_graph: "WBS進捗推移"
+  ipf_qdc_graph_wbs_progress_change_graph: "WBS進捗変化"
+  ipf_qdc_graph_wbs_progress_task_graph: "遅延重要タスク抽出"
+
+  ipf_qdc_graph_evm_evaluation_proc_name: "EVM評価情報集計"
+  ipf_qdc_graph_work_time_evaluation_proc_name: "工数評価情報集計"
+  ipf_qdc_graph_evm_evaluation_week_table: "EVM評価週毎情報"
+  ipf_qdc_graph_evm_evaluation_month_table: "EVM評価月毎情報"
+  ipf_qdc_graph_evm_evaluation_graph: "EVM評価"
+  ipf_qdc_graph_work_time_plan_graph: "工数の予実"
+
+  ipf_qdc_graph_software_volume_proc_name: "ソフトウェア規模推移情報集計"
+  ipf_qdc_graph_software_volume_table: "ソフトウェア規模推移情報"
+  ipf_qdc_graph_software_volume_graph: "ソフトウェア規模推移"
+
+  ipf_qdc_graph_test_progress_proc_name: "試験進捗率情報集計"
+  ipf_qdc_graph_test_progress_table: "試験進捗率情報"
+  ipf_qdc_graph_test_progress_graph: "試験進捗率"
+
+  ipf_qdc_graph_problem_proc_name: "障害情報集計"
+  ipf_qdc_graph_problem_count_table: "障害件数変化情報"
+  ipf_qdc_graph_problem_cause_table: "障害原因分析情報"
+  ipf_qdc_graph_problem_density_table: "障害発生密度情報"
+  ipf_qdc_graph_problem_impairment_table: "障害滞留状況情報"
+  ipf_qdc_graph_problem_count_graph: "障害件数変化"
+  ipf_qdc_graph_problem_cause_graph: "障害原因分析"
+  ipf_qdc_graph_problem_density_graph: "障害発生密度"
+  ipf_qdc_graph_problem_impairment_graph: "障害滞留状況"
+  ipf_qdc_graph_problem_resolution_graph: "障害解決予測"
+
+  ipf_qdc_graph_load_proc_name: "負荷状況情報集計"
+  ipf_qdc_graph_load_table: "負荷状況情報"
+  ipf_qdc_graph_load_graph: "負荷状況"
+
+  ipf_qdc_graph_task_proc_name: "課題情報集計"
+  ipf_qdc_graph_task_table: "長期未解決課題抽出情報"
+  ipf_qdc_graph_task_count_table: "課題別件数抽出情報"
+  ipf_qdc_graph_task_graph: "長期未解決課題抽出"
+
+  ipf_qdc_graph_multi_project_proc_name: "複数プロジェクト情報集計"
+  ipf_qdc_graph_multi_project_table: "複数プロジェクトの情報"
+  ipf_qdc_graph_multi_project_progress_graph: "複数プロジェクトの進捗確認"
+  ipf_qdc_graph_multi_project_soundness_graph: "複数プロジェクトの健全性確認"

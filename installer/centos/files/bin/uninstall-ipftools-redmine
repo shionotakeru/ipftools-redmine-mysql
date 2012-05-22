@@ -1,0 +1,59 @@
+#! /bin/bash
+#
+#   <Quantitative project management tool.>
+#
+#   Copyright (C) 2012 IPA, Japan.
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+: ${TEXTDOMAINDIR:=/opt/ipftools/share/locale}
+TEXTDOMAIN=ipftools
+export TEXTDOMAINDIR TEXTDOMAIN
+
+/usr/bin/tty >/dev/null 2>&1 && isatty=1 || isatty=0
+function echo_tty() {
+    if [ "$isatty" == 1 ]; then
+        echo "$@" >/dev/tty
+    else
+        echo "$@" >&2
+    fi
+}
+
+echo_tty $"\
+Welcome to the IPF Tools (Redmine) setup
+----------------------------------------
+"
+
+if [ "`id -u`" != 0 ]; then
+    echo_tty $"You must be root to uninstall."
+    exit 1
+fi
+
+option_uninstall=
+while [ -z "$option_uninstall" ]; do
+    read -s -t 15 -n 1 -p $"Are you sure you want to uninstall IPF Tools? (y/n)" REPLY || REPLY=
+    case "$REPLY" in
+        [Yy])   option_uninstall=1 ;;
+        [Nn])   option_uninstall=0 ;;
+        *)      continue ;;
+    esac
+    break
+done
+echo_tty
+if [ "$option_uninstall" == 1 ]; then
+    echo_tty -n $"Uninstalling... "
+    /bin/rpm -e ipftools-redmine
+    echo_tty $"done."
+fi

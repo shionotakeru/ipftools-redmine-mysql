@@ -1,0 +1,22 @@
+#main-menu
+{
+  margin-right: 0px !important;
+}
+
+#main-menu li.ipf-has-submenu-off ul
+{
+  display: none;
+}
+
+#main-menu li.ipf-has-submenu-on ul
+{
+  display: block;
+  position: absolute;
+  z-index: 100;
+}
+
+#main-menu ul.menu-children li
+{
+  float: none;
+  background-color: #507aaa;
+}

@@ -1,0 +1,23 @@
+        <% form_tag({:controller => 'IpfMetricsProject', :action => 'entry',:project_id => @project}) do %>
+            <table  class="list" border="0">
+            	<thead>
+				    <tr>
+                        <th><%= l(:label_ipf_metrics_tracker) %></th>
+                        <th colspan=<%= @metrics_list[0][2].size %>><%= l(:label_ipf_metrics_metrics) %></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <% @metrics_list.each do |metrics_row| %>
+                    <tr class="<%= cycle("odd", "even") %>">
+                        <td><%= metrics_row[0] %></td>
+                        <% metrics_row[2].each do |metrics_item|%>
+                            <td>
+                                <%= radio_button_tag( metrics_row[1], metrics_item[0], metrics_item[2] ) %><%= h(metrics_item[1]) %>
+                            </td>
+                        <% end %>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+            <%= submit_tag l(:button_ipf_metrics_update) %><%= submit_tag l(:button_ipf_metrics_cancel) %>
+        <% end %>

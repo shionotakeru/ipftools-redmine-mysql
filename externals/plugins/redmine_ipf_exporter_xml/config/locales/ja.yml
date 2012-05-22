@@ -1,0 +1,27 @@
+ja:
+  label_ipf_exp_xml_relations: "関連を出力"
+  label_ipf_exp_xml_watchers: "ウォッチャーを出力"
+  label_ipf_exp_xml_description: "説明を出力"
+  label_ipf_exp_xml_time: "作業時間を出力"
+  label_ipf_exp_xml_attachments: "添付ファイルのリストを出力"
+  label_ipf_exp_xml_query_columns_only: "選択した列だけを出力"
+  label_ipf_exp_xml_group: "グループの基準で分ける"
+  label_ipf_exp_xml_generate_name: "出力ファイル名を設定する"
+  label_ipf_exp_xml_issues_limit: "出力の最大数"
+  label_ipf_exp_xml_issues_limit_help: "0 - デフォルトを使う"
+  label_ipf_exp_xml_name: "出力ファイル名の接頭辞"
+  
+  label_ipf_exp_xml_settings_title: "詳細を出力する"
+  label_ipf_exp_xml_button_export: "出力"
+  label_ipf_exp_xml_button_back: "チケットの一覧に戻る"
+  
+  label_ipf_exp_xml_field_attachment: "添付ファイル"
+
+  label_ipf_exp_xml_format: "XML 出力:"
+  label_ipf_exp_xml_format_quick: "標準"
+  label_ipf_exp_xml_format_quick_tooltip: "標準の設定で出力する"
+  label_ipf_exp_xml_format_detailed: "オプション"
+  label_ipf_exp_xml_format_detailed_tooltip: "オプションを指定して出力する"
+
+  key_ipf_metrics_name_wbs: "WBS"
+  key_ipf_custom_field_name: "WBS番号"

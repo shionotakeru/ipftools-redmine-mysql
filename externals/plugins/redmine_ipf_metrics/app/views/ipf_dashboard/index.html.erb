@@ -1,0 +1,38 @@
+        <h2><%=l(:title_ipf_dashbord)%></h2>
+
+	    <table  class="list" border="0">
+	        <thead>
+	            <tr>
+	                <th><%= l(:label_ipf_dashboard_project) %></th>
+	                <th><%= l(:label_ipf_dashboard_name) %></th>
+	                <th><%= l(:label_ipf_dashboard_explanation) %></th>
+                    <th><%= l(:label_ipf_dashboard_jsp) %></th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <% @pattern_list.each do |pattern_row| %>
+	                <tr class="<%= cycle("odd", "even") %>">
+                        <td><%= link_to(h(pattern_row["project_name"]), 
+                                       {:action => 'list',
+                                        :project_id => pattern_row["project_id"]} 
+                                       ) %>
+                        </td>
+                        <td><%= link_to(h(pattern_row["name"]), 
+                                       {:action => 'list',
+                                        :project_id => pattern_row["project_id"]} 
+                                       ) %>
+                        </td>
+                        <td><%= link_to(h(pattern_row["explanation"]), 
+                                       {:action => 'list',
+                                        :project_id => pattern_row["project_id"]} 
+                                       ) %>
+                        </td>
+                        <td><%= link_to(h(pattern_row["jsp"]), 
+                                       {:action => 'list',
+                                        :project_id => pattern_row["project_id"]} 
+                                       ) %>
+                        </td>
+	                </tr>
+	            <% end %>
+	        </tbody>
+	    </table>

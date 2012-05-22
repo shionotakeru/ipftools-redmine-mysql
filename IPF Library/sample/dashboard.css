@@ -1,0 +1,103 @@
+.body {
+    margin:0px;
+    overflow-x : hidden;
+}
+
+.bigFontSize {
+    font-size : 26pt;
+}
+
+.main {
+    width        : 960px;
+    margin       : 0 auto;
+    border-width : 0px 1px 0 1px;
+    min-height   : 17px;
+    height       : auto !important;
+    height       : 1px;
+    padding      : 5px;
+    color        : #000;
+    background   : #fff;
+    font-size    : 100%;
+    text-align   : center;
+    line-height  : 1.32em;
+    clear        : both;
+}
+
+.header {
+    width        : 900px;
+    margin       : 0px 10px 10px;
+    min-height   : 30px;
+    height       : auto !important;
+    height       : 30px;
+    background   : #eee;
+    margin-left  : auto;
+    margin-right : auto;
+    text-align   : center;
+}
+
+.table {
+    border       : 1;
+    width        : 900px;
+    margin-left  : auto;
+    margin-right : auto;
+    cellspacing  : 0;
+    cellpadding  : 0;
+}
+.frameTitleTd {
+    text-align : center;
+}
+
+.frameDescriptionTd {
+    text-align     : left;
+    vertical-align : top;
+}
+
+.frameTd {
+    width  : 430px;
+    height : 280px;
+    valign : middle;
+}
+
+.iframe {
+    scrolling    : no;
+    width        : 100%;
+    height       : 100%;
+    frameborder  : 0;
+    border       : 0;
+    marginwidth  : 0;
+    marginheight : 0;
+    topmargin    : 0;
+    leftmargin   : 0;
+    overflow-x   : hidden;
+}
+
+.h2 {
+    width        : 900px;
+    margin       : 0px 10px 10px;
+    margin-left  : auto;
+    margin-right : auto;
+    padding      : 3px;
+    color        : #fff;
+    background   : #000;
+    font-size    : 30%;
+    line-height  : 1em;
+}
+
+.p {
+    text-align : center;
+}
+
+.footer {
+    width        : 900px;
+    clear        : both;
+    margin       : 30px 20px 20px;
+    padding      : 3px 5px;
+    color        : #fff;
+    background   : #000;
+    font-size    : 60%;
+    text-align   : right;
+    line-height  : 1.32em;
+    font-family  : verdana;
+    margin-left  : auto;
+    margin-right : auto;
+}

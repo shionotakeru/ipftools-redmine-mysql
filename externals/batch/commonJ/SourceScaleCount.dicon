@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+"http://www.seasar.org/dtd/components24.dtd">
+<components>
+
+    <component class="org.seasar.framework.container.autoregister.ComponentAutoRegister">
+        <initMethod name="addReferenceClass">
+            <arg>@jp.go.ipa.ipf.sourcescale.counter.IpfSourceScaleCounter@class</arg>
+        </initMethod>
+        <property name="autoNaming">
+            <component class="org.seasar.framework.container.autoregister.DefaultAutoNaming" />
+        </property>
+        <initMethod name="addClassPattern">
+            <arg>"jp.go.ipa.ipf.sourcescale.counter.custom"</arg>
+            <arg>".*Impl"</arg>
+        </initMethod>
+    </component>
+
+</components>

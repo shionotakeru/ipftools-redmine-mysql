@@ -1,0 +1,2 @@
+production:
+  attachments_storage_path: @@IPFTOOLS_DATA_DIR@@/files

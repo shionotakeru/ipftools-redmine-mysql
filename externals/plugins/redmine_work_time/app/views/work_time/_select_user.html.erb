@@ -1,0 +1,17 @@
+﻿<%#**************************************************** ユーザセレクタ %>
+<%if @project then%>
+<select onchange="if (this.value != '') {window.location = this.value;}">
+  <option selected="selected"><%=l(:wt_select_user)%></option>
+  <option disabled="disabled">---</option>
+<%
+@members.each do |mem|
+  user=mem[1]
+%>
+  <option value="<%= url_for(link_params.merge(:user=>user.id));%>">
+    <%=user.to_s%>
+  </option>
+<%
+end
+%>
+</select>
+<%end%>

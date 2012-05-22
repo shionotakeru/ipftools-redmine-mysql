@@ -1,0 +1,314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML lang=ja><HEAD><TITLE>IPF_ヘルプ</TITLE>
+<meta content="text/html; charset=Shift_JIS" http-equiv="Content-Type">
+<meta content="text/css" http-equiv="Content-Style-Type">
+<META name="" 
+content="mode/flm; pagewidth=750; pageheight=900" 940;? pageheight='1200"'>
+
+</HEAD>
+<BODY>
+<div style="Z-INDEX: 11; POSITION: absolute; TOP: 252px; LEFT: 48px;
+	visibility : visible;
+" id="Layer7">
+<DIV>
+    <table border="1" width="644" height="119">
+  <TBODY>
+  <TR>
+          <td rowspan="6" width="76"><FONT size=2>グラフ軸</FONT></td>
+          <td width="96"><FONT size=2>軸</FONT></td>
+          <TD width=117><FONT size=2>項目</FONT></TD>
+    <TD width=487><FONT size=2>説明</FONT></TD></TR>
+  <TR>
+          <td rowspan="4" width="96"><FONT size=2>Y軸（垂直）&nbsp;&nbsp;</FONT>&nbsp;</td>
+          <TD width=117><FONT size=2>PV</FONT></TD>
+    <TD width=487><FONT size=2>Planned Value（工数計画値）</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>EV&nbsp;</FONT></TD>
+    <TD><FONT size=2>Earned Value（生産価値）</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>AC&nbsp;</FONT></TD>
+    <TD><FONT size=2>Actual Cost（工数実績値）</FONT></TD></TR>
+        <TR>
+          <TD><font size="-1">予測値</font></TD>
+          <TD><font size="-1">工数予測値</font></TD>
+        </TR>
+        <TR>
+          <td width="96"><FONT size=2>X軸（水平）</FONT></td>
+          <TD width=117><FONT size=2>n週</FONT></TD>
+    <TD width=487><FONT 
+size=2>n週：パラメータで選択されたスケール</FONT></TD></TR></TBODY></table>
+  </DIV></div>
+<div style="z-index : 17; POSITION: absolute; top : 755px; left : 48px;
+	visibility : visible;
+" id="Layer36">
+  <DIV>
+    <table border="1" width="643" height="216">
+      <TBODY>
+        <TR>
+          <td rowspan="7" width="80"><FONT 
+      size=2>予測値</FONT></td>
+          <td colspan="3"><FONT 
+      size=2>予測値は、完成時予測総コスト（EAC)と実績値（AC)の差を、WBS残期間で線形に配分します。</FONT></td>
+        </TR>
+        <TR>
+          <td width="120"><FONT size=2>EV（生産価値）</FONT></td>
+          <td colspan="2"><FONT size=2>完了までの工数計画値 × 進捗率&nbsp;</FONT></td>
+        </TR>
+        <TR>
+          <td width="120"><FONT size=2>AC（実績コスト）&nbsp;</FONT></td>
+          <td colspan="2"><FONT size=2>工数（実績値）</FONT></td>
+        </TR>
+        <TR>
+          <td width="120"><FONT size=2>生産性の割合<br>
+          （コスト効率）</FONT></td>
+          <td colspan="2"><FONT size=2>EV ÷ AC</FONT></td>
+        </TR>
+        <TR>
+          <td rowspan="3" width="120"><FONT 
+      size=2>完成時予測総コスト<br>
+          (EAC)&nbsp;&nbsp;&nbsp;&nbsp;</FONT></td>
+          <td colspan="2"><FONT size=2>生産性の割合 (コスト効率) が特別なものであり、同様の差異(コスト効率) は今後生じないだろうと判断した場合<BR>
+          　EAC　＝　AC＋ (完了までの工数計画値－EV)</FONT></td>
+        </TR>
+        <TR>
+          <td colspan="2"><FONT size=2>生産性の割合 (コスト効率) 
+      が将来も続くと判断した場合<BR>
+          　EAC　＝　AC＋ (完了までの工数計画値 － EV) ÷ 生産性の割合</FONT></td>
+        </TR>
+        <TR>
+          <td colspan="2"><FONT 
+    size=2>　※上記のどちらの方法を使用するかは、パラメータで選択します。</FONT></td>
+        </TR>
+      </TBODY>
+    </table>
+  </DIV>
+</div>
+<div style="Z-INDEX: 12; POSITION: absolute; top : 400px; left : 48px;
+	visibility : visible;
+" id="Layer27">
+  <DIV>
+    <table border="1" width="644" height="119">
+      <TBODY>
+        <TR>
+          <td rowspan="5" width="100"><FONT size=2>概要&nbsp;&nbsp;&nbsp;</FONT>&nbsp;</td>
+          <TD width=742><FONT 
+  size=2>生産価値（EV）とコスト（AC）と計画値（PV）のEVMグラフを描画します。</FONT></TD>
+        </TR>
+        <TR>
+          <TD width=742><FONT 
+      size=2>表示対象のWBSタスクと、グラフ表示期間（開始日、終了日）、スケール（週単位／月単位）をグラフパラメータで指定します。</FONT></TD>
+        </TR>
+        <TR>
+          <TD><FONT 
+      size=2>生産価値（EV）の計算に使用する進捗率は、ソース規模から求めるか、工数から求めるかを選択可能とし、グラフパラメータで指定します。</FONT></TD>
+        </TR>
+        <TR>
+          <TD><FONT 
+      size=2>生産性として、現時点の生産性の割合が、今回のみの特別なものか、将来も続くものと判断するか、グラフパラメータで指定します。</FONT></TD>
+        </TR>
+        <TR>
+          <TD><font size="-1">&nbsp;現時点の生産性の割合が将来も継続するとした場合、コスト効率（CPI)、スケジュール効率（SPI)を考慮し、予測線を求めます。</font></TD>
+        </TR>
+      </TBODY>
+    </table>
+  </DIV>
+</div>
+<div style="Z-INDEX: 13; POSITION: absolute; top : 997px; left : 48px;
+	visibility : visible;
+" id="Layer8">
+  <DIV>
+    <table border="1" width="642" height="46">
+      <TBODY>
+        <TR>
+          <td width="80"><FONT size=2>ドリルダウン&nbsp;</FONT></td>
+          <TD><FONT 
+      size=2>折れ線グラフのプロットされた点をダブルクリックすることによりドリルダウンし、現在のタスクを直近の親に持つタスクが、グラフパラメータのWBSタスクのリストボックスに設定されたパラメータ入力画面を表示します。</FONT>&nbsp;</TD>
+        </TR>
+      </TBODY>
+    </table>
+  </DIV>
+</div>
+<div style="Z-INDEX: -1; POSITION: absolute; top : 593px; left : 48px;
+	visibility : visible;
+" id="Layer9">
+  <DIV>
+    <table border="1" width="644" height="153">
+      <TBODY>
+        <TR>
+          <td rowspan="4" width="90"><FONT 
+      size=2>説明&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT></td>
+          <TD width=741><FONT 
+    size=2>当グラフではEVMの計算およびグラフ表示において、工数をコストとして使用します。</FONT></TD>
+        </TR>
+        <TR>
+          <TD width=741><FONT 
+      size=2>グラフ表示期間の終了日に、未来の日付を指定した場合、コスト（工数）の予測線を表示します。</FONT></TD>
+        </TR>
+        <TR>
+          <TD width=741><FONT 
+    size=2>グラフ表示時の完成時予測総コスト(EAC)をグラフ上にマーカー線で表示します。</FONT></TD>
+        </TR>
+        <TR>
+          <TD><FONT 
+      size=2>進捗率はソース規模もしくは工数のどちらかをパラメータで選択します。<BR>
+          　　ソース規模からの進捗率　＝　（ソース開発規模／計画規模）<BR>
+          　　工数からの進捗率　＝　（工数計画値×進捗(０～100%）の合計）／工数計画値の総計</FONT></TD>
+        </TR>
+      </TBODY>
+    </table>
+  </DIV>
+</div>
+<div style="z-index : 18; POSITION: absolute; top : 1282px; left : 465px;" id="Layer14"><IMG border=0 src="point_1.gif" width=27 height=18></div>
+<div style="top : 1378px;left : 188px;
+	position : absolute;
+	z-index : 20;
+" id="Layer20"><img src="text_2.gif" width="193" height="42" border="0" alt="グラフをダブルクリックすると ドリルダウン"></div>
+<div style="top : 1280px;left : 341px;
+	position : absolute;
+	z-index : 21;
+" id="Layer10"><img src="text_4.gif" width="117" height="17" border="0" alt="完成予想工数を表示"></div>
+<div style="Z-INDEX: 2; POSITION: absolute; TOP: 1726px; LEFT: 18px;" id="Layer4"><IMG border=0 alt=（２）　グラフパラメータ src="index_2.gif" width=204 
+height=38></div>
+<div style="Z-INDEX: 9; POSITION: absolute; WIDTH: 645px; height : 31px; top : 177px; LEFT: 48px;" id="Layer25">
+  <DIV>
+    <table border="1" width="645" height="31">
+  <TBODY>
+  <TR>
+    <TD width=105><font size="2">グラフの目的</font></TD>
+    <TD width=741><font size="2">EVMにより最近の生産価値とコスト（工数）の予実を把握します。</font></TD></TR></TBODY></table>
+  </DIV>
+</div>
+<div style="z-index : 14; POSITION: absolute; top : 1495px; left : 407px;" id="Layer35"><IMG border=0 src="point_1.gif" width=27 height=18></div>
+<div style="z-index : 16; POSITION: absolute; top : 1408px; LEFT: 307px;" id="Layer31"><IMG border=0 src="point_3.gif" width=48 height=45></div>
+<div style="width : 153px;height : 18px;top : 1478px;left : 340px;
+	position : absolute;
+	z-index : 22;
+" id="Layer15">
+  <div style="top : 1px;left : 113px;
+	position : absolute;
+	z-index : 3;
+" id="Layer38"><img src="text_6.gif" width="40" height="17" border="0" alt="で表示"></div>
+  <div style="top : 1px;left : 85px;
+	position : absolute;
+	z-index : 2;
+" id="Layer16"><img src="text_7.gif" width="29" height="17" border="0" alt="”赤”"></div>
+  <div style="top : 0px;left : 0px;
+	position : absolute;
+	z-index : 1;
+" id="Layer22"><img src="text_5.gif" width="85" height="17" border="0" alt="当日を含む週を"></div>
+</div>
+<div style="z-index : 19; POSITION: absolute; top : 2182px; left : 286px;" id="Layer17"><IMG border=0 src="point_2.gif" width=28 height=18></div>
+<div style="top : 2179px;left : 321px;
+	position : absolute;
+	z-index : 24;
+" id="Layer6"><img src="text_8.gif" width="221" height="19" border="0" alt="項目にカーソルを当てると説明を表示"></div>
+<div style="Z-INDEX: 10; POSITION: absolute; top : 216px; LEFT: 48px;" id="Layer26">
+  <DIV>
+    <table border="1" width="644" height="19">
+      <TBODY>
+        <TR>
+          <TD width=105><FONT size=2>グラフの種類</FONT></TD>
+          <TD width=741><FONT size=2>折れ線グラフ</FONT></TD>
+        </TR>
+      </TBODY>
+    </table>
+  </DIV>
+</div>
+<div style="z-index : 15; POSITION: absolute; top : 1587px; left : 252px;" id="Layer32"><IMG border=0 src="point_2.gif" width=28 
+height=18></div>
+<div style="top : 1587px;left : 283px;
+	position : absolute;
+	z-index : 23;
+" id="Layer23"><img src="text_3.gif" width="119" height="17" border="0" alt="グラフ作成日時を表示"></div>
+<div style="Z-INDEX: 4; POSITION: absolute; TOP: 1778px; LEFT: 48px;
+	visibility : visible;
+	width : 683px;
+	height : 215px;
+" id="Layer5">
+<DIV>
+    <table border="1" width="686" height="165">
+  <TBODY>
+  <TR>
+          <td width="120"><FONT size=2>項目名</FONT></td>
+          <td width="110"><FONT size=2>表示の種類</FONT></td>
+          <td width="40"><CENTER><FONT size=2>必須</FONT></CENTER></td>
+          <td width="72"><CENTER><FONT size=2>複数選択</FONT></CENTER></td>
+          <td width="77"><FONT size=2>デフォルト</FONT></td>
+          <td width="227"><FONT size=2>説明</FONT></td>
+        </TR>
+  <TR>
+          <td width="120"><FONT size=2>WBSタスク</FONT></td>
+          <td width="110"><FONT size=2>リストボックス</FONT></td>
+          <td width="40"><CENTER><FONT size=2>○</FONT></CENTER></td>
+          <td width="72"><CENTER><FONT size=2>－</FONT></CENTER></td>
+          <td width="77"><FONT size=2>未指定</FONT></td>
+          <td width="227"><FONT size=2>WBSのタスク（機能及びモジュール）</FONT></td>
+        </TR>
+  <TR>
+          <td width="120"><FONT size=2>グラフ表示期間<br>
+          （開始日）</FONT></td>
+          <td width="110"><FONT size=2>テキストボックス</FONT></td>
+          <td width="40"><CENTER><FONT size=2>○</FONT></CENTER></td>
+          <td width="72"><CENTER><FONT size=2>－</FONT></CENTER></td>
+          <td width="77"><FONT size=2>現在の日付<br>
+          －１ヶ月</FONT></td>
+          <td width="227"><FONT size=2>年月日<br>
+          （例：2011/4/1 または2011-4-1)</FONT></td>
+        </TR>
+  <TR>
+          <td width="120"><FONT size=2>グラフ表示期間<br>
+          （終了日）</FONT></td>
+          <td width="110"><FONT size=2>テキストボックス</FONT></td>
+          <td width="40"><CENTER><FONT size=2>○</FONT></CENTER></td>
+          <td width="72"><CENTER><FONT size=2>－</FONT></CENTER></td>
+          <td width="77"><FONT size=2>現在の日付<br>
+          ＋１ヶ月</FONT></td>
+          <td width="227"><FONT size=2>年月日<br>
+          （例：2011/4/1 または2011-4-1)</FONT></td>
+        </TR>
+  <TR>
+          <td width="120"><FONT size=2>進捗率選択</FONT></td>
+          <td width="110"><FONT size=2>ラジオボタン</FONT></td>
+          <td width="40"><CENTER><FONT size=2>○</FONT></CENTER></td>
+          <td width="72"><CENTER><FONT size=2>－</FONT></CENTER></td>
+          <td width="77"><FONT size=2>工数</FONT></td>
+          <td width="227"><FONT size=2>「ソース規模」または「工数」で選択<br>
+          します。</FONT></td>
+        </TR>
+  <TR>
+          <td width="120"><FONT size=2>生産性選択</FONT></td>
+          <td width="110"><FONT size=2>ラジオボタン</FONT></td>
+          <td width="40"><CENTER><FONT size=2>○</FONT></CENTER></td>
+          <td width="72"><CENTER><FONT size=2>－</FONT></CENTER></td>
+          <td width="77"><FONT size=2>継続</FONT></td>
+          <td width="227"><FONT size=2>「特別」または「継続」で選択します。　</FONT></td>
+        </TR>
+  <TR>
+          <td width="120"><FONT size=2>スケール</FONT></td>
+          <td width="110"><FONT size=2>ラジオボタン</FONT></td>
+          <td width="40"><CENTER><FONT size=2>○</FONT></CENTER></td>
+          <td width="72"><CENTER><FONT size=2>－</FONT></CENTER></td>
+          <td width="77"><FONT size=2>週</FONT></td>
+          <td width="227"><FONT size=2>週または月を選択します。</FONT></td>
+        </TR></TBODY></table>
+  </DIV></div>
+<div style="Z-INDEX: 3; POSITION: absolute; TOP: 19px; left : 6px;" id="Layer3"><IMG border=0 alt=R_S04：EVM評価 src="title.gif" width=232 
+height=45></div>
+<div style="Z-INDEX: 5; POSITION: absolute; top : 1053px; LEFT: 93px;" id="Layer13"><IMG border=0 alt=画面イメージ src="text_1.gif" width=117 height=36></div>
+<div style="Z-INDEX: 7; POSITION: absolute; TOP: 50px; LEFT: 50px;" id="Layer19"></div>
+<div style="Z-INDEX: 6; POSITION: absolute; top : 2020px; LEFT: 74px;" id="Layer18"><IMG border=0 alt=画面イメージ src="text_1.gif" width=117 height=36></div>
+<div style="Z-INDEX: 1; POSITION: absolute; TOP: 92px; LEFT: 19px;" id="Layer2"><IMG border=0 alt=（１）　グラフ概要 src="index_1.gif" width=165 height=38></div>
+<div style="Z-INDEX: -2; POSITION: absolute; top : 1107px; LEFT: 124px;" id="Layer11"><img border="0" src="R_S04_disp.gif" width="616" height="603"></div>
+<div style="top : 2073px;left : 111px;
+	position : absolute;
+	z-index : -3;
+" id="Layer21"><img src="R_S04_param.gif" width="523" height="422" border="0"></div>
+<div style="Z-INDEX: 8; POSITION: absolute; WIDTH: 645px; HEIGHT: 34px; TOP: 137px; LEFT: 48px;" id="Layer1">
+<DIV>
+<TABLE border=1 width=644 height=31>
+  <TBODY>
+  <TR>
+    <TD width=105><FONT size=2>使用する工程</FONT></TD>
+    <TD width=742><FONT 
+size=2>製造工程、試験工程</FONT></TD></TR></TBODY></TABLE></DIV></div>
+</BODY></HTML>

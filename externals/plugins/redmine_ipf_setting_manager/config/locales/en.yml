@@ -1,0 +1,83 @@
+# English strings go here for Rails i18n
+en:
+
+# menu
+  ipf_sm_repository_menu: "Create and Delete Repositories"
+  ipf_sm_backup_menu: "Backup"
+
+# settings
+  ipf_sm_settings_backup_title: "Backup"
+  ipf_sm_settings_repository_title: "Create and Delete Repositories"
+  ipf_sm_settings_backup_script: "Directory containing the program"
+  ipf_sm_settings_repository_script: "Directory containing the program"
+  ipf_sm_settings_scm: "SCM"
+  ipf_sm_settings_htdigest: "Path to htdigest.txt"
+
+# backup
+  ipf_sm_backup_title: "Backup"
+  ipf_sm_backup_legend: "Target"
+  ipf_sm_backup_all: "All Projects"
+  ipf_sm_backup_redmine_and_scm: "SCM・Project Management Platform"
+  ipf_sm_backup_button: "Start Backup"
+  ipf_sm_backup_list_date: "Datetime"
+  ipf_sm_backup_list_target: "Target"
+  ipf_sm_backup_list_action: "Action"
+  ipf_sm_backup_action_download: "Download"
+  ipf_sm_backup_action_delete: "Delete"
+  ipf_sm_backup_dialog_backup_confirm: "Run backup"
+  ipf_sm_backup_dialog_backup_running: "Running backup ....."
+  ipf_sm_backup_dialog_backup_success: "Backup was successful"
+  ipf_sm_backup_dialog_backup_failure: "Failed to backup"  
+  ipf_sm_backup_dialog_delete_confirm: "Delete backup file"
+  ipf_sm_backup_dialog_delete_failure: "Failed to delete backup file"
+  ipf_sm_backup_dialog_download_not_found: "File not found"
+  ipf_sm_backup_dialog_yes: "YES"
+  ipf_sm_backup_dialog_no: "NO"
+  ipf_sm_backup_dialog_ok: "OK"
+
+# create and delete repository
+  ipf_sm_repository_title: "Create and Delete Repositories"
+  ipf_sm_repository_legend: "Target"
+  ipf_sm_repository_radio_create: "Create"
+  ipf_sm_repository_radio_delete: "Delete"
+  ipf_sm_repository_radio_create_default: "Select project to create"
+  ipf_sm_repository_radio_delete_default: "Select project to delete"
+  ipf_sm_repository_button_apply: "Apply"
+  ipf_sm_repository_dialog_confirm: "Run Process"
+  ipf_sm_repository_dialog_running: "Process is running....."
+  ipf_sm_repository_dialog_success: "Process completed successfully"
+  ipf_sm_repository_dialog_failure: "Failed to process"  
+  ipf_sm_repository_dialog_yes: "YES"
+  ipf_sm_repository_dialog_no: "NO"
+  ipf_sm_repository_dialog_ok: "OK"
+  
+# script error message
+  # common
+  ipf_sm_error_msg_cause: "cause"
+  ipf_sm_error_msg_unexpected: "Unexpected error has occurred"  
+  ipf_sm_error_msg_project_not_selected: "No project is selected"
+  
+  # backup
+  ipf_sm_error_msg_10: "Backup file you specified does not exist"
+  ipf_sm_error_msg_11: "Specified process is running"
+  ipf_sm_error_msg_12: "Error occurred while retrieving backup of attachment"
+  ipf_sm_error_msg_13: "Error occurred while retrieving backup of Redmine DB"
+  ipf_sm_error_msg_14: "Error occurred while retrieving backup of IPF DB"
+  ipf_sm_error_msg_15: "Error occurred while retrieving backup of repository"
+  ipf_sm_error_msg_16: "Error occurred during compression of backup files"
+  ipf_sm_error_msg_17: "Error occurred during registration process of backup data"
+
+  # repository create
+  ipf_sm_error_msg_20: "Specified process is running"
+  ipf_sm_error_msg_21: "Project does not exist"
+  ipf_sm_error_msg_22: "This project has already been configured repositories."
+  ipf_sm_error_msg_23: "This project repository already exists"
+  ipf_sm_error_msg_24: "Error occurred during creation of repository"
+  ipf_sm_error_msg_25: "Error occurred during registration process data repository"
+
+  # repository delete
+  ipf_sm_error_msg_30: "Specified process is running"
+  ipf_sm_error_msg_31: "Project does not exist"
+  ipf_sm_error_msg_32: "This project has not been given a set of repositories"
+  ipf_sm_error_msg_33: "There is no repository for the specified project"
+  ipf_sm_error_msg_34: "Error occurred during removal process of the repository"

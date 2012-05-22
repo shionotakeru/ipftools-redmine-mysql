@@ -1,0 +1,8 @@
+ja:
+  project_module_ipf_dashboard: "定量的分析・診断"
+  ipf_dashboard_menu_title: "定量的分析・診断"
+
+  ipf_dashboard_label_analyze_url: "定量管理ダッシュボードURL"
+  ipf_dashboard_label_hash_key: "ハッシュキー"
+
+  permission_ipf_analyze: "定量管理ダッシュボードの表示"

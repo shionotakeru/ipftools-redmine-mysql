@@ -1,0 +1,90 @@
+en:
+  project_module_ipf_quantitative_data_collector: "Quantitative Data Collector"
+  permission_ipf_exec_quantitative_data_collector: "Execcute Quantitative Data Collector"
+  ipf_quantitative_data_collector_menu_title: "Quantitative Data Collector"
+  ipf_quantitative_data_collector_page_title: "Page of Data process selection."
+
+  ipf_qdc_label_check_interval: "Status check interval(msec.)"
+  ipf_qdc_label_batch_path: "Batch program directory"
+  ipf_qdc_label_batch_log_path: "Batch log directory"
+  ipf_qdc_label_lock_lifetime: "Lock lifetime(min.)"
+
+  ipf_quantitative_data_collector:
+    pf:
+      title: "Project Management Data Collection"
+      label_proc_name: "Proc Name"
+      label_exec_button: "Execute"
+      label_collect_to: "Object Table"
+      label_confirm_msg: "Execute data collect ?"
+      other_executing_msg: "Now processing Graph view Data Collect."
+
+    graph:
+      title: "Graph view Data Collect"
+      label_proc_name: "Proc Name"
+      label_exec_button: "Execute"
+      label_table_name: "Tables"
+      label_graph_name: "Graphs"
+      label_confirm_msg: "Execute data collect ?"
+      pf_executing_msg: "Now processing Project PF Data Collect."
+
+    label_update_date: "Updated time"
+    label_processing: "Processing..."
+
+    proc_executing_msg: "This is executing"
+
+  ipf_qdc_pf_proc_name: "Project Management PF Data Collection"
+  ipf_qdc_pf_from_db: "Redmine DB"
+  ipf_qdc_pf_to_db: "Quantitative data for IPF DB"
+
+  ipf_qdc_graph_test_plan_proc_name: "Field density test plan summary Information"
+  ipf_qdc_graph_test_plan_table: "R_S01_MART"
+  ipf_qdc_graph_test_plan_graph: "Field density test plan summary"
+
+  ipf_qdc_graph_wbs_progress_proc_name: "WBS Progress Information"
+  ipf_qdc_graph_important_task_proc_name: "Important information extraction task delay"
+  ipf_qdc_graph_wbs_progress_week_table: "R_S02_W_MART"
+  ipf_qdc_graph_wbs_progress_month_table: "R_S02_M_MART"
+  ipf_qdc_graph_wbs_progress_task_table: "R_S15_MART"
+  ipf_qdc_graph_wbs_progress_graph: "WBS Progress Transition"
+  ipf_qdc_graph_wbs_progress_change_graph: "WBS Progress Change"
+  ipf_qdc_graph_wbs_progress_task_graph: "Delay Important Task Extraction"
+
+  ipf_qdc_graph_evm_evaluation_proc_name: "EVM Evaluation Information"
+  ipf_qdc_graph_work_time_evaluation_proc_name: "Schedule and results of man-hour Information"
+  ipf_qdc_graph_evm_evaluation_week_table: "R_S04_W_MART"
+  ipf_qdc_graph_evm_evaluation_month_table: "R_S04_M_MART"
+  ipf_qdc_graph_evm_evaluation_graph: "EVM Evaluation (Progress, Man day)"
+  ipf_qdc_graph_work_time_plan_graph: "Schedule and results of man-hour"
+
+  ipf_qdc_graph_software_volume_proc_name: "Software Scale Transition Information"
+  ipf_qdc_graph_software_volume_table: "R_S05_MART"
+  ipf_qdc_graph_software_volume_graph: "Software Scale Transition"
+
+  ipf_qdc_graph_test_progress_proc_name: "Examination Progress Ratio Information"
+  ipf_qdc_graph_test_progress_table: "R_S05_MART"
+  ipf_qdc_graph_test_progress_graph: "Examination Progress Ratio"
+
+  ipf_qdc_graph_problem_proc_name: "Failure information summary"
+  ipf_qdc_graph_problem_count_table: "R_S08_MART"
+  ipf_qdc_graph_problem_cause_table: "R_S09_MART"
+  ipf_qdc_graph_problem_density_table: "R_S10_MART"
+  ipf_qdc_graph_problem_impairment_table: "R_S11_MART"
+  ipf_qdc_graph_problem_count_graph: "Change the number of failures"
+  ipf_qdc_graph_problem_cause_graph: "Root Cause Analysis"
+  ipf_qdc_graph_problem_density_graph: "Failure density"
+  ipf_qdc_graph_problem_impairment_graph: "Residence status impairment"
+  ipf_qdc_graph_problem_resolution_graph: "Predicated fault resolution"
+
+  ipf_qdc_graph_load_proc_name: "Aggregate load status information"
+  ipf_qdc_graph_load_table: "R_S12_MART"
+  ipf_qdc_graph_load_graph: "Load situation"
+
+  ipf_qdc_graph_task_proc_name: "Information Issues"
+  ipf_qdc_graph_task_table: "R_S14_MART"
+  ipf_qdc_graph_task_count_table: "R_S14_LIST_MART"
+  ipf_qdc_graph_task_graph: "Long-term unsettled problem extraction"
+
+  ipf_qdc_graph_multi_project_proc_name: "More project information"
+  ipf_qdc_graph_multi_project_table: "R_M02_MART"
+  ipf_qdc_graph_multi_project_progress_graph: "Progress confirmation of two or more projects"
+  ipf_qdc_graph_multi_project_soundness_graph: "Soundness confirmation of two or more projects"

@@ -1,0 +1,54 @@
+.process-list
+{
+	width: 100%;
+}
+
+.process-list td
+{
+}
+
+.process-list td.no
+{
+	text-align: center;
+	vertical-align: top;
+	width: 30px;
+}
+
+.process-list td.name
+{
+	vertical-align: top;
+}
+
+.process-list td.tables
+{
+	vertical-align: top;
+}
+
+.process-list td.graphs
+{
+	vertical-align: top;
+}
+
+.process-list td.date
+{
+	vertical-align: top;
+	text-align: right;
+}
+
+.process-list td.button
+{
+	text-align: center;
+	vertical-align: middle;
+	width: 80px;
+}
+
+.process-list input.exec-button
+{
+	width: 72px;
+	vertical-align: middle;
+}
+
+.dialog
+{
+	display: none;
+}

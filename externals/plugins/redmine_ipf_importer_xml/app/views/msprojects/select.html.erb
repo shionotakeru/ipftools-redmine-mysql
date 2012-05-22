@@ -1,0 +1,54 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'application', :plugin => 'redmine_ipf_exporter_xml' %>
+<% end %>
+
+<br/>
+<br/>
+
+<% if @tasks.size > 0 %>
+<br/>
+<br/>
+<div style="clear: both;"/>
+<% form_for :ms_project, :url => {:action => 'add', :project_id => @project } do %>
+<table class="list">
+  <tr>
+  <th><%= link_to image_tag('toggle_check.png'), 
+          {}, 
+          :onclick => "toggleCheckboxesBySelector('input'); return false;",
+          :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" 
+        %>
+  </th>
+  <th><%= l :title %></th>
+  <th><%= l :tracker %></th>
+  <th><%= l :assign %></th>
+  <th><%= l :new_task %></th>
+  <th><%= l :start_date %></th>
+  <th><%= l :finish_date %></th>
+  <th><%= l :create_date %></th>
+  </tr>
+  <% @tasks.each_with_index do |task, i| %>
+  <tr>
+  <td><%= check_box_tag 'checked_items[]', task.task_id, :class => 'task_check_box' %></td>
+  <td><span class="msp-level<%= task.outline_level %>"><%= task.name %></span></td>
+  <td><%= select_tag 'trackers[]', options_for_select(@project.trackers.collect {|t| [t.name, t.id]})%></td>
+  <td><%= select_tag 'assigns[]', "<option value=''></option>" + options_for_select(@project.members.collect {|m| [m.name, m.user_id]}) %></td>
+  <td><%= task.create? ? l(:label_added) : l(:label_modified) %></td>
+  <td><%= task.start_date %></td>
+  <td><%= task.finish_date %></td>
+  <td><%= task.create_date %></td>
+  </tr>
+  <% end %>
+</table>
+<div class="contextual">
+  <%= submit_tag l(:button_save), :name => 'save', :onclick => "javascript: $('ajax-indicator').style.display = 'block';" %>
+</div>
+<% end %>
+<% end %>
+
+<script type="text/javascript">
+<!--
+function select_all_asignee() {
+  $$('select#assigns[]');
+}
+// -->
+</script>

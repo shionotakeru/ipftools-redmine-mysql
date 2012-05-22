@@ -1,0 +1,50 @@
+<% content_for(:header_tags) do %>
+	<%= stylesheet_link_tag('ipf_repository.css', :plugin => 'redmine_ipf_setting_manager') %>
+	<%= stylesheet_link_tag('jquery-ui-1.8.16.custom.css', :plugin => 'redmine_ipf_setting_manager') %>
+	<%= javascript_include_tag('jquery-1.6.4.js', :plugin => 'redmine_ipf_setting_manager') %>
+	<script language="JavaScript" type="text/javascript">
+		jQuery.noConflict();
+	</script>	
+	<%= javascript_include_tag('jquery-ui-1.8.16.custom.min.js', :plugin => 'redmine_ipf_setting_manager') %>
+	<%= javascript_include_tag('ipf_repository.js', :plugin => 'redmine_ipf_setting_manager') %>
+<% end %>
+
+<script language="JavaScript" type="text/javascript">
+	var label_repository_yes = '<%= l(:ipf_sm_repository_dialog_yes) %>';
+	var label_repository_no = '<%= l(:ipf_sm_repository_dialog_no) %>';
+	var label_repository_ok = '<%= l(:ipf_sm_repository_dialog_ok) %>';
+	var msg_success = '<%= l(:ipf_sm_repository_dialog_success) %>';
+	var msg_failure = '<%= l(:ipf_sm_repository_dialog_failure) %>';
+	var msg_cause = '<%= l(:ipf_sm_error_msg_cause) %>';
+	var msg_project_not_selected = '<%= l(:ipf_sm_error_msg_project_not_selected) %>';
+</script>
+
+<h2><%= l(:ipf_sm_repository_title) %></h2>
+<fieldset><legend><%= l(:ipf_sm_repository_legend) %></legend>
+<%=radio_button_tag :select_action,0, :checked %><%= l(:ipf_sm_repository_radio_create) %>
+<%= collection_select(:project, :create, @ipf_repos_project, :identifier, :name, :include_blank => l(:ipf_sm_repository_radio_create_default)) %>
+<BR>
+<%=radio_button_tag :select_action,1 %><%= l(:ipf_sm_repository_radio_delete) %>
+<%= collection_select(:project, :delete, @ipf_repos_project, :identifier, :name, :include_blank => l(:ipf_sm_repository_radio_delete_default)) %>
+<BR>
+</fieldset>
+<BR>
+<%= submit_tag l(:ipf_sm_repository_button_apply), :class => "apply-button" %>
+
+<div id="confirm-dialog" class="dialog">
+	<p><%= l(:ipf_sm_repository_dialog_confirm) %></p>
+</div>
+<div id="running-dialog" class="dialog">
+	<p>
+		<table>
+			<tr>
+				<td valign="center"><%= image_tag 'loading.gif' %></td>
+				<td valign="center"><%= l(:ipf_sm_repository_dialog_running) %></td>
+			</tr>
+		</table>	
+		<br>
+	</p>
+</div>
+<div id="message-dialog" class="dialog">
+	<p></p>
+</div>

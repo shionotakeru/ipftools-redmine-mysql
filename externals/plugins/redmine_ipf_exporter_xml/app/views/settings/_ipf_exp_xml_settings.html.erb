@@ -1,0 +1,12 @@
+
+<div class="box tabular">
+<p>
+  <%= label_tag('settings[issues_limit]', "#{l(:label_ipf_exp_xml_issues_limit)}<br>#{l(:label_ipf_exp_xml_issues_limit_help)}" ) %>
+	<%= text_field_tag 'settings[issues_limit]', @settings['issues_limit'], {:size => 6, :maxlength => 10 } %>
+</p>
+
+<p>
+  <%= label_tag('settings[export_name]', l(:label_ipf_exp_xml_name) ) %>
+	<%= text_field_tag 'settings[export_name]', @settings['export_name'], {:size => 40, :maxlength => 80 } %>
+</p>
+</div>

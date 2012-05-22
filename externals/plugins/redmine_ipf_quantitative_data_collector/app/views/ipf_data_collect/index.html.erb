@@ -1,0 +1,94 @@
+<% content_for(:header_tags) do %>
+	<%= stylesheet_link_tag('ipf_quantitative_data_collector', :plugin => 'redmine_ipf_quantitative_data_collector') %>
+	<%= stylesheet_link_tag('jquery-ui-1.8.16.custom.css', :plugin => 'redmine_ipf_quantitative_data_collector') %>
+	<%= javascript_include_tag('jquery-1.6.4.js', :plugin => 'redmine_ipf_quantitative_data_collector') %>
+	<script language="JavaScript" type="text/javascript">
+		jQuery.noConflict();
+	</script>
+	<%= javascript_include_tag('jquery-ui-1.8.16.custom.min.js', :plugin => 'redmine_ipf_quantitative_data_collector') %>
+	<%= javascript_include_tag('ipf_quantitative_data_collector', :plugin => 'redmine_ipf_quantitative_data_collector') %>
+<% end %>
+
+<% html_title(t('ipf_quantitative_data_collector_page_title')) %>
+
+<script language="JavaScript" type="text/javascript">
+	var label_pf_confirm_msg = '<%= t("ipf_quantitative_data_collector.pf.label_confirm_msg") %>';
+	var label_graph_confirm_msg = '<%= t("ipf_quantitative_data_collector.graph.label_confirm_msg") %>';
+	var label_button_processing = '<%= t("ipf_quantitative_data_collector.label_processing") %>';
+	var label_pf_button = '<%= t("ipf_quantitative_data_collector.pf.label_exec_button") %>';
+	var label_graph_button = '<%= t("ipf_quantitative_data_collector.graph.label_exec_button") %>';
+	var label_accept_button = '<%= t("general_text_Yes") %>';
+	var label_cancel_button = '<%= t("general_text_No") %>';
+	var project_id = '<%= params[:project_id] %>';
+	var check_interval = Number('<%= @check_interval %>');
+</script>
+
+<h2><%= t('ipf_quantitative_data_collector_menu_title') %></h2>
+
+<h4><%= t('ipf_quantitative_data_collector.pf.title') %></h4>
+<table class="list process-list">
+	<tr>
+		<th>No.</th>
+		<th><%= t('ipf_quantitative_data_collector.pf.label_proc_name') %></th>
+		<th><%= t('ipf_quantitative_data_collector.pf.label_collect_to') %></th>
+		<th></th>
+		<th><%= t('ipf_quantitative_data_collector.label_update_date') %></th>
+		<th></th>
+	</tr>
+
+	<% @pfItems.each do |procdata| %>
+	<tr class="<%= cycle('odd', 'even') %>">
+		<td class="no"><%= procdata[:proc_id] %></td>
+		<td class="name"><%= t(procdata[:name]) %></td>
+		<td class="tables"><%= t(procdata[:collect_to]) %></td>
+		<td class="graphs"></td>
+		<td class="date" id="date_area_pf_<%= procdata[:proc_id] %>"><%= procdata[:update_date] %></td>
+		<td class="button"><input type="button" id="exec_btn_pf_<%= procdata[:proc_id] %>" class="pf-exec-button" value="<%= t('ipf_quantitative_data_collector.pf.label_exec_button') %>" /></td>
+	</tr>
+	<% end %>
+</table>
+
+<h4><%= t('ipf_quantitative_data_collector.graph.title') %></h4>
+<table class="list process-list">
+	<tr>
+		<th>No.</th>
+		<th><%= t('ipf_quantitative_data_collector.graph.label_proc_name') %></th>
+		<th><%= t('ipf_quantitative_data_collector.graph.label_table_name') %></th>
+		<th><%= t('ipf_quantitative_data_collector.graph.label_graph_name') %></th>
+		<th><%= t('ipf_quantitative_data_collector.label_update_date') %></th>
+		<th></th>
+	</tr>
+
+	<% @graphItems.each do |procdata| %>
+	<tr class="<%= cycle('odd', 'even') %>">
+		<td class="no"><%= procdata[:proc_id] %></td>
+		<td class="name">
+			<% procdata[:names].each do |name| %>
+				<%= t(name) unless name.empty? %><br />
+			<% end %>
+		</td>
+		<td class="tables">
+			<% procdata[:tables].each do |table| %>
+				<%= t(table) %><br />
+			<% end %>
+		</td>
+		<td class="graphs">
+			<% procdata[:graphs].each do |graph| %>
+				<%= t(graph) %><br />
+			<% end %>
+		</td>
+		<td class="date" id="date_area_graph_<%= procdata[:proc_id] %>"><%= procdata[:update_date] %></td>
+		<td class="button"><input type="button" id="exec_btn_graph_<%= procdata[:proc_id] %>" class="graph-exec-button" value="<%= t('ipf_quantitative_data_collector.graph.label_exec_button') %>" /></td>
+	</tr>
+	<% end %>
+</table>
+
+<div id="pf-confirm-dialog" class="dialog">
+	<p><%= t("ipf_quantitative_data_collector.pf.label_confirm_msg") %></p>
+</div>
+<div id="graph-confirm-dialog" class="dialog">
+	<p><%= t("ipf_quantitative_data_collector.graph.label_confirm_msg") %></p>
+</div>
+<div id="message-dialog" class="dialog">
+	<p></p>
+</div>
